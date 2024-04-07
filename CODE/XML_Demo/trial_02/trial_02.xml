@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<mavlink>
+    <version>3</version>
+    <messages>
+        <message id="1" name="person">
+            <description>个人信息</description>
+            <field type="int16_t" name="age">年龄</field>
+            <field type="char" name="name"> 名字</field>
+        </message>
+        <message id="2" name="logs">
+            <description>记录</description>
+            <field type="int16_t" name="date">日期</field>
+            <field type="double" name="weight"> 体重</field>
+
+    </messages>
+
+</mavlink>
