@@ -1,4 +1,4 @@
-#include "Caculate.h"
+#include "Calculate.h"
 #include "math.h"
 
 /**
@@ -65,4 +65,70 @@ void speedServo(float ref, DJI_t *motor)
 	motor->speedPID.ref = ref;
 	motor->speedPID.fdb = motor->FdbData.rpm;
 	PID_Calc(&motor->speedPID);
+}
+
+
+
+/**
+ * @brief麦克纳姆轮底盘逆解算
+ * @author: szf
+ * @date:
+ * @return {void}
+ */
+void CalculateFourMecanumWheels(double *moter_speed, double vx, double vy, double vw)
+{
+    moter_speed[0] = (vx - vy - vw * rotate_ratio) * wheel_rpm_ratio;
+    moter_speed[1] = (vx + vy - vw * rotate_ratio) * wheel_rpm_ratio;
+    moter_speed[2] = (-vx + vy - vw * rotate_ratio) * wheel_rpm_ratio;
+    moter_speed[3] = (-vx - vy - vw * rotate_ratio) * wheel_rpm_ratio;
+}
+
+
+/**
+ * @brief: 圆周死区控制
+ * @auther: szf
+ * @param {double} x
+ * @param {double} y
+ * @param {double} *new_x
+ * @param {double} *new_y
+ * @param {double} threshould
+ * @return {*}
+ */
+void DeadBand(double x, double y, double *new_x, double *new_y, double threshould)
+{
+    double length     = sqrt(x * x + y * y);
+    double new_length = length - threshould;
+
+    if (new_length <= 0) {
+        *new_x = 0;
+        *new_y = 0;
+        return;
+    }
+
+    double k = new_length / length;
+
+    *new_x = x * k;
+    *new_y = y * k;
+}
+
+/**
+ * @brief: 单轴死区控制
+ * @auther: szf
+ * @param {double} x
+ * @param {double} *new_x
+ * @param {double} threshould
+ * @return {*}
+ */
+void DeadBandOneDimensional(double x, double *new_x, double threshould)
+{
+
+    double difference_x = fabs(x) - threshould;
+
+    if (difference_x < 0) {
+        *new_x = 0;
+        return;
+    }
+
+    double k = difference_x / fabs(x);
+    *new_x   = k * x;
 }

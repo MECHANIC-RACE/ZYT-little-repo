@@ -37,10 +37,10 @@ void Chassis_Servo_Task(void const *argument)
         xSemaphoreGiveRecursive(ChassisControl.xMutex_control);             //为什么要在这里释放互斥锁？是因为互斥锁只是用于保证顺利地访问变量吗
 
         double motor_velocity[4] = {0};
-        CalculateFourMecanumWheels(motor_velocity,                          //由控制信息得来的xyz速度解算成电机速度并放入motor_velocity数组中
+        CalculateFourMecanumWheels(motor_velocity,                         
                                    ChassisControl_tmp.velocity.x,
                                    ChassisControl_tmp.velocity.y,
-                                   ChassisControl_tmp.velocity.w);
+                                   ChassisControl_tmp.velocity.w); //由控制信息得来的xyz速度解算成电机速度并放入motor_velocity数组中
         DJI_t hDJI_tmp[4];              //临时变量
 
         vPortEnterCritical();
@@ -48,7 +48,7 @@ void Chassis_Servo_Task(void const *argument)
         vPortExitCritical();
 
         for (int i = 0; i < 4; i++) { speedServo(motor_velocity[i], &(hDJI_tmp[i])); }          //motor_velocity[i]：目标速度   hDJI_tmp[i]：实际值，pid后会被改变
-        CanTransmit_DJI_1234(&hcan_Dji,
+        CanTransmit_DJI_1234(can1,
                              hDJI_tmp[0].speedPID.output,
                              hDJI_tmp[1].speedPID.output,
                              hDJI_tmp[2].speedPID.output,
@@ -77,15 +77,15 @@ void Chassis_Servo_Task(void const *argument)
  */
 void Chassis_Servo_DjiMotorInit()
 {
-    CANFilterInit(&hcan1);
-    WheelComponent.hDJI[0] = &hDJI[0];
-    WheelComponent.hDJI[1] = &hDJI[1];
-    WheelComponent.hDJI[2] = &hDJI[2];
-    WheelComponent.hDJI[3] = &hDJI[3];
-    hDJI[0].motorType      = M3508;
-    hDJI[1].motorType      = M3508;
-    hDJI[2].motorType      = M3508;
-    hDJI[3].motorType      = M3508;
+    can1.CAN_Rx_Filter_Init();
+    WheelComponent.hDJI[0] = &hDJI[0][CAN_PORT];
+    WheelComponent.hDJI[1] = &hDJI[1][CAN_PORT];
+    WheelComponent.hDJI[2] = &hDJI[2][CAN_PORT];
+    WheelComponent.hDJI[3] = &hDJI[3][CAN_PORT];
+    hDJI[0][CAN_PORT].motorType      = M3508;
+    hDJI[1][CAN_PORT].motorType      = M3508;
+    hDJI[2][CAN_PORT].motorType      = M3508;
+    hDJI[3][CAN_PORT].motorType      = M3508;
     DJI_Init();
 }
 /**

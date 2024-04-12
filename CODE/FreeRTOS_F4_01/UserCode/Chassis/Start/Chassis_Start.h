@@ -10,6 +10,11 @@
  */
 #ifndef __CHAEEIS_START_H__
 #define __CHAEEIS_START_H__
+
+
+#define CAN_PORT 0
+#include "math.h"
+
 #include "main.h"
 #include "can.h"
 #include "gpio.h"
@@ -17,9 +22,9 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "cmsis_os.h"
-#include "wtr_calculate.h"
+#include "Calculate.h"
 #include "wtr_can.h"
-#include "wtr_dji.h"
+#include "DJI.h"
 #include "wtr_uart.h"
 #include "Chassis_Callback.h"
 #include "Chassis_commen.h"

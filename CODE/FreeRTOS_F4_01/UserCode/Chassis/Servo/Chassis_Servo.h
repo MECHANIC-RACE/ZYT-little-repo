@@ -13,7 +13,9 @@
 #define __CHASSIS_SERVO_H__
 #include"Chassis_Start.h"
 
+// void Chassis_Servo_Init();
+// void Chassis_Servo_TaskStart();
 void Chassis_Servo_Init();
-void Chassis_Servo_TaskStart();
+void Chassis_Servo_DjiMotorInit();
 
 #endif // __CHASSIS_SERVO_H__
