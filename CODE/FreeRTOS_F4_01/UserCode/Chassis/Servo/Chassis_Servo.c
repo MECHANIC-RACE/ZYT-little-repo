@@ -37,17 +37,17 @@ void Chassis_Servo_Task(void const *argument)
         xSemaphoreGiveRecursive(ChassisControl.xMutex_control);             //为什么要在这里释放互斥锁？是因为互斥锁只是用于保证顺利地访问变量吗
 
         double motor_velocity[4] = {0};
-        CalculateFourMecanumWheels(motor_velocity,
+        CalculateFourMecanumWheels(motor_velocity,                          //由控制信息得来的xyz速度解算成电机速度并放入motor_velocity数组中
                                    ChassisControl_tmp.velocity.x,
                                    ChassisControl_tmp.velocity.y,
                                    ChassisControl_tmp.velocity.w);
-        DJI_t hDJI_tmp[4];
+        DJI_t hDJI_tmp[4];              //临时变量
 
         vPortEnterCritical();
-        for (int i = 0; i < 4; i++) { memcpy(&(hDJI_tmp[i]), WheelComponent.hDJI[i], sizeof(DJI_t)); }
+        for (int i = 0; i < 4; i++) { memcpy(&(hDJI_tmp[i]), WheelComponent.hDJI[i], sizeof(DJI_t)); }          //将后者的信息复制到tmp里面，这是测得的实际速度值
         vPortExitCritical();
 
-        for (int i = 0; i < 4; i++) { speedServo(motor_velocity[i], &(hDJI_tmp[i])); }
+        for (int i = 0; i < 4; i++) { speedServo(motor_velocity[i], &(hDJI_tmp[i])); }          //motor_velocity[i]：目标速度   hDJI_tmp[i]：实际值，pid后会被改变
         CanTransmit_DJI_1234(&hcan_Dji,
                              hDJI_tmp[0].speedPID.output,
                              hDJI_tmp[1].speedPID.output,
@@ -55,7 +55,7 @@ void Chassis_Servo_Task(void const *argument)
                              hDJI_tmp[3].speedPID.output);
 
         vPortEnterCritical();
-        for (int i = 0; i < 4; i++) { memcpy(WheelComponent.hDJI[i], &(hDJI_tmp[i]), sizeof(DJI_t)); }
+        for (int i = 0; i < 4; i++) { memcpy(WheelComponent.hDJI[i], &(hDJI_tmp[i]), sizeof(DJI_t)); }              //将pid后的结构体再传回WheelComponent.hDJI[i]
         vPortExitCritical();
 
         vTaskDelay(10);
