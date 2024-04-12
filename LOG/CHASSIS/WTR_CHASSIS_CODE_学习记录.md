@@ -1,8 +1,6 @@
 ## WTR_CHASSIS_CODE_学习记录
 
-## FreeRTOS
-
-### V1---->V2的修改
+## FreeRTOSV1---->V2的修改
 
 CYT靴长的写法是只在Mx中保留一个`StartDefaultTask` ,其他任务都手敲代码自己建，
 
@@ -42,9 +40,11 @@ void Chassis_Servo_TaskStart()
 
 （如果有需要的话可以把自己另把以上两句创建任务的码丢到UserCode里，不直接在`freertos.c`里跑
 
+## Chassis_Servo.c
 
+### void Chassis_Servo_Task(void const *argument)
 
-### 互斥锁
+#### 互斥锁
 
 ```
 xSemaphoreTakeRecursive( SemaphoreHandle_t xMutex,TickType_t xTicksToWait );
@@ -90,3 +90,26 @@ xSemaphoreTakeRecursive(ChassisControl.xMutex_control, portMAX_DELAY);
 ```
 
 互斥锁没有用于整个线程，而只是用在访问变量的前后，拿到变量的值后即可释放，防止后面的阻塞浪费CPU资源
+
+
+
+#### vPortEnterCritical()
+
+来自`port.c`，当有一部分代码希望不被FreeRTOS所管理的高优先级任务打断时，可以调用该函数进入临界区，进入临界区后将会屏蔽操作系统所能管理的任务切换和中断。
+
+
+
+### void VelocityPlanning
+
+在伺服系统以及控制系统的加减速动作中，为了让速度更加平滑，可以引入**T型速度曲线规划**（T-curve velocity profile），T曲线是工业界广泛采用的形式，它是一种时间最优的曲线。一般情况，曲线**加速和减速的过程是对称**的，设给定**速度上限**为。**加速度上限**为，被控对象从**A点运动到B点**，要求生成的轨迹在这些条件下**时间最优**^1。
+
+[一文搞懂T型曲线速度规划的原理和实现 （转载菜刀和小麦） - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/360598384)
+
+
+
+## Chassis_StateMachine.c
+
+### void StateMachine_Task(void const **argument*)  
+
+
+

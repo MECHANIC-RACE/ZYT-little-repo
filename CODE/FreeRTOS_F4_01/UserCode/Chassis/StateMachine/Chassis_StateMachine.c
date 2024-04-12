@@ -16,11 +16,11 @@ CHASSIS_MOVING_STATE ChassisState;
  * @brief: 状态机线程
  * @return {*}
  */
-void StateMachine_Task(void const *argument)
+void StateMachine_Task(void const *argument)            //根据接收到的Remote信息来给ChassisControl赋值，ChassisControl后面会给Servo中的结构体赋值
 {
     for (;;) {
         vPortEnterCritical();
-        Remote_t RemoteCtl_RawData_tmp = RemoteCtl_RawData;
+        Remote_t RemoteCtl_RawData_tmp = RemoteCtl_RawData;         //来自decode所得的RemoteCtl结构体
         vPortExitCritical();
         switch (RemoteCtl_RawData_tmp.left) {
             case Stop:

@@ -12,7 +12,7 @@
 #include "Chassis_Callback.h"
 
 /**
- * @brief: 串口接收中断回调函数
+ * @brief: 串口接收中断回调函数（！）
  * @param {UART_HandleTypeDef} *huart 中断串口
  * @return {*}
  */
