@@ -1,9 +1,9 @@
 /*
  * @Author: Chen Yitong
  * @Date: 2023-09-23 12:54:05
- * @LastEditors: Chen Yitong 
- * @LastEditTime: 2023-10-21 21:56:42
- * @FilePath: \WTR_Chassis\麦克纳姆轮\UserCode\Chassis\Config\Chassis_commen.h
+ * @LastEditors: labbbbbbbbb 
+ * @LastEditTime: 2024-04-13 14:14:11
+ * @FilePath: \FreeRTOS_F4_01\UserCode\Chassis\Config\Chassis_commen.h
  * @Brief: 底盘结构体定义
  *
  * Copyright (c) 2023 by ChenYiTong, All Rights Reserved.
@@ -13,6 +13,7 @@
 #define __CHASSIS_COMMEN_H__
 
 #include "Chassis_Start.h"
+#include "FreeRTOS.h"
 #include "semphr.h"
 typedef enum {
     Stop       = 1, // 停止

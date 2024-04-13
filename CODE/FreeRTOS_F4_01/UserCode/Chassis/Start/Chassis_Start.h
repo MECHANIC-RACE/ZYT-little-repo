@@ -1,9 +1,9 @@
 /*
  * @Author: Chen Yitong
  * @Date: 2023-09-22 22:19:36
- * @LastEditors: Chen Yitong 
- * @LastEditTime: 2023-10-21 21:55:00
- * @FilePath: \WTR_Chassis\麦克纳姆轮\UserCode\Chassis\Start\Chassis_Start.h
+ * @LastEditors: labbbbbbbbb 
+ * @LastEditTime: 2024-04-13 15:09:14
+ * @FilePath: \FreeRTOS_F4_01\UserCode\Chassis\Start\Chassis_Start.h
  * @brief 底盘启动文件以及所有库
  *
  * Copyright (c) 2023 by ChenYiTong, All Rights Reserved.
@@ -21,6 +21,7 @@
 #include "wtr_can.h"
 #include "wtr_dji.h"
 #include "wtr_uart.h"
+#include "semphr.h"
 #include "Chassis_Callback.h"
 #include "Chassis_commen.h"
 #include "Chassis_UserConfig.h"

@@ -1,9 +1,9 @@
 /*
  * @Author: Chen Yitong
  * @Date: 2023-09-23 13:49:36
- * @LastEditors: Chen Yitong 
+ * @LastEditors: labbbbbbbbb 
  * @LastEditTi 10-09 15:57:22
- * @FilePath: \WTR_Chassis\麦克纳姆轮\UserCode\Chassis\Servo\Chassis_Servo.c
+ * @FilePath: \FreeRTOS_F4_01\UserCode\Chassis\Servo\Chassis_Servo.c
  * @Brief: 底盘伺服函数
  *
  * Copyright (c) 2023 by ChenYiTong, All Rights Reserved.
@@ -48,6 +48,7 @@ void Chassis_Servo_Task(void const *argument)
         vPortExitCritical();
 
         for (int i = 0; i < 4; i++) { speedServo(motor_velocity[i], &(hDJI_tmp[i])); }          //motor_velocity[i]：目标速度   hDJI_tmp[i]：实际值，pid后会被改变
+        speedServo(1000, &(hDJI_tmp[1]));
         CanTransmit_DJI_1234(&hcan_Dji,
                              hDJI_tmp[0].speedPID.output,
                              hDJI_tmp[1].speedPID.output,
@@ -66,10 +67,16 @@ void Chassis_Servo_Task(void const *argument)
  * @brief: 启动底盘伺服线程
  * @return {*}
  */
-// void Chassis_Servo_TaskStart()
-// {
-//     Chassis_ServoHandle = osThreadNew(Chassis_Servo_Task, NULL, &Chassis_Servo_attributes);
-// }
+void Chassis_Servo_TaskStart()
+{
+    osThreadId_t Chassis_ServoHandle;
+    const osThreadAttr_t Chassis_Servo_attributes = {
+        .name       = "Chassis_Servo",
+        .stack_size = 128 * 10,
+        .priority   = (osPriority_t)osPriorityNormal,
+    };
+    Chassis_ServoHandle = osThreadNew(Chassis_Servo_Task, NULL, &Chassis_Servo_attributes);
+}
 
 /**
  * @brief 大疆电机初始化
@@ -82,10 +89,10 @@ void Chassis_Servo_DjiMotorInit()
     WheelComponent.hDJI[1] = &hDJI[1];
     WheelComponent.hDJI[2] = &hDJI[2];
     WheelComponent.hDJI[3] = &hDJI[3];
-    hDJI[0].motorType      = M3508;
-    hDJI[1].motorType      = M3508;
-    hDJI[2].motorType      = M3508;
-    hDJI[3].motorType      = M3508;
+    hDJI[0].motorType      = M2006;
+    hDJI[1].motorType      = M2006;
+    hDJI[2].motorType      = M2006;
+    hDJI[3].motorType      = M2006;
     DJI_Init();
 }
 /**

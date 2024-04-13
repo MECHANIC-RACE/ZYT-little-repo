@@ -19,7 +19,10 @@
 void Chassis_RemoteCtl_Init()
 {
     HAL_UART_Receive_DMA(&huart_RemoteCtl, JoyStickReceiveData, 18);        //在cube中选择circular模式循环接收JoyStick的控制信息，并且接受后引发中断，开始解码
+
+    //for(uint16_t i=0;i<18;i++)   JoyStickReceiveData[i]=5;              //5:测试数据
+
     __HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE); // IDLE 中断使能
-    
+
 }
 

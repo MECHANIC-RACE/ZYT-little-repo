@@ -1,9 +1,9 @@
 /*
  * @Author: Chen Yitong 3083697520@qq.com
  * @Date: 2023-09-23 11:33:41
- * @LastEditors: Chen Yitong 
- * @LastEditTime: 2023-10-21 22:04:06
- * @FilePath: \WTR_Chassis\麦克纳姆轮\UserCode\Chassis\StateMachine\Chassis_StateMachine.c
+ * @LastEditors: labbbbbbbbb 
+ * @LastEditTime: 2024-04-13 14:54:49
+ * @FilePath: \FreeRTOS_F4_01\UserCode\Chassis\StateMachine\Chassis_StateMachine.c
  * @brief 底盘状态机
  *
  * Copyright (c) 2023 by ChenYiTong, All Rights Reserved.
@@ -19,9 +19,16 @@ CHASSIS_MOVING_STATE ChassisState;
 void StateMachine_Task(void const *argument)            //根据接收到的Remote信息来给ChassisControl赋值，ChassisControl后面会给Servo中的结构体赋值
 {
     for (;;) {
+        
+        DjiRemoteCtl_Decode(); // 大疆遥控器解码
+
         vPortEnterCritical();
         Remote_t RemoteCtl_RawData_tmp = RemoteCtl_RawData;         //来自decode所得的RemoteCtl结构体
         vPortExitCritical();
+        RemoteCtl_RawData_tmp.left=3;
+        RemoteCtl_RawData_tmp.ch0=3;
+        RemoteCtl_RawData_tmp.ch1=3;
+        RemoteCtl_RawData_tmp.ch2=3;
         switch (RemoteCtl_RawData_tmp.left) {
             case Stop:
                 xSemaphoreTakeRecursive(ChassisControl.xMutex_control, portMAX_DELAY);
@@ -51,22 +58,26 @@ void StateMachine_Task(void const *argument)            //根据接收到的Remo
  * @brief: 状态机线程启动
  * @return {*}
  */
-// void Chassis_StateMachine_TaskStart()
-// {
-//     osThreadDef(Chassis_StateMachine, Chassis_StateMachine_Task, osPriorityAboveNormal, 0, 1024);
-//     osThreadCreate(osThread(Chassis_StateMachine), NULL);
-// }
-
-/**
- * @brief 初始化状态机
- * @return {*}
- */
-
-void Chassis_StateMachine_Init()
+void StateMachine_TaskStart()
 {
-    ChassisControl.xMutex_control = xSemaphoreCreateRecursiveMutex();
-    ChassisState.xMutex_control   = xSemaphoreCreateRecursiveMutex();
-    WheelComponent.xMutex_wheel   = xSemaphoreCreateRecursiveMutex();
+    osThreadId_t StateMachineHandle;
+    const osThreadAttr_t StateMachine_attributes = {
+        .name       = "StateMachine",
+        .stack_size = 128 * 10,
+        .priority   = (osPriority_t)osPriorityAboveNormal,
+    };
+    StateMachineHandle = osThreadNew(StateMachine_Task, NULL, &StateMachine_attributes);
+}
+    /**
+     * @brief 初始化状态机
+     * @return {*}
+     */
+
+    void Chassis_StateMachine_Init()
+    {
+        ChassisControl.xMutex_control = xSemaphoreCreateRecursiveMutex();
+        ChassisState.xMutex_control   = xSemaphoreCreateRecursiveMutex();
+        WheelComponent.xMutex_wheel   = xSemaphoreCreateRecursiveMutex();
 }
 
 void Chassis_SteerinfWheelCorrect(){
