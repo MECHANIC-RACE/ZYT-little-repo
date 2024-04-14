@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "stp_receive.h": "c",
+        "stp_decode.h": "c",
+        "stm32f1xx_hal.h": "c"
+    }
+}
