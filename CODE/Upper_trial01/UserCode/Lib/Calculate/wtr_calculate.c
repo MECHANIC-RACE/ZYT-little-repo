@@ -1,10 +1,10 @@
 /*
  * @Author: szf
  * @Date: 2023-02-22 12:04:21
- * @LastEditTime: 2024-04-16 15:44:54
- * @LastEditors: labbbbbbbbb 
+ * @LastEditTime: 2023-10-06 14:48:00
+ * @LastEditors: Chen Yitong 
  * @brief 运动学逆解算及PID计算函数
- * @FilePath: \WTR_Chassis\UserCode\Lib\Calculate\wtr_calculate.c
+ * @FilePath: \MyChassisTry\UserCode\Lib\Calculate\wtr_calculate.c
  */
 
 #include "wtr_calculate.h"
@@ -81,8 +81,7 @@ void positionServo(float ref, DJI_t *motor)
 
     motor->posPID.ref = ref;
     motor->posPID.fdb = motor->AxisData.AxisAngle_inDegree;
-    PID_Calc(&(motor->posPID));
-    
+
     motor->speedPID.ref = motor->posPID.output;
     motor->speedPID.fdb = motor->FdbData.rpm;
     PID_Calc(&(motor->speedPID));

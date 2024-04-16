@@ -22,4 +22,5 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     {
         DjiRemoteCtl_Decode(); // 大疆遥控器解码
     }
+    //记得重新使能（！）
 }
