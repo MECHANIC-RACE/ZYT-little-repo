@@ -4,5 +4,6 @@
 #include "UpperStart.h"
 
 
+void Core_XY_StateMachine_Init();
 
 #endif // __STATEMACHINE_H__

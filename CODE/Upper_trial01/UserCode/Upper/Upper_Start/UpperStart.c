@@ -5,10 +5,11 @@
 
 void StartDefaultTask(void *argument)
 {
-    
-    for (;;) 
-    {
+
+    Core_XY_StateMachine_Init();
+    Core_xy_Motor_init();
+
+    for (;;) {
         osDelay(1);
     }
-    
 }

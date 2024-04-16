@@ -4,16 +4,6 @@
 CoreXY_COMPONENT Core_xy;
 
 /********线程相关部分*************/
-void Upper_Servo_Start(void)
-{
-    osThreadId_t Upper_ServoHandle;
-    const osThreadAttr_t Upper_Servo_attributes = {
-        .name       = "Upper_Servo",
-        .stack_size = 128 * 4,
-        .priority   = (osPriority_t)osPriorityAboveNormal,
-    };
-    Upper_ServoHandle = osThreadNew(Upper_Servo_Task, NULL, &Upper_Servo_attributes);
-}
 
 void Upper_Servo_Task(void *argument)
 {
@@ -30,8 +20,8 @@ void Upper_Servo_Task(void *argument)
         memcpy(&(hDJI_tmp[2]), Core_xy.Motor_Z, sizeof(DJI_t));
         vPortExitCritical();                                   //获取当前状态
 
-        Core_xy_Servo();                    //伺服函数
-        CanTransmit_DJI_1234(&hcan_Dji,
+        Core_xy_Servo(target_tmp); // 伺服函数
+        CanTransmit_DJI_1234(&hcan1,
                              hDJI_tmp[0].speedPID.output,
                              hDJI_tmp[1].speedPID.output,
                              hDJI_tmp[2].speedPID.output,
@@ -49,6 +39,16 @@ void Upper_Servo_Task(void *argument)
     
 }
 
+void Upper_Servo_Start(void)
+{
+    osThreadId_t Upper_ServoHandle;
+    const osThreadAttr_t Upper_Servo_attributes = {
+        .name       = "Upper_Servo",
+        .stack_size = 128 * 4,
+        .priority   = (osPriority_t)osPriorityAboveNormal,
+    };
+    Upper_ServoHandle = osThreadNew(Upper_Servo_Task, NULL, &Upper_Servo_attributes);
+}
 
 /*******封装函数部分********/
 void Core_xy_Motor_init()               //电机初始化
@@ -74,9 +74,9 @@ void Core_xy_Servo(CoreXYState Target)
    //注：以下三个值正负待定
    //需要加上每时刻速度的判断吗？T型速度规划？
    //可不可以不建立互斥锁了，直接临界段好了
-    REF[0] = (Target.position.x - Core_xy.position.x) / BELT_LENGTH_PER_ROUND * 360.0f;//所需要转的角度  单位：度
-    REF[1] = (Target.position.y - Core_xy.position.y) / BELT_LENGTH_PER_ROUND * 360.0f;
-    REF[2] = (Target.position.z - Core_xy.position.z) / BELT_LENGTH_PER_ROUND * 360.0f;
+    REF[0] = (Target.position.x - Core_xy.Corexy_state.position.x) / BELT_LENGTH_PER_ROUND * 360.0f;//所需要转的角度  单位：度
+    REF[1] = (Target.position.y - Core_xy.Corexy_state.position.y) / BELT_LENGTH_PER_ROUND * 360.0f;
+    REF[2] = (Target.position.z - Core_xy.Corexy_state.position.z) / BELT_LENGTH_PER_ROUND * 360.0f;
     positionServo(REF[0], &(Core_xy.Motor_X));
     positionServo(REF[1], &(Core_xy.Motor_Y));
     positionServo(REF[2], &(Core_xy.Motor_Z));
