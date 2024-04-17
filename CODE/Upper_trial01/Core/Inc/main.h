@@ -61,6 +61,10 @@ void Error_Handler(void);
 #define CAN1_RX_GPIO_Port GPIOD
 #define CAN1_TX_Pin GPIO_PIN_1
 #define CAN1_TX_GPIO_Port GPIOD
+#define LED_R_Pin GPIO_PIN_11
+#define LED_R_GPIO_Port GPIOE
+#define LED_G_Pin GPIO_PIN_14
+#define LED_G_GPIO_Port GPIOF
 
 /* USER CODE BEGIN Private defines */
 
