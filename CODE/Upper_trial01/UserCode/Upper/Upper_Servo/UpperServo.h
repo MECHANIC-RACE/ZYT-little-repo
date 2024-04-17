@@ -6,6 +6,6 @@ void Upper_Servo_Start(void);
 
 void Core_xy_Motor_init();
 
-void Core_xy_Servo(CoreXYState Target, CoreXY_COMPONENT Now);
+void Core_xy_Servo(CoreXYState Target);
 
 #endif // __UPPERSERVO_H__
