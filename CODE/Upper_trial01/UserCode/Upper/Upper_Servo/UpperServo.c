@@ -20,21 +20,21 @@ void Upper_Servo_Task(void *argument)
 {
     osDelay(1000);
     for (;;) {
-        // positionServo(current_angle[0], Core_xy.Motor_X);
-        // positionServo(current_angle[1], Core_xy.Motor_Y);
-        // positionServo(current_angle[2], Core_xy.Motor_Z);
-        float REF[3];
-            REF[0] = (Target.position.x) / BELT_LENGTH_PER_ROUND * 360.0f; // 所需要转的角度  单位：度
-            REF[1] = (Target.position.y) / BELT_LENGTH_PER_ROUND * 360.0f;
-            REF[2] = (Target.position.z) / BELT_LENGTH_PER_ROUND * 360.0f;
-            positionServo(REF[0], Core_xy.Motor_X);
-            positionServo(REF[1], Core_xy.Motor_Y);
+        positionServo(current_angle[0], Core_xy.Motor_X);
+        positionServo(current_angle[1], Core_xy.Motor_Y);
+        positionServo(current_angle[2], Core_xy.Motor_Z);
+        // float REF[3];
+        //     REF[0] = (Target.position.x) / BELT_LENGTH_PER_ROUND * 360.0f; // 所需要转的角度  单位：度
+        //     REF[1] = (Target.position.y) / BELT_LENGTH_PER_ROUND * 360.0f;
+        //     REF[2] = (Target.position.z) / BELT_LENGTH_PER_ROUND * 360.0f;
+        //     positionServo(REF[0], Core_xy.Motor_X);
+        //     positionServo(REF[1], Core_xy.Motor_Y);
             CanTransmit_DJI_1234(&hcan1,
                                  Core_xy.Motor_X->speedPID.output,
                                  Core_xy.Motor_Y->speedPID.output,
                                  Core_xy.Motor_Z->speedPID.output,
                                  0);
-            osDelay(10);
+             osDelay(10);
 
     }
     
