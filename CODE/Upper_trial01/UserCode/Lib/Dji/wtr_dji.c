@@ -105,7 +105,7 @@ void DJI_Update(DJI_t *motor, uint8_t *fdbData)
     motor->Calculate.RotorAngle_all = motor->Calculate.RotorRound * 360 + motor->Calculate.RotorAngle_0_360_Log[NOW] - motor->Calculate.RotorAngle_0_360_OffSet;
 }
 
-void get_dji_offset(DJI_t *motor, uint8_t *fdbData)
+void get_dji_offset(DJI_t *motor, uint8_t *fdbData)         //零点校准函数
 {
     motor->FdbData.RotorAngle_0_360             = (fdbData[0] << 8 | fdbData[1]) * 360.0f / motor->encoder_resolution;
     motor->Calculate.RotorAngle_0_360_Log[LAST] = motor->FdbData.RotorAngle_0_360;
@@ -120,7 +120,7 @@ HAL_StatusTypeDef DJI_CanMsgDecode(uint32_t Stdid, uint8_t *fdbData)
     if (i >= 0 && i < 8) {
         if (hDJI[i].FdbData.msg_cnt < 50) {
             get_dji_offset(&hDJI[i], fdbData);
-            hDJI[i].FdbData.msg_cnt++;
+            hDJI[i].FdbData.msg_cnt++;              //注意这个循环其实只运行了一次（没有对cnt进行置零处理）
         } else {
             DJI_Update(&hDJI[i], fdbData);
         }

@@ -11,11 +11,11 @@
 
 typedef __IO struct 
 {
-    // __IO struct {
-    //     double x;
-    //     double y;
-    //     double z;
-    // } velocity; // 速度结构体//不知道需不需要来着
+    __IO struct {
+        double x;
+        double y;
+        double z;
+    } velocity; // 速度结构体//不知道需不需要来着
 
     __IO struct {
         double x;
