@@ -13,36 +13,28 @@
 
 CoreXY_COMPONENT Core_xy;
 
+
 /********线程相关部分*************/
 
 void Upper_Servo_Task(void *argument)
 {
     osDelay(1000);
     for (;;) {
-        xSemaphoreTakeRecursive(Target.xMutex_control, portMAX_DELAY);
-        CoreXYState target_tmp = Target;
-        xSemaphoreGiveRecursive(Target.xMutex_control);     //获取目标控制状态
-        Core_xy_Servo(target_tmp);                          // 伺服函数
-        // DJI_t hDJI_tmp[3];
-        // vPortEnterCritical();
-        // memcpy(&(hDJI_tmp[0]), Core_xy.Motor_X, sizeof(DJI_t));
-        // memcpy(&(hDJI_tmp[1]), Core_xy.Motor_Y, sizeof(DJI_t));
-        // memcpy(&(hDJI_tmp[2]), Core_xy.Motor_Z, sizeof(DJI_t));
-        // vPortExitCritical();                                   //获取当前状态
-
-        CanTransmit_DJI_1234(&hcan1,
-                             Core_xy.Motor_X->speedPID.output,
-                             Core_xy.Motor_Y->speedPID.output,
-                             Core_xy.Motor_Z->speedPID.output,
-                             0); // ee到时候多一个电机数据怎么办呢急急急ID等于4的电调是不是就用不了了
-
-        // vPortEnterCritical();
-        // memcpy(Core_xy.Motor_X,&(hDJI_tmp[0]),sizeof(DJI_t));
-        // memcpy(Core_xy.Motor_Y,&(hDJI_tmp[1]), sizeof(DJI_t));
-        // memcpy(Core_xy.Motor_Z,&(hDJI_tmp[2]), sizeof(DJI_t));
-        // vPortExitCritical();                                    //将临时变量的值归还给全局变量
-
-        osDelay(10);
+        // positionServo(current_angle[0], Core_xy.Motor_X);
+        // positionServo(current_angle[1], Core_xy.Motor_Y);
+        // positionServo(current_angle[2], Core_xy.Motor_Z);
+        float REF[3];
+            REF[0] = (Target.position.x) / BELT_LENGTH_PER_ROUND * 360.0f; // 所需要转的角度  单位：度
+            REF[1] = (Target.position.y) / BELT_LENGTH_PER_ROUND * 360.0f;
+            REF[2] = (Target.position.z) / BELT_LENGTH_PER_ROUND * 360.0f;
+            positionServo(REF[0], Core_xy.Motor_X);
+            positionServo(REF[1], Core_xy.Motor_Y);
+            CanTransmit_DJI_1234(&hcan1,
+                                 Core_xy.Motor_X->speedPID.output,
+                                 Core_xy.Motor_Y->speedPID.output,
+                                 Core_xy.Motor_Z->speedPID.output,
+                                 0);
+            osDelay(10);
 
     }
     
@@ -66,57 +58,13 @@ void Core_xy_Motor_init()               //电机初始化
     Core_xy.Motor_X = &hDJI[0];
     Core_xy.Motor_Y = &hDJI[1];
     Core_xy.Motor_Z = &hDJI[2];
-    hDJI[0].motorType = M3508;
+    hDJI[0].motorType = M2006;      //3508
     hDJI[1].motorType = M2006;
     hDJI[2].motorType = M3508;
     DJI_Init();
     CANFilterInit(&hcan1);
     //HAL_GPIO_TogglePin(LED_G_GPIO_Port, LED_G_Pin);
 }
-
-
-void Core_xy_Servo(CoreXYState Target)
-{
-    float REF[3];
-    /*
-    解算函数，将Target.position.x，y,z与Core_xy.position和REF[]建立起联系
-
-    */
-  
-   
-   //test
-    Target.position.x = 360;
-    Target.position.y = 360;
-    Target.position.z = 360;
-
-    // REF[0] = (Target.position.x - Core_xy.Corexy_state.position.x) / BELT_LENGTH_PER_ROUND * 360.0f;//所需要转的角度  单位：度
-    // REF[1] = (Target.position.y - Core_xy.Corexy_state.position.y) / BELT_LENGTH_PER_ROUND * 360.0f;
-    // REF[2] = (Target.position.z - Core_xy.Corexy_state.position.z) / BELT_LENGTH_PER_ROUND * 360.0f;
-
-    // 注：以下三个值正负待定
-    REF[0] = (Target.position.x) / BELT_LENGTH_PER_ROUND * 360.0f; // 所需要转的角度  单位：度
-    REF[1] = (Target.position.y) / BELT_LENGTH_PER_ROUND * 360.0f;
-    REF[2] = (Target.position.z) / BELT_LENGTH_PER_ROUND * 360.0f;
-    positionServo(REF[0], Core_xy.Motor_X);
-    positionServo(REF[1], Core_xy.Motor_Y);
-    positionServo(REF[2], Core_xy.Motor_Z);
-
-
-
-
-    /*加 速度规划版*/
-    
-
-
-
-
-
-
-
-
-}
-
-
 
 
 
@@ -174,6 +122,25 @@ void VelocityPlanning(float initialAngle, float maxAngularVelocity, float Angula
         } else {
             // 达到目标位置
             *currentAngle = targetAngle;
+            HAL_TIM_Base_Stop(&htim8);      //test
         }
     }
+}
+
+void Core_xy_Servo(CoreXYState Target, float current_time)
+{
+    
+    // float REF[3];
+    // REF[0] = (Target.position.x) / BELT_LENGTH_PER_ROUND * 360.0f; // 所需要转的角度  单位：度
+    // REF[1] = (Target.position.y) / BELT_LENGTH_PER_ROUND * 360.0f;
+    // REF[2] = (Target.position.z) / BELT_LENGTH_PER_ROUND * 360.0f;
+    // positionServo(REF[0], Core_xy.Motor_X);
+    // positionServo(REF[1], Core_xy.Motor_Y);
+    // positionServo(REF[2], Core_xy.Motor_Z);
+    
+    /*VelocityPlanning*/
+    
+    positionServo(current_angle[0], Core_xy.Motor_X);
+    positionServo(current_angle[1], Core_xy.Motor_Y);
+    positionServo(current_angle[2], Core_xy.Motor_Z);
 }

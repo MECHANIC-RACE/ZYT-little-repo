@@ -35,5 +35,8 @@ typedef __IO struct {
 
 extern CoreXY_COMPONENT Core_xy;       //全局的Corexy状态参数
 extern CoreXYState Target;              //目标状态
+extern uint8_t Rxbuffer[5];
+extern float initial_angle[3];
+extern float current_angle[3];
 
 #endif // __PARAMDEF_H__
