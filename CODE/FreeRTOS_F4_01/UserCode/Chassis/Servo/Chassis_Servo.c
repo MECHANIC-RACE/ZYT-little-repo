@@ -47,8 +47,9 @@ void Chassis_Servo_Task(void const *argument)
         for (int i = 0; i < 4; i++) { memcpy(&(hDJI_tmp[i]), WheelComponent.hDJI[i], sizeof(DJI_t)); }          //将后者的信息复制到tmp里面，这是测得的实际速度值
         vPortExitCritical();
 
-        for (int i = 0; i < 4; i++) { speedServo(motor_velocity[i], &(hDJI_tmp[i])); }          //motor_velocity[i]：目标速度   hDJI_tmp[i]：实际值，pid后会被改变
-        speedServo(1000, &(hDJI_tmp[1]));
+        //for (int i = 0; i < 4; i++) { positionServo(motor_velocity[i], &(hDJI_tmp[i])); }          //motor_velocity[i]：目标速度   hDJI_tmp[i]：实际值，pid后会被改变
+        for (int i = 0; i < 4; i++) { positionServo(3000, &(hDJI_tmp[i])); }
+        //speedServo(1000, &(hDJI_tmp[1]));
         CanTransmit_DJI_1234(&hcan_Dji,
                              hDJI_tmp[0].speedPID.output,
                              hDJI_tmp[1].speedPID.output,
