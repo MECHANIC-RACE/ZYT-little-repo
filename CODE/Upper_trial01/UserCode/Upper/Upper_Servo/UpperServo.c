@@ -1,3 +1,5 @@
+
+
 #include "UpperServo.h"
 
 
@@ -8,7 +10,7 @@ CoreXY_COMPONENT Core_xy;
 
 void Upper_Servo_Task(void *argument)
 {
-    osDelay(1000);
+    osDelay(100);
     for (;;) {
         positionServo(current_angle[0], Core_xy.Motor_X);
         positionServo(current_angle[1], Core_xy.Motor_Y);
@@ -19,9 +21,8 @@ void Upper_Servo_Task(void *argument)
                              Core_xy.Motor_Y->speedPID.output,
                              Core_xy.Motor_Z->speedPID.output,
                              0);
-        printf("%f,%f,%f,%f\n", Core_xy.Motor_X->AxisData.AxisVelocity, Core_xy.Motor_X->AxisData.AxisAngle_inDegree, Core_xy.Motor_X->speedPID.ref, Core_xy.Motor_X->speedPID.output);
-
-        osDelay(10);
+       // printf("%f,%f,%f,%f\n", Core_xy.Motor_X->AxisData.AxisVelocity, Core_xy.Motor_X->AxisData.AxisAngle_inDegree, Core_xy.Motor_X->speedPID.ref, Core_xy.Motor_X->speedPID.output);
+        osDelay(2);
 
     }
     
@@ -50,12 +51,12 @@ void Core_xy_Motor_init()               //电机初始化
     hDJI[2].motorType = M3508;
     DJI_Init();
     for (int i = 0; i < 8; i++) {
-        hDJI[i].speedPID.KP        = 5;
-        hDJI[i].speedPID.KI        = 1.0;
+        hDJI[i].speedPID.KP        = 2.0;
+        hDJI[i].speedPID.KI        = 0.0;
         hDJI[i].speedPID.KD        = 0.0;
         hDJI[i].speedPID.outputMax = 8000;
 
-        hDJI[i].posPID.KP        = 5.0f;
+        hDJI[i].posPID.KP        = 80.0f;
         hDJI[i].posPID.KI        = 0.0f;
         hDJI[i].posPID.KD        = 0.0f;
         hDJI[i].posPID.outputMax = 5000;
@@ -120,7 +121,7 @@ void VelocityPlanning(float initialAngle, float maxAngularVelocity, float Angula
         } else {
             // 达到目标位置
             *currentAngle = targetAngle;
-            HAL_TIM_Base_Stop(&htim8);      //test
+           
         }
     }
 }
