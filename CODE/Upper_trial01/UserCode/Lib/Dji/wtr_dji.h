@@ -16,6 +16,7 @@ typedef struct {
     float outputMax; // 最大输出值的绝对值
     float outputMin; // 最小输出值的绝对值用于防抖
 
+    float integral;//add by zyt
 } PID_t;
 
 typedef enum {

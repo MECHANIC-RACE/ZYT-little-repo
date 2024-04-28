@@ -1,9 +1,9 @@
 /*
  * @Author: szf
  * @Date: 2023-02-22 12:06:17
- * @LastEditors: Chen Yitong 
- * @LastEditTime: 2023-10-05 22:33:45
- * @FilePath: \MyChassisTry\UserCode\Lib\Calculate\wtr_calculate.h
+ * @LastEditors: labbbbbbbbb 
+ * @LastEditTime: 2024-04-28 16:01:21
+ * @FilePath: \Upper_trial01\UserCode\Lib\Calculate\wtr_calculate.h
  * @brief大疆电机PID以及底盘逆解
  *
  * Copyright (c) 2023 by ChenYiTong, All Rights Reserved.
@@ -36,3 +36,5 @@ void DeadBand(double x, double y, double *new_x, double *new_y, double threshoul
 
 // 单维度死区控制
 void DeadBandOneDimensional(double x, double *new_x, double threshould);
+
+void PID_Calc_P(__IO PID_t *pid);
