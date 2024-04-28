@@ -18,8 +18,16 @@ void StartDefaultTask(void *argument)
     for (;;) {
 
         HAL_GPIO_TogglePin(LED_R_GPIO_Port, LED_R_Pin);
-        //HAL_GPIO_TogglePin(LED_G_GPIO_Port, LED_G_Pin);
-        //HAL_UART_Transmit(&huart8, Rxbuffer+1, 3, 0xFFFF);
+        //printf("%f,%f\n", current_angle[0], Core_xy.Motor_X->speedPID.output);
+        printf("%f,%f,%f,%f\n", Core_xy.Motor_X->AxisData.AxisVelocity, Core_xy.Motor_X->AxisData.AxisAngle_inDegree, Core_xy.Motor_X->speedPID.ref,Core_xy.Motor_X->speedPID.output);
+
         osDelay(100);
     }
 }
+
+
+
+
+
+
+

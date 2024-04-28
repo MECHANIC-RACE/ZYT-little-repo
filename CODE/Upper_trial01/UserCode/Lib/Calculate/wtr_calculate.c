@@ -81,7 +81,7 @@ void positionServo(float ref, DJI_t *motor)
 
     motor->posPID.ref = ref;
     motor->posPID.fdb = motor->AxisData.AxisAngle_inDegree;
-    PID_Calc(&motor->posPID);
+    P_Calc(&motor->posPID);
     
     motor->speedPID.ref = motor->posPID.output;
     motor->speedPID.fdb = motor->FdbData.rpm;
