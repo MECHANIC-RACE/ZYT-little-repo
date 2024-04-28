@@ -36,3 +36,6 @@ void DeadBand(double x, double y, double *new_x, double *new_y, double threshoul
 
 // 单维度死区控制
 void DeadBandOneDimensional(double x, double *new_x, double threshould);
+
+//位置式pid控制
+void PID_Calc_P(__IO PID_t *pid);

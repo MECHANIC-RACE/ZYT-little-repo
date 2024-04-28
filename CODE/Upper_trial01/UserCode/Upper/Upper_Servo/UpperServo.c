@@ -25,7 +25,7 @@ void Upper_Servo_Task(void *argument)
                              Core_xy.Motor_Y->speedPID.output,
                              Core_xy.Motor_Z->speedPID.output,
                              0);
-             osDelay(10);
+             osDelay(2);
 
     }
     
@@ -54,8 +54,8 @@ void Core_xy_Motor_init()               //电机初始化
     hDJI[2].motorType = M3508;
     DJI_Init();
     for (int i = 0; i < 8; i++) {
-        hDJI[i].speedPID.KP        = 5;
-        hDJI[i].speedPID.KI        = 2.0;
+        hDJI[i].speedPID.KP        = 4.0;
+        hDJI[i].speedPID.KI        = 0.0;
         hDJI[i].speedPID.KD        = 0.0;
         hDJI[i].speedPID.outputMax = 8000;
 

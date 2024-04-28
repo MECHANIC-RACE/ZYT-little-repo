@@ -1,7 +1,7 @@
 /*
  * @Author: szf
  * @Date: 2023-02-22 12:04:21
- * @LastEditTime: 2024-04-17 04:52:50
+ * @LastEditTime: 2024-04-28 18:10:29
  * @LastEditors: labbbbbbbbb 
  * @brief 运动学逆解算及PID计算函数
  * @FilePath: \Upper_trial01\UserCode\Lib\Calculate\wtr_calculate.c
@@ -52,6 +52,25 @@ void PID_Calc(__IO PID_t *pid)
 }
 
 /**
+ * @brief: PID控制-位置式PID
+ * @auther: zyt
+ * @param {__IO PID_t} *pid
+ * @return {*}
+ */
+
+void PID_Calc_P(__IO PID_t *pid)
+{
+    pid->cur_error = pid->ref - pid->fdb;
+    pid->integral += pid->cur_error;
+    pid->output   = pid->KP * pid->cur_error + pid->KI * pid->integral + pid->KD * (pid->cur_error - pid->error[1]);
+    pid->error[0] = pid->error[1]; // 这句已经没有用了
+    pid->error[1] = pid->ref - pid->fdb;
+    /*设定输出上限*/
+    if (pid->output > pid->outputMax) pid->output = pid->outputMax;
+    if (pid->output < -pid->outputMax) pid->output = -pid->outputMax;
+}
+
+/**
  * @brief: PID算法-P控制
  * @auther: Chen YiTong 3083697520
  * @param {__IO PID_t} *pid
@@ -85,7 +104,7 @@ void positionServo(float ref, DJI_t *motor)
     
     motor->speedPID.ref = motor->posPID.output;
     motor->speedPID.fdb = motor->FdbData.rpm;
-    PID_Calc(&(motor->speedPID));
+    PID_Calc_P(&(motor->speedPID));
 }
 
 /**

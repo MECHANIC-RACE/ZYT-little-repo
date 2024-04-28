@@ -39,7 +39,7 @@ void Core_xy_State_Task(void *argument)
 
     // } while (!isArray);
 
-        osDelay(10);
+        osDelay(5);
     }
     
 }
