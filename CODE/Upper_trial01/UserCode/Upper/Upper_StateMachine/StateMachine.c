@@ -5,7 +5,7 @@ CoreXYState Target;
 float initial_angle[3];
 float current_angle[3];
 //待赋值
-// Target.position.x = 0;
+// Target.position.x = 0
 // Target.position.y = 0;
 // Target.position.z = 0;
 
@@ -23,7 +23,7 @@ void Core_xy_State_Task(void *argument)
         REF[2] = (Target.position.z) / BELT_LENGTH_PER_ROUND * 360.0f;
         TickType_t StartTick = xTaskGetTickCount();
         
-            initial_angle[0] = Core_xy.Motor_X->AxisData.AxisAngle_inDegree;
+        initial_angle[0] = Core_xy.Motor_X->AxisData.AxisAngle_inDegree;
         initial_angle[1] = Core_xy.Motor_Y->AxisData.AxisAngle_inDegree;
         initial_angle[2] = Core_xy.Motor_Z->AxisData.AxisAngle_inDegree;
 
