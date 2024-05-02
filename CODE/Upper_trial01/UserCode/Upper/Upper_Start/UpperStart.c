@@ -19,9 +19,10 @@ void StartDefaultTask(void *argument)
 
         HAL_GPIO_TogglePin(LED_R_GPIO_Port, LED_R_Pin);
         //printf("%f,%f\n", current_angle[0], Core_xy.Motor_X->speedPID.output);
-        printf("%f,%f,%f,%f,%f\n", Core_xy.Motor_X->AxisData.AxisVelocity * 60, Core_xy.Motor_X->AxisData.AxisAngle_inDegree, Core_xy.Motor_X->speedPID.ref, Core_xy.Motor_X->speedPID.output, current_angle[0]);
-        //printf("%d\n", xTaskGetTickCount());
-         //osDelay(2);
+        //printf("%f,%f,%f,%f,%f\n", Core_xy.Motor_X->AxisData.AxisVelocity * 60, Core_xy.Motor_X->AxisData.AxisAngle_inDegree, Core_xy.Motor_X->speedPID.ref, Core_xy.Motor_X->speedPID.output, current_angle[0]);
+        printf("%f,%f,%f\n", Core_xy.Motor_Y->AxisData.AxisAngle_inDegree,current_angle[1], Core_xy.Motor_Y->speedPID.output);
+        // printf("%d\n", xTaskGetTickCount());
+        // osDelay(20);
     }
 }
 
@@ -31,4 +32,3 @@ void StartDefaultTask(void *argument)
 
 
 
-                                                    

@@ -2,6 +2,8 @@
 #include "StateMachine.h"
 
 CoreXYState Target;
+
+
 float initial_angle[3];
 float current_angle[3];
 //待赋值
@@ -17,12 +19,19 @@ void Core_xy_State_Task(void *argument)
     osDelay(100);
 
      for (;;) {
+
+        /*test*/
+        //Target.position.x = 100;
+        //Target.position.y = 100;
+        //Target.position.z = 100;
+        /*test*/
         float REF[3];
         REF[0] = (Target.position.x) / BELT_LENGTH_PER_ROUND * 360.0f; // 所需要转的角度  单位：度
         REF[1] = (Target.position.y) / BELT_LENGTH_PER_ROUND * 360.0f;
         REF[2] = (Target.position.z) / BELT_LENGTH_PER_ROUND * 360.0f;
+        REF[1]               = 360;
         TickType_t StartTick = xTaskGetTickCount();
-        
+
         initial_angle[0] = Core_xy.Motor_X->AxisData.AxisAngle_inDegree;
         initial_angle[1] = Core_xy.Motor_Y->AxisData.AxisAngle_inDegree;
         initial_angle[2] = Core_xy.Motor_Z->AxisData.AxisAngle_inDegree;
@@ -40,7 +49,7 @@ void Core_xy_State_Task(void *argument)
             //printf("%d,%d,%f,%f\n", StartTick, CurrentTick, current_time,current_angle[0]);
         } while (!isArray);
 
-        osDelay(2);
+        osDelay(10);
     }
     
 }

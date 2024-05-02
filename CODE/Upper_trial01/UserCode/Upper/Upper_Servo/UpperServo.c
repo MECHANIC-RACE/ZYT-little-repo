@@ -22,7 +22,7 @@ void Upper_Servo_Task(void *argument)
                              Core_xy.Motor_Z->speedPID.output,
                              0);
        // printf("%f,%f,%f,%f\n", Core_xy.Motor_X->AxisData.AxisVelocity, Core_xy.Motor_X->AxisData.AxisAngle_inDegree, Core_xy.Motor_X->speedPID.ref, Core_xy.Motor_X->speedPID.output);
-        osDelay(2);
+        osDelay(10);
 
     }
     
@@ -46,7 +46,7 @@ void Core_xy_Motor_init()               //电机初始化
     Core_xy.Motor_X = &hDJI[0];
     Core_xy.Motor_Y = &hDJI[1];
     Core_xy.Motor_Z = &hDJI[2];
-    hDJI[0].motorType = M2006;      //3508
+    hDJI[0].motorType = M3508;      //3508
     hDJI[1].motorType = M2006;
     hDJI[2].motorType = M3508;
     DJI_Init();
