@@ -29,13 +29,13 @@ typedef __IO struct
 typedef __IO struct {
     DJI_t *Motor_X;
     DJI_t *Motor_Y;
-    DJI_t *Motor_Z;
+    _Bool cylinder;
     CoreXYState Corexy_state;
 } CoreXY_COMPONENT;
 
 extern CoreXY_COMPONENT Core_xy;       //全局的Corexy状态参数
 extern CoreXYState Target;              //目标状态
-extern uint8_t Rxbuffer[5];
+
 extern float initial_angle[3];
 extern float current_angle[3];
 
