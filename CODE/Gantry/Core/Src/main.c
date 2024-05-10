@@ -199,6 +199,7 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
+//      HAL_UART_Transmit(&huart2, "hello", 6, 0xffff);
   }
   /* USER CODE END Error_Handler_Debug */
 }
