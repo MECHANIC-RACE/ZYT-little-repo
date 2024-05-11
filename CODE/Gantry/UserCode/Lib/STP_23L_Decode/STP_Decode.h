@@ -15,8 +15,8 @@
 
 
 
-extern uint8_t Rxbuffer[195];
-
+extern uint8_t Rxbuffer[4][195];
+extern float distance_aver[4];
 
 typedef struct{
     int16_t distance;               //测量目标距离（单位：mm）
@@ -28,12 +28,12 @@ typedef struct{
 } LidarPointTypedef;                //获取的测量数据结构体
 
 /*定义接收到的雷达测试数据*/
-extern LidarPointTypedef LidarData[12];
+extern LidarPointTypedef LidarData[4][12];
 
 /*串口宏定义*/
 #define USART_RX_HANDLE &huart1
 
 
-void STP_23L_Decode();
+void STP_23L_Decode(uint16_t num);
 
 #endif // __STP_DECODE_H__

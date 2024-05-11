@@ -33,8 +33,8 @@ typedef __IO struct {
     CoreXYState Corexy_state;
 } CoreXY_COMPONENT;
 
-extern CoreXY_COMPONENT Core_xy;       //全局的Corexy状态参数
-extern CoreXYState Target;              //目标状态
+extern CoreXY_COMPONENT Core_xy[2];       //全局的Corexy状态参数
+extern CoreXYState TargetState[2];              //目标状态
 
 extern float initial_angle[3];
 extern float current_angle[3];

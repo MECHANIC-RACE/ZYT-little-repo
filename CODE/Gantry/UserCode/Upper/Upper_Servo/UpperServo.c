@@ -3,7 +3,7 @@
 #include "UpperServo.h"
 
 
-CoreXY_COMPONENT Core_xy;
+CoreXY_COMPONENT Core_xy[2];    //两个分区的龙门的数据
 
 
 /********线程相关部分*************/
@@ -12,15 +12,24 @@ void Upper_Servo_Task(void *argument)
 {
     osDelay(100);
     for (;;) {
-        positionServo(current_angle[0], Core_xy.Motor_X);
-        positionServo(current_angle[1], Core_xy.Motor_Y);
-        
-        
+        /*TestCode*/
+       
+        float Target_tmp[4] = {100,100,100,100};//单位：mm
+        TargetState[0].velocity.x  = Target_tmp[0] - distance_aver[0];
+        TargetState[0].velocity.y  = Target_tmp[1] - distance_aver[1];
+        TargetState[1].velocity.x  = Target_tmp[2] - distance_aver[2];
+        TargetState[1].velocity.y  = Target_tmp[3] - distance_aver[3];
+
+        speedServo(TargetState[0].velocity.x, Core_xy[0].Motor_X);
+        speedServo(TargetState[0].velocity.y, Core_xy[0].Motor_Y);
+        speedServo(TargetState[1].velocity.x, Core_xy[1].Motor_X);
+        speedServo(TargetState[1].velocity.y, Core_xy[1].Motor_Y);
+
         CanTransmit_DJI_1234(&hcan1,
-                             Core_xy.Motor_X->speedPID.output,
-                             Core_xy.Motor_Y->speedPID.output,
-                             0,
-                             0);
+                             Core_xy[0].Motor_X->speedPID.output,
+                             Core_xy[0].Motor_Y->speedPID.output,
+                             Core_xy[1].Motor_X->speedPID.output,
+                             Core_xy[1].Motor_Y->speedPID.output);
         osDelay(10);
 
     }
@@ -42,10 +51,14 @@ void Upper_Servo_Start(void)
 void Core_xy_Motor_init()               //电机初始化
 {
     
-    Core_xy.Motor_X = &hDJI[0];
-    Core_xy.Motor_Y = &hDJI[1];
-    hDJI[0].motorType = M3508;      //3508
+    Core_xy[0].Motor_X = &hDJI[0];
+    Core_xy[0].Motor_Y = &hDJI[1];
+    Core_xy[1].Motor_X = &hDJI[2];
+    Core_xy[1].Motor_Y = &hDJI[3];
+    hDJI[0].motorType = M2006;      
     hDJI[1].motorType = M2006;
+    hDJI[2].motorType  = M2006;
+    hDJI[3].motorType  = M2006;
     DJI_Init();
     for (int i = 0; i < 8; i++) {
         hDJI[i].speedPID.KP        = 2.0;
