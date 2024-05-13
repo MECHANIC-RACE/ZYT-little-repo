@@ -20,17 +20,6 @@ void StartDefaultTask(void *argument)
 
     for (;;) {
 
-        HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
-        
-        //printf("%f,%f,%f\n", Core_xy.Motor_Y->AxisData.AxisAngle_inDegree,current_angle[1], Core_xy.Motor_Y->speedPID.output);
-        //float distance_sum = 0;
-        // for (uint16_t i = 0; i < 12; i++) 
-        // {
-        //     distance_sum += LidarData[i].distance;
-        // }
-        // float distance_aver = distance_sum / 12;
-        //printf("%d\n", LidarData[0].distance);
-        //printf("%d\n", LidarData[0].distance);
         osDelay(10);
     }
 }

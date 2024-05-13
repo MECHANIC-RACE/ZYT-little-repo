@@ -15,15 +15,15 @@ void Upper_Servo_Task(void *argument)
         /*TestCode*/
        
         //float Target_tmp[4] = {100,100,100,100};//单位：mm
-        TargetState[0].velocity.x  = TargetState[0].position.x - distance_aver[0];
-        TargetState[0].velocity.y  = TargetState[0].position.y - distance_aver[1];
-        TargetState[1].velocity.x  = TargetState[1].position.x - distance_aver[2];
-        TargetState[1].velocity.y  = TargetState[1].position.y - distance_aver[3];
+        Core_xy[0].gantry_t.velocity.x = Core_xy[0].gantry_t.position.x - distance_aver[0];
+        Core_xy[0].gantry_t.velocity.y = Core_xy[0].gantry_t.position.y - distance_aver[1];
+        Core_xy[1].gantry_t.velocity.x = Core_xy[1].gantry_t.position.x - distance_aver[2];
+        Core_xy[1].gantry_t.velocity.y = Core_xy[1].gantry_t.position.y - distance_aver[3];
 
-        speedServo(TargetState[0].velocity.x, Core_xy[0].Motor_X);
-        speedServo(TargetState[0].velocity.y, Core_xy[0].Motor_Y);
-        speedServo(TargetState[1].velocity.x, Core_xy[1].Motor_X);
-        speedServo(TargetState[1].velocity.y, Core_xy[1].Motor_Y);
+        speedServo(Core_xy[0].gantry_t.velocity.x, Core_xy[0].Motor_X);
+        speedServo(Core_xy[0].gantry_t.velocity.y, Core_xy[0].Motor_Y);
+        speedServo(Core_xy[1].gantry_t.velocity.x, Core_xy[1].Motor_X);
+        speedServo(Core_xy[1].gantry_t.velocity.y, Core_xy[1].Motor_Y);
 
         CanTransmit_DJI_1234(&hcan1,
                              Core_xy[0].Motor_X->speedPID.output,
