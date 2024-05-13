@@ -14,11 +14,11 @@ void Upper_Servo_Task(void *argument)
     for (;;) {
         /*TestCode*/
        
-        float Target_tmp[4] = {100,100,100,100};//单位：mm
-        TargetState[0].velocity.x  = Target_tmp[0] - distance_aver[0];
-        TargetState[0].velocity.y  = Target_tmp[1] - distance_aver[1];
-        TargetState[1].velocity.x  = Target_tmp[2] - distance_aver[2];
-        TargetState[1].velocity.y  = Target_tmp[3] - distance_aver[3];
+        //float Target_tmp[4] = {100,100,100,100};//单位：mm
+        TargetState[0].velocity.x  = TargetState[0].position.x - distance_aver[0];
+        TargetState[0].velocity.y  = TargetState[0].position.y - distance_aver[1];
+        TargetState[1].velocity.x  = TargetState[1].position.x - distance_aver[2];
+        TargetState[1].velocity.y  = TargetState[1].position.y - distance_aver[3];
 
         speedServo(TargetState[0].velocity.x, Core_xy[0].Motor_X);
         speedServo(TargetState[0].velocity.y, Core_xy[0].Motor_Y);

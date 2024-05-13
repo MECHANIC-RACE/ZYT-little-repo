@@ -30,6 +30,7 @@ typedef __IO struct {
     DJI_t *Motor_X;
     DJI_t *Motor_Y;
     _Bool cylinder;
+    _Bool electromagnet;
     CoreXYState Corexy_state;
 } CoreXY_COMPONENT;
 
