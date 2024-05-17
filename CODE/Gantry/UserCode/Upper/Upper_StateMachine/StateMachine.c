@@ -36,8 +36,19 @@ void Core_xy_State_Task(void *argument)
             // HAL_GPIO_WritePin(Cylinder_GPIO_Port, Cylinder_Pin, 1);
             // osDelay(5);
             // HAL_GPIO_WritePin(Electromagnet_GPIO_Port, Electromagnet_Pin, 0);
-
-            osDelay(10);
+            if(UartFlag[0])
+            {
+                STP_23L_Decode(0);
+                UartFlag[0] = 0;
+                HAL_UARTEx_ReceiveToIdle_DMA(&huart1, Rxbuffer[0], sizeof(Rxbuffer[0]));
+            }
+            if(UartFlag[1])
+            {
+                STP_23L_Decode(1);
+                UartFlag[1] = 0;
+                HAL_UARTEx_ReceiveToIdle_DMA(&huart2, Rxbuffer[1], sizeof(Rxbuffer[0]));
+            }
+            osDelay(2);
 
             
     }

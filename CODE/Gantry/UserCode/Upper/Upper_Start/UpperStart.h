@@ -18,4 +18,5 @@
 #include "math.h"
 //#include "tim.h"
 #include "STP_Decode.h" 
+#include "DMA.h"
 #endif // __UPPERSTART_H__

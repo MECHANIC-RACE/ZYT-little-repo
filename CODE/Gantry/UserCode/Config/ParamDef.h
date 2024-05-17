@@ -35,7 +35,6 @@ typedef __IO struct {
 extern CoreXY_COMPONENT Core_xy[2];       //全局的Corexy状态参数
 //extern CoreXYState TargetState[2];              //目标状态
 
-// extern float initial_angle[3];
-// extern float current_angle[3];
+extern uint16_t UartFlag[4];
 
 #endif // __PARAMDEF_H__
