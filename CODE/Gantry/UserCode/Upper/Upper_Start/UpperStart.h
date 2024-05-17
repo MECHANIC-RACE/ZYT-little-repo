@@ -19,4 +19,6 @@
 //#include "tim.h"
 #include "STP_Decode.h" 
 #include "DMA.h"
+#include "usart_queue.h"
+#include "UsartUpdate.h"
 #endif // __UPPERSTART_H__
