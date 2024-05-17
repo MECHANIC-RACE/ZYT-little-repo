@@ -7,8 +7,6 @@
 #include "UpperStart.h"
 #define BELT_LENGTH_PER_ROUND 95.5044167  //输出轴转一圈同步带走的长度，单位:mm
 
-
-
 typedef __IO struct 
 {
     __IO struct {

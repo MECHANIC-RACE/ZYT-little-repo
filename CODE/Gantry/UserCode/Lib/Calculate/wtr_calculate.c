@@ -112,7 +112,7 @@ void positionServo(float ref, DJI_t *motor)
 /**
  * @brief: 速度伺服函数
  * @auther: Chen YiTong 3083697520
- * @param {float} ref 目标值
+ * @param {float} ref 目标值 rpm
  * @param {DJI_t} *motor 电机结构体
  * @return {*}
  */
