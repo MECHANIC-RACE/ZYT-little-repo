@@ -10,7 +10,7 @@ void DMA_Enable()
     // HAL_UARTEx_ReceiveToIdle_DMA(&huart1, Rxbuffer[0], sizeof(Rxbuffer[0]));
     //__HAL_UART_ENABLE_IT(&huart2, UART_IT_IDLE);
     // HAL_UART_Receive_DMA(&huart2, Rxbuffer[1], sizeof(Rxbuffer[1]));
-    HAL_UART_Receive_IT(&huart2, (Rxbuffer[1]), 195);
+    //HAL_UART_Receive_IT(&huart2, (Rxbuffer[1]), 195);
     // HAL_UART_Receive_DMA(&huart2, (Rxbuffer[1]), 195);
 
     // HAL_UARTEx_ReceiveToIdle_DMA(&huart2, Rxbuffer[1], sizeof(Rxbuffer[1]));

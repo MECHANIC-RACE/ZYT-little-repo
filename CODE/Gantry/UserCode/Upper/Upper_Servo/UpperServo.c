@@ -15,10 +15,10 @@ void Upper_Servo_Task(void *argument)
         /*TestCode*/
         Core_xy[0].gantry_t.position.y = 200;
         // float Target_tmp[4] = {100,100,100,100};//单位：mm
-        Core_xy[0].gantry_t.velocity.x = Core_xy[0].gantry_t.position.x - distance_aver[0];
-        Core_xy[0].gantry_t.velocity.y = -(Core_xy[0].gantry_t.position.y - distance_aver[1])*10;
-        Core_xy[1].gantry_t.velocity.x = Core_xy[1].gantry_t.position.x - distance_aver[2];
-        Core_xy[1].gantry_t.velocity.y = Core_xy[1].gantry_t.position.y - distance_aver[3];
+        //Core_xy[0].gantry_t.velocity.x = Core_xy[0].gantry_t.position.x - distance_aver[0];
+        //Core_xy[0].gantry_t.velocity.y = -(Core_xy[0].gantry_t.position.y - distance_aver[1])*10;
+        //Core_xy[1].gantry_t.velocity.x = Core_xy[1].gantry_t.position.x - distance_aver[2];
+        //Core_xy[1].gantry_t.velocity.y = Core_xy[1].gantry_t.position.y - distance_aver[3];
 
         // speedServo(Core_xy[0].gantry_t.velocity.x, Core_xy[0].Motor_X);
          speedServo(Core_xy[0].gantry_t.velocity.y, Core_xy[0].Motor_Y);

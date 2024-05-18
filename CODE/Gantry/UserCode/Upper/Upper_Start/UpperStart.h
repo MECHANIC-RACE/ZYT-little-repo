@@ -11,14 +11,14 @@
 #include "cmsis_os.h"
 #include "wtr_can.h"
 #include "wtr_dji.h"
-#include "ParamDef.h"
 #include "UpperServo.h"
 #include "StateMachine.h"
 #include "string.h"
 #include "math.h"
-//#include "tim.h"
 #include "STP_Decode.h" 
 #include "DMA.h"
 #include "usart_queue.h"
 #include "UsartUpdate.h"
+#include "ParamDef.h"
+
 #endif // __UPPERSTART_H__

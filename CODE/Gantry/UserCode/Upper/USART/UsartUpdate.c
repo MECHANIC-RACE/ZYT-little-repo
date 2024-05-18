@@ -1,6 +1,6 @@
 #include "UsartUpdate.h"
 #include "UpperStart.h"
-uint16_t cnt_queue[4];
+
 void UartUpdateTask(void *argument)
 {
     /* USER CODE BEGIN UartUpdateTask */
@@ -9,40 +9,27 @@ void UartUpdateTask(void *argument)
     /* Infinite loop */
     for (;;) {
         if (UartFlag[0]) {
-            STP_23L_Decode(0);
-            
-
-            //MX_USART1_UART_Init();
-            //while (!HAL_DMA_GetState((&huart1)->hdmarx));
-            //__HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE);
-            //HAL_UARTEx_ReceiveToIdle_DMA(&huart1, Rxbuffer[0], sizeof(Rxbuffer[0]));
-            //HAL_UART_Receive_DMA(&huart1, Rxbuffer[0], sizeof(Rxbuffer[0]));
+            STP_23L_Decode(Rxbuffer_1,&Lidar1);
             UartFlag[0] = 0;
         }
         if (UartFlag[1]) {
-            STP_23L_Decode(1);
-            //printf("it");
-            //MX_USART2_UART_Init();
-            //__HAL_UART_ENABLE_IT(&huart2, UART_IT_IDLE);
-            //HAL_UARTEx_ReceiveToIdle_DMA(&huart2, Rxbuffer[1], sizeof(Rxbuffer[0]));
-            //HAL_UART_Receive_DMA(&huart2, Rxbuffer[1], sizeof(Rxbuffer[0]));
+            STP_23L_Decode(Rxbuffer_2,&Lidar2);
             UartFlag[1] = 0;
         }
         if (UartFlag[2]) {
-            STP_23L_Decode(2);
-
-            // MX_USART2_UART_Init();
-            //__HAL_UART_ENABLE_IT(&huart2, UART_IT_IDLE);
-            // HAL_UARTEx_ReceiveToIdle_DMA(&huart2, Rxbuffer[1], sizeof(Rxbuffer[0]));
-            //HAL_UART_Receive_DMA(&huart3, Rxbuffer[2], sizeof(Rxbuffer[0]));
-            //UartFlag[2] = 0;
+            STP_23L_Decode(Rxbuffer_3, &Lidar3);
+            UartFlag[2] = 0;
+        }
+        if (UartFlag[3]) {
+            STP_23L_Decode(Rxbuffer_6, &Lidar6);
+            UartFlag[3] = 0;
         }
         osDelay(10);
     }
     /* USER CODE END UartUpdateTask */
 }
 
-UsartUpdate_Start()
+void UsartUpdate_Start()
 {
     osThreadId_t UsartUpdateHandle;
     const osThreadAttr_t UsartUpdate_attributes = {
@@ -51,4 +38,14 @@ UsartUpdate_Start()
         .priority   = (osPriority_t)osPriorityAboveNormal,
     };
     UsartUpdateHandle = osThreadNew(UartUpdateTask, NULL, &UsartUpdate_attributes);
+}
+
+void Usart_start()
+{
+    HAL_UART_Receive_IT(&huart1, usart1_rx, 1);
+    HAL_UART_Receive_IT(&huart2, usart2_rx, 1);
+    HAL_UART_Receive_IT(&huart3, usart3_rx, 1);
+    HAL_UART_Receive_IT(&huart6, usart6_rx, 1);
+    /*2，3，6串口的使能函数*/
+    __HAL_UART_ENABLE(&huart4);
 }
