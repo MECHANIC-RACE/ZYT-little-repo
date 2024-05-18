@@ -1,0 +1,3 @@
+tool: GCC
+fileName: MAVLink_TRIAL01.map
+elfName: MAVLink_TRIAL01.elf

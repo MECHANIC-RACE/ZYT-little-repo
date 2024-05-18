@@ -56,7 +56,7 @@
 
 /* External variables --------------------------------------------------------*/
 extern CAN_HandleTypeDef hcan1;
-extern UART_HandleTypeDef huart8;
+extern UART_HandleTypeDef huart7;
 extern TIM_HandleTypeDef htim1;
 
 /* USER CODE BEGIN EV */
@@ -190,17 +190,17 @@ void TIM1_UP_TIM10_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles UART8 global interrupt.
+  * @brief This function handles UART7 global interrupt.
   */
-void UART8_IRQHandler(void)
+void UART7_IRQHandler(void)
 {
-  /* USER CODE BEGIN UART8_IRQn 0 */
+  /* USER CODE BEGIN UART7_IRQn 0 */
 
-  /* USER CODE END UART8_IRQn 0 */
-  HAL_UART_IRQHandler(&huart8);
-  /* USER CODE BEGIN UART8_IRQn 1 */
+  /* USER CODE END UART7_IRQn 0 */
+  HAL_UART_IRQHandler(&huart7);
+  /* USER CODE BEGIN UART7_IRQn 1 */
 
-  /* USER CODE END UART8_IRQn 1 */
+  /* USER CODE END UART7_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

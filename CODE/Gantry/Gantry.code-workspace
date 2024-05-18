@@ -19,7 +19,10 @@
             "*.cpp": "cpp",
             "*.cxx": "cpp",
             "*.cc": "cpp",
-            "cmath": "c"
+            "cmath": "c",
+            "compare": "c",
+            "limits": "c",
+            "new": "c"
         },
         "[yaml]": {
             "editor.insertSpaces": true,

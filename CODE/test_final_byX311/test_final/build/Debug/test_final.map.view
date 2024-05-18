@@ -1,0 +1,3 @@
+tool: GCC
+fileName: test_final.map
+elfName: test_final.elf

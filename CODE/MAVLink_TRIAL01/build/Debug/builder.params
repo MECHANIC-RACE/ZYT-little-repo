@@ -1,0 +1,123 @@
+{
+    "name": "MAVLink_TRIAL01",
+    "target": "Debug",
+    "toolchain": "GCC",
+    "toolchainLocation": "D:\\GNU Arm Embedded Toolchain\\10 2021.10",
+    "toolchainCfgFile": "c:\\Users\\86189\\.vscode\\extensions\\cl.eide-3.15.1\\res\\data\\models\\win32/arm.gcc.model.json",
+    "buildMode": "fast|multhread",
+    "showRepathOnLog": true,
+    "threadNum": 16,
+    "rootDir": "e:\\WULIUSAI_LOG\\CODE\\MAVLink_TRIAL01",
+    "dumpPath": "build\\Debug",
+    "outDir": "build\\Debug",
+    "incDirs": [
+        ".eide/deps",
+        "Core/Src",
+        "Core/Inc",
+        "Drivers/STM32F4xx_HAL_Driver/Src",
+        "Drivers/STM32F4xx_HAL_Driver/Inc",
+        "Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
+        "Drivers/CMSIS/Include",
+        "Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+        "USER",
+        "USER/wtr_mavlink_demo"
+    ],
+    "libDirs": [],
+    "defines": [
+        "USE_HAL_DRIVER",
+        "STM32F427xx"
+    ],
+    "sourceList": [
+        "Core/Src/gpio.c",
+        "Core/Src/main.c",
+        "Core/Src/stm32f4xx_hal_msp.c",
+        "Core/Src/stm32f4xx_it.c",
+        "Core/Src/system_stm32f4xx.c",
+        "Core/Src/usart.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c",
+        "USER/wtr_mavlink.c",
+        "startup_stm32f427xx.s"
+    ],
+    "sourceParams": {},
+    "sourceParamsMtime": 1711875515722.6267,
+    "options": {
+        "version": 5,
+        "beforeBuildTasks": [],
+        "afterBuildTasks": [],
+        "global": {
+            "$float-abi-type": "softfp",
+            "output-debug-info": "enable",
+            "misc-control": "--specs=nosys.specs --specs=nano.specs",
+            "toolPrefix": "arm-none-eabi-",
+            "microcontroller-cpu": "cortex-m4",
+            "microcontroller-fpu": "cortex-m4",
+            "microcontroller-float": "cortex-m4",
+            "target": "cortex-m4"
+        },
+        "c/cpp-compiler": {
+            "language-c": "c11",
+            "language-cpp": "c++11",
+            "optimization": "level-debug",
+            "warnings": "all-warnings",
+            "one-elf-section-per-function": true,
+            "one-elf-section-per-data": true,
+            "C_FLAGS": "",
+            "CXX_FLAGS": ""
+        },
+        "asm-compiler": {
+            "ASM_FLAGS": ""
+        },
+        "linker": {
+            "output-format": "elf",
+            "remove-unused-input-sections": true,
+            "LD_FLAGS": "",
+            "LIB_FLAGS": "-lm",
+            "$toolName": "gcc",
+            "link-scatter": [
+                "\"e:/WULIUSAI_LOG/CODE/MAVLink_TRIAL01/STM32F427IIHx_FLASH.ld\""
+            ]
+        }
+    },
+    "env": {
+        "workspaceFolder": "e:\\WULIUSAI_LOG\\CODE\\MAVLink_TRIAL01",
+        "workspaceFolderBasename": "MAVLink_TRIAL01",
+        "OutDir": "e:\\WULIUSAI_LOG\\CODE\\MAVLink_TRIAL01\\build\\Debug",
+        "OutDirRoot": "build",
+        "OutDirBase": "build\\Debug",
+        "ProjectName": "MAVLink_TRIAL01",
+        "ConfigName": "Debug",
+        "ProjectRoot": "e:\\WULIUSAI_LOG\\CODE\\MAVLink_TRIAL01",
+        "ExecutableName": "e:\\WULIUSAI_LOG\\CODE\\MAVLink_TRIAL01\\build\\Debug\\MAVLink_TRIAL01",
+        "SYS_Platform": "win32",
+        "SYS_DirSep": "\\",
+        "SYS_DirSeparator": "\\",
+        "SYS_PathSep": ";",
+        "SYS_PathSeparator": ";",
+        "SYS_EOL": "\r\n",
+        "ToolchainRoot": "D:\\GNU Arm Embedded Toolchain\\10 2021.10"
+    },
+    "sha": {
+        "c/cpp-defines": "17f3f6cb93b99aa072de45f16cf5b067",
+        "beforeBuildTasks": "d751713988987e9331980363e24189ce",
+        "afterBuildTasks": "d751713988987e9331980363e24189ce",
+        "global": "2cd05bcd01039a5fafd2c2dd2aa1c80a",
+        "c/cpp-compiler": "292b10e2fef533def4cb15297b4e0391",
+        "asm-compiler": "dd2e48fddd09233278cb37447cf1e693",
+        "linker": "ba9d82dc09cd0f9b9d9595f07d2b3685"
+    }
+}

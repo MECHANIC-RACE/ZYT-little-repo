@@ -1,0 +1,118 @@
+{
+    "name": "test_final",
+    "target": "Debug",
+    "toolchain": "GCC",
+    "toolchainLocation": "D:\\GNU Arm Embedded Toolchain\\10 2021.10",
+    "toolchainCfgFile": "c:\\Users\\86189\\.vscode\\extensions\\cl.eide-3.16.0\\res\\data\\models\\win32/arm.gcc.model.json",
+    "buildMode": "fast|multhread",
+    "showRepathOnLog": true,
+    "threadNum": 16,
+    "rootDir": "e:\\WULIUSAI_LOG\\CODE\\test_final_byX311\\test_final",
+    "dumpPath": "build\\Debug",
+    "outDir": "build\\Debug",
+    "incDirs": [
+        ".eide/deps",
+        "Core/Inc",
+        "Drivers/STM32F4xx_HAL_Driver/Inc",
+        "Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
+        "Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+        "Drivers/CMSIS/Include",
+        "Core/Src",
+        "Drivers/STM32F4xx_HAL_Driver/Src",
+        "UC",
+        "UC/test_speed"
+    ],
+    "libDirs": [],
+    "defines": [
+        "USE_HAL_DRIVER",
+        "STM32F427xx"
+    ],
+    "sourceList": [
+        "Core/Src/gpio.c",
+        "Core/Src/main.c",
+        "Core/Src/stm32f4xx_hal_msp.c",
+        "Core/Src/stm32f4xx_it.c",
+        "Core/Src/system_stm32f4xx.c",
+        "Core/Src/usart.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c",
+        "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c",
+        "UC/wtr_mavlink.c",
+        "startup_stm32f427xx.s"
+    ],
+    "sourceParams": {},
+    "sourceParamsMtime": 1711895178000,
+    "options": {
+        "version": 5,
+        "beforeBuildTasks": [],
+        "afterBuildTasks": [],
+        "global": {
+            "$float-abi-type": "hard",
+            "output-debug-info": "enable",
+            "misc-control": "--specs=nosys.specs --specs=nano.specs",
+            "toolPrefix": "arm-none-eabi-",
+            "microcontroller-cpu": "cortex-m4-sp",
+            "microcontroller-fpu": "cortex-m4-sp",
+            "microcontroller-float": "cortex-m4-sp",
+            "target": "cortex-m4-sp"
+        },
+        "c/cpp-compiler": {
+            "language-c": "c11",
+            "language-cpp": "c++11",
+            "optimization": "level-debug",
+            "warnings": "all-warnings",
+            "one-elf-section-per-function": true,
+            "one-elf-section-per-data": true
+        },
+        "asm-compiler": {},
+        "linker": {
+            "output-format": "elf",
+            "remove-unused-input-sections": true,
+            "LIB_FLAGS": "-lm",
+            "$toolName": "gcc",
+            "link-scatter": [
+                "\"e:/WULIUSAI_LOG/CODE/test_final_byX311/test_final/STM32F427IIHx_FLASH.ld\""
+            ]
+        }
+    },
+    "env": {
+        "workspaceFolder": "e:\\WULIUSAI_LOG\\CODE\\test_final_byX311\\test_final",
+        "workspaceFolderBasename": "test_final",
+        "OutDir": "e:\\WULIUSAI_LOG\\CODE\\test_final_byX311\\test_final\\build\\Debug",
+        "OutDirRoot": "build",
+        "OutDirBase": "build\\Debug",
+        "ProjectName": "test_final",
+        "ConfigName": "Debug",
+        "ProjectRoot": "e:\\WULIUSAI_LOG\\CODE\\test_final_byX311\\test_final",
+        "ExecutableName": "e:\\WULIUSAI_LOG\\CODE\\test_final_byX311\\test_final\\build\\Debug\\test_final",
+        "SYS_Platform": "win32",
+        "SYS_DirSep": "\\",
+        "SYS_DirSeparator": "\\",
+        "SYS_PathSep": ";",
+        "SYS_PathSeparator": ";",
+        "SYS_EOL": "\r\n",
+        "ToolchainRoot": "D:\\GNU Arm Embedded Toolchain\\10 2021.10"
+    },
+    "sha": {
+        "c/cpp-defines": "17f3f6cb93b99aa072de45f16cf5b067",
+        "beforeBuildTasks": "d751713988987e9331980363e24189ce",
+        "afterBuildTasks": "d751713988987e9331980363e24189ce",
+        "global": "7d3b6242ea34847fa7f6c001da2d214f",
+        "c/cpp-compiler": "a6b483e22e4217f2ae766678be714bdf",
+        "asm-compiler": "99914b932bd37a50b983c5e7c90ae93b",
+        "linker": "e7f29af9eb468ffcf9f2bb0164da8bd0"
+    }
+}

@@ -1,0 +1,105 @@
+[2024-03-31 22:39:50]	[done]
+	build successfully !
+
+[2024-03-31 22:59:55]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+d:/program files/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/Core/Src/main.o: in function `main':
+d:\Study_log\Mavlink_Note\test_final/./Core/Src/main.c:112: undefined reference to `mavlink_msg_xxx_send_struct'
+Memory region         Used Size  Region Size  %age Used
+             RAM:        3056 B       192 KB      1.55%
+          CCMRAM:          0 GB        64 KB      0.00%
+           FLASH:       11032 B         2 MB      0.53%
+collect2.exe: error: ld returned 1 exit status
+
+
+[2024-03-31 23:00:26]	[done]
+	build successfully !
+
+[2024-03-31 23:20:47]	[done]
+	build successfully !
+
+[2024-04-07 23:37:41]	[done]
+	build successfully !
+
+[2024-04-08 23:45:51]	compilation failed at : "e:\WULIUSAI_LOG\CODE\test_final_byX311\test_final\Core\Src\main.c", exit code: 1
+command: 
+  "D:\GNU Arm Embedded Toolchain\10 2021.10\bin\arm-none-eabi-gcc.exe" -c -xc -mthumb -std=c11 -I.eide/deps -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include -ICore/Src -IDrivers/STM32F4xx_HAL_Driver/Src -IUC -IUC/test_speed -DUSE_HAL_DRIVER -DSTM32F427xx -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -Og -Wall -g --specs=nosys.specs --specs=nano.specs -ffunction-sections -fdata-sections -o ./build/Debug/.obj/Core/Src/main.o -MMD ./Core/Src/main.c
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from UC/test_speed/test_speed.h:49,
+                 from UC/test_speed/mavlink.h:32,
+                 from UC/wtr_mavlink.h:105,
+                 from ./Core/Src/main.c:26:
+UC/test_speed/./mavlink_msg_speed.h: In function 'mavlink_msg_speed_send_buf':
+UC/test_speed/./mavlink_msg_speed.h:254:5: warning: converting a packed 'mavlink_message_t' {aka 'struct __mavlink_message'} pointer (alignment 1) to a 'mavlink_speed_t' {aka 'struct __mavlink_speed_t'} pointer (alignment 8) may result in an unaligned pointer value [-Waddress-of-packed-member]
+  254 |     mavlink_speed_t *packet = (mavlink_speed_t *)msgbuf;
+      |     ^~~~~~~~~~~~~~~
+In file included from UC/wtr_mavlink.h:22,
+                 from ./Core/Src/main.c:26:
+UC/mavlink_types.h:108:16: note: defined here
+  108 | typedef struct __mavlink_message {
+      |                ^~~~~~~~~~~~~~~~~
+UC/mavlink_types.h:17:40: note: in definition of macro 'MAVPACKED'
+   17 |   #define MAVPACKED( __Declaration__ ) __Declaration__ __attribute__((packed))
+      |                                        ^~~~~~~~~~~~~~~
+In file included from UC/test_speed/test_speed.h:49,
+                 from UC/test_speed/mavlink.h:32,
+                 from UC/wtr_mavlink.h:105,
+                 from ./Core/Src/main.c:26:
+UC/test_speed/./mavlink_msg_speed.h:7:16: note: defined here
+    7 | typedef struct __mavlink_speed_t {
+      |                ^~~~~~~~~~~~~~~~~
+./Core/Src/main.c: At top level:
+./Core/Src/main.c:59:20: error: expected '=', ',', ';', 'asm' or '__attribute__' before '.' token
+   59 | SPEEDStructToBeSend.vx = 0;
+      |                    ^
+./Core/Src/main.c:60:20: error: expected '=', ',', ';', 'asm' or '__attribute__' before '.' token
+   60 | SPEEDStructToBeSend.vy = 0;
+      |                    ^
+./Core/Src/main.c:61:20: error: expected '=', ',', ';', 'asm' or '__attribute__' before '.' token
+   61 | SPEEDStructToBeSend.vz = 0;
+      |                    ^
+
+[2024-04-08 23:48:03]	compilation failed at : "e:\WULIUSAI_LOG\CODE\test_final_byX311\test_final\Core\Src\main.c", exit code: 1
+command: 
+  "D:\GNU Arm Embedded Toolchain\10 2021.10\bin\arm-none-eabi-gcc.exe" -c -xc -mthumb -std=c11 -I.eide/deps -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include -ICore/Src -IDrivers/STM32F4xx_HAL_Driver/Src -IUC -IUC/test_speed -DUSE_HAL_DRIVER -DSTM32F427xx -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -Og -Wall -g --specs=nosys.specs --specs=nano.specs -ffunction-sections -fdata-sections -o ./build/Debug/.obj/Core/Src/main.o -MMD ./Core/Src/main.c
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from UC/test_speed/test_speed.h:49,
+                 from UC/test_speed/mavlink.h:32,
+                 from UC/wtr_mavlink.h:105,
+                 from ./Core/Src/main.c:26:
+UC/test_speed/./mavlink_msg_speed.h: In function 'mavlink_msg_speed_send_buf':
+UC/test_speed/./mavlink_msg_speed.h:254:5: warning: converting a packed 'mavlink_message_t' {aka 'struct __mavlink_message'} pointer (alignment 1) to a 'mavlink_speed_t' {aka 'struct __mavlink_speed_t'} pointer (alignment 8) may result in an unaligned pointer value [-Waddress-of-packed-member]
+  254 |     mavlink_speed_t *packet = (mavlink_speed_t *)msgbuf;
+      |     ^~~~~~~~~~~~~~~
+In file included from UC/wtr_mavlink.h:22,
+                 from ./Core/Src/main.c:26:
+UC/mavlink_types.h:108:16: note: defined here
+  108 | typedef struct __mavlink_message {
+      |                ^~~~~~~~~~~~~~~~~
+UC/mavlink_types.h:17:40: note: in definition of macro 'MAVPACKED'
+   17 |   #define MAVPACKED( __Declaration__ ) __Declaration__ __attribute__((packed))
+      |                                        ^~~~~~~~~~~~~~~
+In file included from UC/test_speed/test_speed.h:49,
+                 from UC/test_speed/mavlink.h:32,
+                 from UC/wtr_mavlink.h:105,
+                 from ./Core/Src/main.c:26:
+UC/test_speed/./mavlink_msg_speed.h:7:16: note: defined here
+    7 | typedef struct __mavlink_speed_t {
+      |                ^~~~~~~~~~~~~~~~~
+./Core/Src/main.c: At top level:
+./Core/Src/main.c:59:20: error: expected '=', ',', ';', 'asm' or '__attribute__' before '.' token
+   59 | SPEEDStructToBeSend.vx = 0;
+      |                    ^
+./Core/Src/main.c:60:20: error: expected '=', ',', ';', 'asm' or '__attribute__' before '.' token
+   60 | SPEEDStructToBeSend.vy = 0;
+      |                    ^
+./Core/Src/main.c:61:20: error: expected '=', ',', ';', 'asm' or '__attribute__' before '.' token
+   61 | SPEEDStructToBeSend.vz = 0;
+      |                    ^
+
+[2024-04-08 23:48:25]	[done]
+	build successfully !
+

@@ -1,0 +1,280 @@
+[2024-04-08 23:26:58]	[done]
+	build successfully !
+
+[2024-04-08 23:41:00]	compilation failed at : "e:\WULIUSAI_LOG\CODE\MAV_trial_F103\Core\Src\main.c", exit code: 1
+command: 
+  "D:\GNU Arm Embedded Toolchain\10 2021.10\bin\arm-none-eabi-gcc.exe" -c -xc -mthumb -std=c11 -I.eide/deps -ICore/Src -ICore/Inc -IDrivers/STM32F1xx_HAL_Driver/Src -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Include -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IUC -IUC/test_speed -DUSE_HAL_DRIVER -DSTM32F103xB -mcpu=cortex-m3 -Og -Wall -g --specs=nosys.specs --specs=nano.specs -ffunction-sections -fdata-sections -o ./build/Debug/.obj/Core/Src/main.o -MMD ./Core/Src/main.c
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from UC/test_speed/test_speed.h:49,
+                 from UC/test_speed/mavlink.h:32,
+                 from UC/wtr_mavlink.h:105,
+                 from ./Core/Src/main.c:27:
+UC/test_speed/./mavlink_msg_speed.h: In function 'mavlink_msg_speed_send_buf':
+UC/test_speed/./mavlink_msg_speed.h:254:5: warning: converting a packed 'mavlink_message_t' {aka 'struct __mavlink_message'} pointer (alignment 1) to a 'mavlink_speed_t' {aka 'struct __mavlink_speed_t'} pointer (alignment 8) may result in an unaligned pointer value [-Waddress-of-packed-member]
+  254 |     mavlink_speed_t *packet = (mavlink_speed_t *)msgbuf;
+      |     ^~~~~~~~~~~~~~~
+In file included from UC/wtr_mavlink.h:22,
+                 from ./Core/Src/main.c:27:
+UC/mavlink_types.h:108:16: note: defined here
+  108 | typedef struct __mavlink_message {
+      |                ^~~~~~~~~~~~~~~~~
+UC/mavlink_types.h:17:40: note: in definition of macro 'MAVPACKED'
+   17 |   #define MAVPACKED( __Declaration__ ) __Declaration__ __attribute__((packed))
+      |                                        ^~~~~~~~~~~~~~~
+In file included from UC/test_speed/test_speed.h:49,
+                 from UC/test_speed/mavlink.h:32,
+                 from UC/wtr_mavlink.h:105,
+                 from ./Core/Src/main.c:27:
+UC/test_speed/./mavlink_msg_speed.h:7:16: note: defined here
+    7 | typedef struct __mavlink_speed_t {
+      |                ^~~~~~~~~~~~~~~~~
+In file included from ./Core/Src/main.c:29:
+UC/oledfont.h: At top level:
+UC/oledfont.h:8:1: warning: missing braces around initializer [-Wmissing-braces]
+    8 | {
+      | ^
+    9 |  0x00, 0x00, 0x00, 0x00, 0x00, 0x00,// sp
+      |  {                                 }
+   10 |  0x00, 0x00, 0x00, 0x2f, 0x00, 0x00,// !
+      |  {                                 }
+   11 |  0x00, 0x00, 0x07, 0x00, 0x07, 0x00,// "
+      |  {                                 }
+   12 |  0x00, 0x14, 0x7f, 0x14, 0x7f, 0x14,// #
+      |  {                                 }
+   13 |  0x00, 0x24, 0x2a, 0x7f, 0x2a, 0x12,// $
+      |  {                                 }
+   14 |  0x00, 0x62, 0x64, 0x08, 0x13, 0x23,// %
+      |  {                                 }
+   15 |  0x00, 0x36, 0x49, 0x55, 0x22, 0x50,// &
+      |  {                                 }
+   16 |  0x00, 0x00, 0x05, 0x03, 0x00, 0x00,// '
+      |  {                                 }
+   17 |  0x00, 0x00, 0x1c, 0x22, 0x41, 0x00,// (
+      |  {                                 }
+   18 |  0x00, 0x00, 0x41, 0x22, 0x1c, 0x00,// )
+      |  {                                 }
+   19 |  0x00, 0x14, 0x08, 0x3E, 0x08, 0x14,// *
+      |  {                                 }
+   20 |  0x00, 0x08, 0x08, 0x3E, 0x08, 0x08,// +
+      |  {                                 }
+   21 |  0x00, 0x00, 0x00, 0xA0, 0x60, 0x00,// ,
+      |  {                                 }
+   22 |  0x00, 0x08, 0x08, 0x08, 0x08, 0x08,// -
+      |  {                                 }
+   23 |  0x00, 0x00, 0x60, 0x60, 0x00, 0x00,// .
+      |  {                                 }
+   24 |  0x00, 0x20, 0x10, 0x08, 0x04, 0x02,// /
+      |  {                                 }
+   25 |  0x00, 0x3E, 0x51, 0x49, 0x45, 0x3E,// 0
+      |  {                                 }
+   26 |  0x00, 0x00, 0x42, 0x7F, 0x40, 0x00,// 1
+      |  {                                 }
+   27 |  0x00, 0x42, 0x61, 0x51, 0x49, 0x46,// 2
+      |  {                                 }
+   28 |  0x00, 0x21, 0x41, 0x45, 0x4B, 0x31,// 3
+      |  {                                 }
+   29 |  0x00, 0x18, 0x14, 0x12, 0x7F, 0x10,// 4
+      |  {                                 }
+   30 |  0x00, 0x27, 0x45, 0x45, 0x45, 0x39,// 5
+      |  {                                 }
+   31 |  0x00, 0x3C, 0x4A, 0x49, 0x49, 0x30,// 6
+      |  {                                 }
+   32 |  0x00, 0x01, 0x71, 0x09, 0x05, 0x03,// 7
+      |  {                                 }
+   33 |  0x00, 0x36, 0x49, 0x49, 0x49, 0x36,// 8
+      |  {                                 }
+   34 |  0x00, 0x06, 0x49, 0x49, 0x29, 0x1E,// 9
+      |  {                                 }
+   35 |  0x00, 0x00, 0x36, 0x36, 0x00, 0x00,// :
+      |  {                                 }
+   36 |  0x00, 0x00, 0x56, 0x36, 0x00, 0x00,// ;
+      |  {                                 }
+   37 |  0x00, 0x08, 0x14, 0x22, 0x41, 0x00,// <
+      |  {                                 }
+   38 |  0x00, 0x14, 0x14, 0x14, 0x14, 0x14,// =
+      |  {                                 }
+   39 |  0x00, 0x00, 0x41, 0x22, 0x14, 0x08,// >
+      |  {                                 }
+   40 |  0x00, 0x02, 0x01, 0x51, 0x09, 0x06,// ?
+      |  {                                 }
+   41 |  0x00, 0x32, 0x49, 0x59, 0x51, 0x3E,// @
+      |  {                                 }
+   42 |  0x00, 0x7C, 0x12, 0x11, 0x12, 0x7C,// A
+      |  {                                 }
+   43 |  0x00, 0x7F, 0x49, 0x49, 0x49, 0x36,// B
+      |  {                                 }
+   44 |  0x00, 0x3E, 0x41, 0x41, 0x41, 0x22,// C
+      |  {                                 }
+   45 |  0x00, 0x7F, 0x41, 0x41, 0x22, 0x1C,// D
+      |  {                                 }
+   46 |  0x00, 0x7F, 0x49, 0x49, 0x49, 0x41,// E
+      |  {                                 }
+   47 |  0x00, 0x7F, 0x09, 0x09, 0x09, 0x01,// F
+      |  {                                 }
+   48 |  0x00, 0x3E, 0x41, 0x49, 0x49, 0x7A,// G
+      |  {                                 }
+   49 |  0x00, 0x7F, 0x08, 0x08, 0x08, 0x7F,// H
+      |  {                                 }
+   50 |  0x00, 0x00, 0x41, 0x7F, 0x41, 0x00,// I
+      |  {                                 }
+   51 |  0x00, 0x20, 0x40, 0x41, 0x3F, 0x01,// J
+      |  {                                 }
+   52 |  0x00, 0x7F, 0x08, 0x14, 0x22, 0x41,// K
+      |  {                                 }
+   53 |  0x00, 0x7F, 0x40, 0x40, 0x40, 0x40,// L
+      |  {                                 }
+   54 |  0x00, 0x7F, 0x02, 0x0C, 0x02, 0x7F,// M
+      |  {                                 }
+   55 |  0x00, 0x7F, 0x04, 0x08, 0x10, 0x7F,// N
+      |  {                                 }
+   56 |  0x00, 0x3E, 0x41, 0x41, 0x41, 0x3E,// O
+      |  {                                 }
+   57 |  0x00, 0x7F, 0x09, 0x09, 0x09, 0x06,// P
+      |  {                                 }
+   58 |  0x00, 0x3E, 0x41, 0x51, 0x21, 0x5E,// Q
+      |  {                                 }
+   59 |  0x00, 0x7F, 0x09, 0x19, 0x29, 0x46,// R
+      |  {                                 }
+   60 |  0x00, 0x46, 0x49, 0x49, 0x49, 0x31,// S
+      |  {                                 }
+   61 |  0x00, 0x01, 0x01, 0x7F, 0x01, 0x01,// T
+      |  {                                 }
+   62 |  0x00, 0x3F, 0x40, 0x40, 0x40, 0x3F,// U
+      |  {                                 }
+   63 |  0x00, 0x1F, 0x20, 0x40, 0x20, 0x1F,// V
+      |  {                                 }
+   64 |  0x00, 0x3F, 0x40, 0x38, 0x40, 0x3F,// W
+      |  {                                 }
+   65 |  0x00, 0x63, 0x14, 0x08, 0x14, 0x63,// X
+      |  {                                 }
+   66 |  0x00, 0x07, 0x08, 0x70, 0x08, 0x07,// Y
+      |  {                                 }
+   67 |  0x00, 0x61, 0x51, 0x49, 0x45, 0x43,// Z
+      |  {                                 }
+   68 |  0x00, 0x00, 0x7F, 0x41, 0x41, 0x00,// [
+      |  {                                 }
+   69 |  0x00, 0x55, 0x2A, 0x55, 0x2A, 0x55,// 55
+      |  {                                 }
+   70 |  0x00, 0x00, 0x41, 0x41, 0x7F, 0x00,// ]
+      |  {                                 }
+   71 |  0x00, 0x04, 0x02, 0x01, 0x02, 0x04,// ^
+      |  {                                 }
+   72 |  0x00, 0x40, 0x40, 0x40, 0x40, 0x40,// _
+      |  {                                 }
+   73 |  0x00, 0x00, 0x01, 0x02, 0x04, 0x00,// '
+      |  {                                 }
+   74 |  0x00, 0x20, 0x54, 0x54, 0x54, 0x78,// a
+      |  {                                 }
+   75 |  0x00, 0x7F, 0x48, 0x44, 0x44, 0x38,// b
+      |  {                                 }
+   76 |  0x00, 0x38, 0x44, 0x44, 0x44, 0x20,// c
+      |  {                                 }
+   77 |  0x00, 0x38, 0x44, 0x44, 0x48, 0x7F,// d
+      |  {                                 }
+   78 |  0x00, 0x38, 0x54, 0x54, 0x54, 0x18,// e
+      |  {                                 }
+   79 |  0x00, 0x08, 0x7E, 0x09, 0x01, 0x02,// f
+      |  {                                 }
+   80 |  0x00, 0x18, 0xA4, 0xA4, 0xA4, 0x7C,// g
+      |  {                                 }
+   81 |  0x00, 0x7F, 0x08, 0x04, 0x04, 0x78,// h
+      |  {                                 }
+   82 |  0x00, 0x00, 0x44, 0x7D, 0x40, 0x00,// i
+      |  {                                 }
+   83 |  0x00, 0x40, 0x80, 0x84, 0x7D, 0x00,// j
+      |  {                                 }
+   84 |  0x00, 0x7F, 0x10, 0x28, 0x44, 0x00,// k
+      |  {                                 }
+   85 |  0x00, 0x00, 0x41, 0x7F, 0x40, 0x00,// l
+      |  {                                 }
+   86 |  0x00, 0x7C, 0x04, 0x18, 0x04, 0x78,// m
+      |  {                                 }
+   87 |  0x00, 0x7C, 0x08, 0x04, 0x04, 0x78,// n
+      |  {                                 }
+   88 |  0x00, 0x38, 0x44, 0x44, 0x44, 0x38,// o
+      |  {                                 }
+   89 |  0x00, 0xFC, 0x24, 0x24, 0x24, 0x18,// p
+      |  {                                 }
+   90 |  0x00, 0x18, 0x24, 0x24, 0x18, 0xFC,// q
+      |  {                                 }
+   91 |  0x00, 0x7C, 0x08, 0x04, 0x04, 0x08,// r
+      |  {                                 }
+   92 |  0x00, 0x48, 0x54, 0x54, 0x54, 0x20,// s
+      |  {                                 }
+   93 |  0x00, 0x04, 0x3F, 0x44, 0x40, 0x20,// t
+      |  {                                 }
+   94 |  0x00, 0x3C, 0x40, 0x40, 0x20, 0x7C,// u
+      |  {                                 }
+   95 |  0x00, 0x1C, 0x20, 0x40, 0x20, 0x1C,// v
+      |  {                                 }
+   96 |  0x00, 0x3C, 0x40, 0x30, 0x40, 0x3C,// w
+      |  {                                 }
+   97 |  0x00, 0x44, 0x28, 0x10, 0x28, 0x44,// x
+      |  {                                 }
+   98 |  0x00, 0x1C, 0xA0, 0xA0, 0xA0, 0x7C,// y
+      |  {                                 }
+   99 |  0x00, 0x44, 0x64, 0x54, 0x4C, 0x44,// z
+      |  {                                 }
+  100 |  0x14, 0x14, 0x14, 0x14, 0x14, 0x14,// horiz lines
+      |  {
+  101 | };
+      | }
+./Core/Src/main.c:62:20: error: expected '=', ',', ';', 'asm' or '__attribute__' before '.' token
+   62 | SPEEDStructToBeSend.vx = 0;
+      |                    ^
+./Core/Src/main.c:63:20: error: expected '=', ',', ';', 'asm' or '__attribute__' before '.' token
+   63 | SPEEDStructToBeSend.vy = 0;
+      |                    ^
+./Core/Src/main.c:64:20: error: expected '=', ',', ';', 'asm' or '__attribute__' before '.' token
+   64 | SPEEDStructToBeSend.vz = 0;
+      |                    ^
+
+[2024-04-08 23:47:26]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UC/oled.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/./UC/oledfont.h:211: multiple definition of `BMP'; ./build/Debug/.obj/Core/Src/main.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/UC/oledfont.h:211: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UC/oled.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/./UC/oledfont.h:200: multiple definition of `Hzk'; ./build/Debug/.obj/Core/Src/main.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/UC/oledfont.h:200: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UC/oled.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/./UC/oledfont.h:103: multiple definition of `F8X16'; ./build/Debug/.obj/Core/Src/main.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/UC/oledfont.h:103: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UC/oled.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/./UC/oledfont.h:7: multiple definition of `F6x8'; ./build/Debug/.obj/Core/Src/main.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/UC/oledfont.h:7: first defined here
+Memory region         Used Size  Region Size  %age Used
+             RAM:        3168 B        20 KB     15.47%
+           FLASH:       20148 B        64 KB     30.74%
+collect2.exe: error: ld returned 1 exit status
+
+
+[2024-04-08 23:47:45]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UC/oled.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/./UC/oledfont.h:211: multiple definition of `BMP'; ./build/Debug/.obj/Core/Src/main.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/UC/oledfont.h:211: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UC/oled.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/./UC/oledfont.h:200: multiple definition of `Hzk'; ./build/Debug/.obj/Core/Src/main.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/UC/oledfont.h:200: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UC/oled.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/./UC/oledfont.h:103: multiple definition of `F8X16'; ./build/Debug/.obj/Core/Src/main.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/UC/oledfont.h:103: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UC/oled.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/./UC/oledfont.h:7: multiple definition of `F6x8'; ./build/Debug/.obj/Core/Src/main.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/UC/oledfont.h:7: first defined here
+Memory region         Used Size  Region Size  %age Used
+             RAM:        3168 B        20 KB     15.47%
+           FLASH:       20132 B        64 KB     30.72%
+collect2.exe: error: ld returned 1 exit status
+
+
+[2024-04-08 23:49:30]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UC/oled.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/./UC/oledfont.h:211: multiple definition of `BMP'; ./build/Debug/.obj/Core/Src/main.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/UC/oledfont.h:211: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UC/oled.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/./UC/oledfont.h:200: multiple definition of `Hzk'; ./build/Debug/.obj/Core/Src/main.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/UC/oledfont.h:200: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UC/oled.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/./UC/oledfont.h:103: multiple definition of `F8X16'; ./build/Debug/.obj/Core/Src/main.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/UC/oledfont.h:103: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UC/oled.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/./UC/oledfont.h:7: multiple definition of `F6x8'; ./build/Debug/.obj/Core/Src/main.o:e:\WULIUSAI_LOG\CODE\MAV_trial_F103/UC/oledfont.h:7: first defined here
+Memory region         Used Size  Region Size  %age Used
+             RAM:        3168 B        20 KB     15.47%
+           FLASH:       20132 B        64 KB     30.72%
+collect2.exe: error: ld returned 1 exit status
+
+
+[2024-04-08 23:50:02]	[done]
+	build successfully !
+
+[2024-04-08 23:55:23]	[done]
+	build successfully !
+
+[2024-04-08 23:56:07]	[done]
+	build successfully !
+

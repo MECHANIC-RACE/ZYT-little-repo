@@ -37,4 +37,5 @@ extern CoreXY_COMPONENT Core_xy[2];       //全局的Corexy状态参数
 
 extern uint16_t UartFlag[4];
 extern uint8_t temp_buffer[4];
+extern uint16_t debug[4];
 #endif // __PARAMDEF_H__

@@ -1,0 +1,32 @@
+>>> cc
+
+In file included from UC/test_speed/test_speed.h:49,
+                 from UC/test_speed/mavlink.h:32,
+                 from UC/wtr_mavlink.h:105,
+                 from ./Core/Src/main.c:26:
+UC/test_speed/./mavlink_msg_speed.h: In function 'mavlink_msg_speed_send_buf':
+UC/test_speed/./mavlink_msg_speed.h:254:5: warning: converting a packed 'mavlink_message_t' {aka 'struct __mavlink_message'} pointer (alignment 1) to a 'mavlink_speed_t' {aka 'struct __mavlink_speed_t'} pointer (alignment 8) may result in an unaligned pointer value [-Waddress-of-packed-member]
+  254 |     mavlink_speed_t *packet = (mavlink_speed_t *)msgbuf;
+      |     ^~~~~~~~~~~~~~~
+In file included from UC/wtr_mavlink.h:22,
+                 from ./Core/Src/main.c:26:
+UC/mavlink_types.h:108:16: note: defined here
+  108 | typedef struct __mavlink_message {
+      |                ^~~~~~~~~~~~~~~~~
+UC/mavlink_types.h:17:40: note: in definition of macro 'MAVPACKED'
+   17 |   #define MAVPACKED( __Declaration__ ) __Declaration__ __attribute__((packed))
+      |                                        ^~~~~~~~~~~~~~~
+In file included from UC/test_speed/test_speed.h:49,
+                 from UC/test_speed/mavlink.h:32,
+                 from UC/wtr_mavlink.h:105,
+                 from ./Core/Src/main.c:26:
+UC/test_speed/./mavlink_msg_speed.h:7:16: note: defined here
+    7 | typedef struct __mavlink_speed_t {
+      |                ^~~~~~~~~~~~~~~~~
+
+>>> ld
+
+Memory region         Used Size  Region Size  %age Used
+             RAM:        3056 B       192 KB      1.55%
+          CCMRAM:          0 GB        64 KB      0.00%
+           FLASH:       13112 B         2 MB      0.63%

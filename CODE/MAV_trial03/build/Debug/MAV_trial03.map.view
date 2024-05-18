@@ -1,0 +1,3 @@
+tool: GCC
+fileName: MAV_trial03.map
+elfName: MAV_trial03.elf
