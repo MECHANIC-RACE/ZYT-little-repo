@@ -1,0 +1,270 @@
+[2024-05-18 22:58:20]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o: in function `HAL_UART_RxCpltCallback':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:8: multiple definition of `HAL_UART_RxCpltCallback'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:8: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:6: multiple definition of `cnt'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:6: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:5: multiple definition of `flag'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:5: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:4: multiple definition of `Rxbuffer'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:4: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:3: multiple definition of `LidarData'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:3: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:2: multiple definition of `DataLens'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:2: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Start/STP_Start_1.o: in function `STP_32L_Start':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Start/STP_Start_1.c:5: multiple definition of `STP_32L_Start'; ./build/Debug/.obj/UserCode/STP_23L_Start/STP_Start.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Start/STP_Start.c:5: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `WriteCmd':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:17: multiple definition of `WriteCmd'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:17: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_WR_CMD':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:26: multiple definition of `OLED_WR_CMD'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:26: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_WR_DATA':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:31: multiple definition of `OLED_WR_DATA'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:31: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_Init':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:36: multiple definition of `OLED_Init'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:36: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_Clear':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:43: multiple definition of `OLED_Clear'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:43: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_Display_On':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:56: multiple definition of `OLED_Display_On'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:56: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_Display_Off':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:63: multiple definition of `OLED_Display_Off'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:63: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_Set_Pos':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:69: multiple definition of `OLED_Set_Pos'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:69: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_On':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:76: multiple definition of `OLED_On'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:76: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `oled_pow':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:88: multiple definition of `oled_pow'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:88: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_ShowChar':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:124: multiple definition of `OLED_ShowChar'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:124: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_ShowNum':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:100: multiple definition of `OLED_ShowNum'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:100: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_ShowString':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:147: multiple definition of `OLED_ShowString'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:147: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_ShowCHinese':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:159: multiple definition of `OLED_ShowCHinese'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:159: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_DrawBMP':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:177: multiple definition of `OLED_DrawBMP'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:177: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:8: multiple definition of `CMD_Data'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:8: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:211: multiple definition of `BMP'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:211: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:200: multiple definition of `Hzk'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:200: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:103: multiple definition of `F8X16'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:103: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:7: multiple definition of `F6x8'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:7: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart_1.o: in function `IORetarget_Uart_Receive_IT':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart_1.c:21: multiple definition of `IORetarget_Uart_Receive_IT'; ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart.c:21: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart_1.o: in function `IORetarget_Uart_RxCpltCallback':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart_1.c:27: multiple definition of `IORetarget_Uart_RxCpltCallback'; ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart.c:27: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart_1.o: in function `IORetarget_ReadChar':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart_1.c:81: multiple definition of `IORetarget_ReadChar'; ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart.c:81: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart_1.o: in function `_write':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart_1.c:106: multiple definition of `_write'; ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart.c:106: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart_1.o: in function `_read':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart_1.c:132: multiple definition of `_read'; ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart.c:132: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/STP_23L_Decode/STP_Decode_1.o: in function `STP_23L_Decode':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/STP_23L_Decode/STP_Decode_1.c:7: multiple definition of `STP_23L_Decode'; ./build/Debug/.obj/UserCode/STP_Lib/STP_23L_Decode/STP_Decode.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/STP_23L_Decode/STP_Decode.c:7: first defined here
+Memory region         Used Size  Region Size  %age Used
+             RAM:        2536 B        20 KB     12.38%
+           FLASH:       13024 B        64 KB     19.87%
+collect2.exe: error: ld returned 1 exit status
+
+
+[2024-05-18 22:58:50]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o: in function `HAL_UART_RxCpltCallback':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:8: multiple definition of `HAL_UART_RxCpltCallback'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:8: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:6: multiple definition of `cnt'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:6: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:5: multiple definition of `flag'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:5: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:4: multiple definition of `Rxbuffer'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:4: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:3: multiple definition of `LidarData'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:3: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:2: multiple definition of `DataLens'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:2: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Start/STP_Start_1.o: in function `STP_32L_Start':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Start/STP_Start_1.c:5: multiple definition of `STP_32L_Start'; ./build/Debug/.obj/UserCode/STP_23L_Start/STP_Start.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Start/STP_Start.c:5: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `WriteCmd':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:17: multiple definition of `WriteCmd'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:17: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_WR_CMD':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:26: multiple definition of `OLED_WR_CMD'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:26: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_WR_DATA':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:31: multiple definition of `OLED_WR_DATA'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:31: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_Init':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:36: multiple definition of `OLED_Init'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:36: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_Clear':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:43: multiple definition of `OLED_Clear'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:43: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_Display_On':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:56: multiple definition of `OLED_Display_On'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:56: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_Display_Off':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:63: multiple definition of `OLED_Display_Off'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:63: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_Set_Pos':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:69: multiple definition of `OLED_Set_Pos'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:69: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_On':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:76: multiple definition of `OLED_On'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:76: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `oled_pow':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:88: multiple definition of `oled_pow'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:88: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_ShowChar':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:124: multiple definition of `OLED_ShowChar'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:124: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_ShowNum':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:100: multiple definition of `OLED_ShowNum'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:100: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_ShowString':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:147: multiple definition of `OLED_ShowString'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:147: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_ShowCHinese':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:159: multiple definition of `OLED_ShowCHinese'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:159: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_DrawBMP':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:177: multiple definition of `OLED_DrawBMP'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:177: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:8: multiple definition of `CMD_Data'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:8: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:211: multiple definition of `BMP'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:211: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:200: multiple definition of `Hzk'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:200: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:103: multiple definition of `F8X16'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:103: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:7: multiple definition of `F6x8'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:7: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart_1.o: in function `IORetarget_Uart_Receive_IT':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart_1.c:21: multiple definition of `IORetarget_Uart_Receive_IT'; ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart.c:21: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart_1.o: in function `IORetarget_Uart_RxCpltCallback':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart_1.c:27: multiple definition of `IORetarget_Uart_RxCpltCallback'; ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart.c:27: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart_1.o: in function `IORetarget_ReadChar':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart_1.c:81: multiple definition of `IORetarget_ReadChar'; ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart.c:81: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart_1.o: in function `_write':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart_1.c:106: multiple definition of `_write'; ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart.c:106: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart_1.o: in function `_read':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart_1.c:132: multiple definition of `_read'; ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart.c:132: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/STP_23L_Decode/STP_Decode_1.o: in function `STP_23L_Decode':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/STP_23L_Decode/STP_Decode_1.c:7: multiple definition of `STP_23L_Decode'; ./build/Debug/.obj/UserCode/STP_Lib/STP_23L_Decode/STP_Decode.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/STP_23L_Decode/STP_Decode.c:7: first defined here
+Memory region         Used Size  Region Size  %age Used
+             RAM:        2536 B        20 KB     12.38%
+           FLASH:       13024 B        64 KB     19.87%
+collect2.exe: error: ld returned 1 exit status
+
+
+[2024-05-18 22:59:08]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o: in function `HAL_UART_RxCpltCallback':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:8: multiple definition of `HAL_UART_RxCpltCallback'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:8: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:6: multiple definition of `cnt'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:6: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:5: multiple definition of `flag'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:5: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:4: multiple definition of `Rxbuffer'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:4: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:3: multiple definition of `LidarData'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:3: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:2: multiple definition of `DataLens'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:2: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Start/STP_Start_1.o: in function `STP_32L_Start':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Start/STP_Start_1.c:5: multiple definition of `STP_32L_Start'; ./build/Debug/.obj/UserCode/STP_23L_Start/STP_Start.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Start/STP_Start.c:5: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `WriteCmd':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:17: multiple definition of `WriteCmd'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:17: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_WR_CMD':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:26: multiple definition of `OLED_WR_CMD'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:26: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_WR_DATA':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:31: multiple definition of `OLED_WR_DATA'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:31: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_Init':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:36: multiple definition of `OLED_Init'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:36: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_Clear':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:43: multiple definition of `OLED_Clear'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:43: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_Display_On':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:56: multiple definition of `OLED_Display_On'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:56: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_Display_Off':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:63: multiple definition of `OLED_Display_Off'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:63: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_Set_Pos':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:69: multiple definition of `OLED_Set_Pos'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:69: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_On':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:76: multiple definition of `OLED_On'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:76: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `oled_pow':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:88: multiple definition of `oled_pow'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:88: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_ShowChar':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:124: multiple definition of `OLED_ShowChar'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:124: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_ShowNum':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:100: multiple definition of `OLED_ShowNum'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:100: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_ShowString':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:147: multiple definition of `OLED_ShowString'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:147: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_ShowCHinese':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:159: multiple definition of `OLED_ShowCHinese'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:159: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o: in function `OLED_DrawBMP':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:177: multiple definition of `OLED_DrawBMP'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:177: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled_1.c:8: multiple definition of `CMD_Data'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oled.c:8: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:211: multiple definition of `BMP'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:211: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:200: multiple definition of `Hzk'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:200: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:103: multiple definition of `F8X16'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:103: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:7: multiple definition of `F6x8'; ./build/Debug/.obj/UserCode/STP_Lib/OLED/oled.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/OLED/oledfont.h:7: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart_1.o: in function `IORetarget_Uart_Receive_IT':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart_1.c:21: multiple definition of `IORetarget_Uart_Receive_IT'; ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart.c:21: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart_1.o: in function `IORetarget_Uart_RxCpltCallback':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart_1.c:27: multiple definition of `IORetarget_Uart_RxCpltCallback'; ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart.c:27: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart_1.o: in function `IORetarget_ReadChar':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart_1.c:81: multiple definition of `IORetarget_ReadChar'; ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart.c:81: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart_1.o: in function `_write':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart_1.c:106: multiple definition of `_write'; ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart.c:106: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart_1.o: in function `_read':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart_1.c:132: multiple definition of `_read'; ./build/Debug/.obj/UserCode/STP_Lib/Retarget/io_retargetToUart.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/Retarget/io_retargetToUart.c:132: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_Lib/STP_23L_Decode/STP_Decode_1.o: in function `STP_23L_Decode':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/STP_23L_Decode/STP_Decode_1.c:7: multiple definition of `STP_23L_Decode'; ./build/Debug/.obj/UserCode/STP_Lib/STP_23L_Decode/STP_Decode.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_Lib/STP_23L_Decode/STP_Decode.c:7: first defined here
+Memory region         Used Size  Region Size  %age Used
+             RAM:        2536 B        20 KB     12.38%
+           FLASH:       13024 B        64 KB     19.87%
+collect2.exe: error: ld returned 1 exit status
+
+
+[2024-05-18 23:00:06]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o: in function `HAL_UART_RxCpltCallback':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:8: multiple definition of `HAL_UART_RxCpltCallback'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:8: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:6: multiple definition of `cnt'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:6: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:5: multiple definition of `flag'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:5: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:4: multiple definition of `Rxbuffer'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:4: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:3: multiple definition of `LidarData'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:3: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive_1.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive_1.c:2: multiple definition of `DataLens'; ./build/Debug/.obj/UserCode/STP_23L_Receive/STP_Receive.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Receive/STP_Receive.c:2: first defined here
+d:/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/.obj/UserCode/STP_23L_Start/STP_Start_1.o: in function `STP_32L_Start':
+e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Start/STP_Start_1.c:5: multiple definition of `STP_32L_Start'; ./build/Debug/.obj/UserCode/STP_23L_Start/STP_Start.o:e:\WULIUSAI_LOG\CODE\STP_23L_01/./UserCode/STP_23L_Start/STP_Start.c:5: first defined here
+Memory region         Used Size  Region Size  %age Used
+             RAM:        2536 B        20 KB     12.38%
+           FLASH:       13024 B        64 KB     19.87%
+collect2.exe: error: ld returned 1 exit status
+
+
+[2024-05-18 23:00:25]	[done]
+	build successfully !
+
+[2024-05-18 23:01:07]	[done]
+	build successfully !
+
+[2024-05-18 23:01:47]	[done]
+	build successfully !
+
+[2024-05-18 23:03:05]	[done]
+	build successfully !
+
+[2024-05-18 23:05:21]	[done]
+	build successfully !
+
+[2024-05-18 23:06:07]	[done]
+	build successfully !
+
+[2024-05-18 23:06:35]	[done]
+	build successfully !
+
+[2024-05-18 23:12:08]	[done]
+	build successfully !
+
+[2024-05-18 23:12:19]	[done]
+	build successfully !
+
+[2024-05-18 23:13:10]	[done]
+	build successfully !
+
+[2024-05-18 23:13:37]	[done]
+	build successfully !
+
+[2024-05-18 23:14:24]	[done]
+	build successfully !
+
+[2024-05-18 23:16:23]	[done]
+	build successfully !
+
+[2024-05-18 23:17:23]	[done]
+	build successfully !
+
+[2024-05-18 23:17:39]	[done]
+	build successfully !
+
+[2024-05-18 23:17:50]	[done]
+	build successfully !
+
+[2024-05-18 23:18:20]	[done]
+	build successfully !
+
+[2024-05-18 23:20:10]	[done]
+	build successfully !
+
+[2024-05-18 23:21:24]	[done]
+	build successfully !
+
