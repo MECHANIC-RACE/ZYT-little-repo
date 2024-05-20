@@ -6,11 +6,11 @@
 void StartDefaultTask(void *argument)
 {
     /*初始化函数*/
-    // Core_XY_StateMachine_Init();
-    // Core_xy_Motor_init();
-    // /*开启线程*/
-    // Core_xy_StateMachine_Start();
-    // Upper_Servo_Start();
+    Core_XY_StateMachine_Init();
+    Core_xy_Motor_init();
+    /*开启线程*/
+    Core_xy_StateMachine_Start();
+    Upper_Servo_Start();
     UsartUpdate_Start();
     
     /*串口使能*/
@@ -19,7 +19,8 @@ void StartDefaultTask(void *argument)
 
     for (;;) {
 
-        printf("%d,%d,%d,%d\n", Lidar1.distance, Lidar2.distance, Lidar3.distance, Lidar6.distance);
+        printf("%f,%f,%f,%f\n", Lidar1.distance_aver, Lidar2.distance_aver, Lidar3.distance_aver, Lidar6.distance_aver);
+        
         HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
 
         osDelay(50);

@@ -11,37 +11,43 @@
 void Core_xy_State_Task(void *argument)
 {
     osDelay(100);
+    uint16_t stateflag = 0;
+    for (;;) {
+        /*用于一个分区的路径规划*/
+        if(stateflag==0){
+            /*if flag=0 在外圈*/
+            // 此处TargetState[i].position.x/y 为预期的与雷达的距离  考虑分开给还是一起给  不过应该没有办法一起给 因为要做不同的路径
+            Core_xy[0].gantry_t.position.x = 245.0;
+            Core_xy[0].gantry_t.position.y = Lidar2.distance_aver;
+            /*if flag=1 在里圈*/
+            // Core_xy[0].gantry_t.position.x = 1062.5;
+            // Core_xy[0].gantry_t.position.y = 675.24;
+            if ((fabs(Core_xy[0].gantry_t.position.x - Lidar1.distance_aver)) < 2 && (fabs(Core_xy[0].gantry_t.position.y - Lidar2.distance_aver) < 1)) 
+            {
+                stateflag = 1;
+            }
+        }
+        //到时这里再补一个状态
+        HAL_GPIO_WritePin(Electromagnet_GPIO_Port, Electromagnet_Pin, 1);
+        osDelay(500);
+        /*前往木桩*/
 
-     for (;;) {
-            /*用于一个分区的路径规划*/
-            // do {
-            //     /*if flag=0 在外圈*/
-            //     // 此处TargetState[i].position.x/y 为预期的与雷达的距离  考虑分开给还是一起给  不过应该没有办法一起给 因为要做不同的路径
-            //     Core_xy[0].gantry_t.position.x = 875.0;
-            //     Core_xy[0].gantry_t.position.y = 350.48;
-            //     /*if flag=1 在里圈*/
-            //     //Core_xy[0].gantry_t.position.x = 1062.5;
-            //     //Core_xy[0].gantry_t.position.y = 675.24;
-
-            // } while (1);
-            // //while (fabs(Core_xy[0].gantry_t.position.x - distance_aver[0]) > 1 || fabs(Core_xy[0].gantry_t.position.y - distance_aver[1]) > 1);
-            // HAL_GPIO_WritePin(Electromagnet_GPIO_Port, Electromagnet_Pin, 1);
-            // osDelay(5);
-            // /*前往木桩*/
-
-            // do {
-            //     Core_xy[0].gantry_t.position.x = 245;
-            //     Core_xy[0].gantry_t.position.y = 245;
-            // } while (fabs(Core_xy[0].gantry_t.position.x - distance_aver[0]) > 1 || fabs(Core_xy[0].gantry_t.position.y - distance_aver[1]) > 1);
-            // HAL_GPIO_WritePin(Cylinder_GPIO_Port, Cylinder_Pin, 1);
-            // osDelay(5);
-            // HAL_GPIO_WritePin(Electromagnet_GPIO_Port, Electromagnet_Pin, 0);
+        if (stateflag == 1) {
+            /*if flag=0 在外圈*/
             
-            osDelay(2);
+            Core_xy[0].gantry_t.position.x = 875.0;
+            Core_xy[0].gantry_t.position.y = Lidar2.distance_aver;
+           
+            if ((fabs(Core_xy[0].gantry_t.position.x - Lidar1.distance_aver)) < 2 && (fabs(Core_xy[0].gantry_t.position.y - Lidar2.distance_aver) < 1)) {
+                stateflag = 2;
+            }
+        }
+        HAL_GPIO_WritePin(Cylinder_GPIO_Port, Cylinder_Pin, 1);
+        //osDelay(5);
+        HAL_GPIO_WritePin(Electromagnet_GPIO_Port, Electromagnet_Pin, 0);
 
-            
+        osDelay(2);
     }
-    
 }
 
 void Core_xy_StateMachine_Start(void)

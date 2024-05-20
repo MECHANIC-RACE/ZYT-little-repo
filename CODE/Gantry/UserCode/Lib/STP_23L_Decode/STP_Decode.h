@@ -15,6 +15,7 @@
 
 typedef struct{
     int16_t distance;               //测量目标距离（单位：mm）
+    float distance_aver;            //为物流赛专门搞的变量，直接计算12个得均值，免得再搞二维数组
     uint16_t noise;                 //环境噪声
     uint32_t peak;                  //接收强度信息
     uint8_t confidence;             //置信度    

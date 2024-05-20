@@ -13,29 +13,28 @@ void Upper_Servo_Task(void *argument)
     osDelay(100);
     for (;;) {
         /*TestCode*/
-        Core_xy[0].gantry_t.position.y = 200;
-        // float Target_tmp[4] = {100,100,100,100};//单位：mm
-        //Core_xy[0].gantry_t.velocity.x = Core_xy[0].gantry_t.position.x - distance_aver[0];
-        //Core_xy[0].gantry_t.velocity.y = -(Core_xy[0].gantry_t.position.y - distance_aver[1])*10;
-        //Core_xy[1].gantry_t.velocity.x = Core_xy[1].gantry_t.position.x - distance_aver[2];
-        //Core_xy[1].gantry_t.velocity.y = Core_xy[1].gantry_t.position.y - distance_aver[3];
+        //Core_xy[0].gantry_t.position.x = 600;
+        
+        Core_xy[0].gantry_t.velocity.x = (Core_xy[0].gantry_t.position.x - Lidar1.distance_aver)*100;
+        //Core_xy[0].gantry_t.velocity.y = -(Core_xy[0].gantry_t.position.y - Lidar2.distance_aver)*10;
+        Core_xy[1].gantry_t.velocity.x = Core_xy[1].gantry_t.position.x - Lidar3.distance_aver;
+        Core_xy[1].gantry_t.velocity.y = Core_xy[1].gantry_t.position.y - Lidar6.distance_aver;
 
-        // speedServo(Core_xy[0].gantry_t.velocity.x, Core_xy[0].Motor_X);
-         speedServo(Core_xy[0].gantry_t.velocity.y, Core_xy[0].Motor_Y);
-        // speedServo(Core_xy[1].gantry_t.velocity.x, Core_xy[1].Motor_X);
-        // speedServo(Core_xy[1].gantry_t.velocity.y, Core_xy[1].Motor_Y);
-        // Core_xy[0].Motor_X->speedPID.output = 0;
-        // if (Core_xy[0].Motor_Y->speedPID.output >0) Core_xy[0].Motor_Y->speedPID.output += 1600;
-        // if (Core_xy[0].Motor_Y->speedPID.output < 0) Core_xy[0].Motor_Y->speedPID.output -= 1600;
-        // speedServo(20000, Core_xy[0].Motor_X);
-         //speedServo(10000, Core_xy[0].Motor_Y);
-        CanTransmit_DJI_1234(&hcan1,
-                             0,
-                             Core_xy[0].Motor_Y->speedPID.output,
-                             Core_xy[1].Motor_X->speedPID.output,
-                             Core_xy[1].Motor_Y->speedPID.output);
-        //CanTransmit_DJI_1234(&hcan1, 0, -1600, 0, 0);
-        osDelay(2);
+        speedServo(Core_xy[0].gantry_t.velocity.x, Core_xy[0].Motor_X);
+        speedServo(Core_xy[0].gantry_t.velocity.y, Core_xy[0].Motor_Y);
+        speedServo(Core_xy[1].gantry_t.velocity.x, Core_xy[1].Motor_X);
+        speedServo(Core_xy[1].gantry_t.velocity.y, Core_xy[1].Motor_Y);
+        
+        
+        //speedServo(20000, Core_xy[0].Motor_X);
+        //speedServo(10000, Core_xy[0].Motor_Y);
+         CanTransmit_DJI_1234(&hcan1,
+                              Core_xy[0].Motor_X->speedPID.output,
+                              Core_xy[0].Motor_Y->speedPID.output,
+                              Core_xy[1].Motor_X->speedPID.output,
+                              Core_xy[1].Motor_Y->speedPID.output);
+         // CanTransmit_DJI_1234(&hcan1, 0, -1600, 0, 0);
+         osDelay(2);
     }
     
 }

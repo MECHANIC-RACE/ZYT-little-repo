@@ -1,13 +1,14 @@
 /*
  * @Author: szf
  * @Date: 2023-02-22 12:04:21
- * @LastEditTime: 2024-04-28 16:01:49
+ * @LastEditTime: 2024-05-20 16:58:59
  * @LastEditors: labbbbbbbbb 
  * @brief 运动学逆解算及PID计算函数
- * @FilePath: \Upper_trial01\UserCode\Lib\Calculate\wtr_calculate.c
+ * @FilePath: \Gantry_Trial\UserCode\Lib\Calculate\wtr_calculate.c
  */
 
 #include "wtr_calculate.h"
+
 #include <math.h>
 //#include "Chassis_UserConfig.h"
 
@@ -104,6 +105,25 @@ void positionServo(float ref, DJI_t *motor)
     motor->posPID.fdb = motor->AxisData.AxisAngle_inDegree;
     P_Calc(&motor->posPID);
     
+    motor->speedPID.ref = motor->posPID.output;
+    motor->speedPID.fdb = motor->FdbData.rpm;
+    PID_Calc_P(&(motor->speedPID));
+}
+/**
+ * @brief: 位置伺服,使用雷达反馈
+ * @auther: zyt
+ * @param {float} ref 目标位置(距测距雷达的目标距离)
+ * @param {DJI_t} *motor 电机结构体
+ * @param {LidarData} lidardata 电机结构体
+ * @return {*}
+ */
+void positionServo_lidar(float ref, DJI_t *motor, LidarPointTypedef lidardata)
+{
+
+    motor->posPID.ref = ref;
+    motor->posPID.fdb = lidardata.distance_aver;
+    P_Calc(&motor->posPID);
+
     motor->speedPID.ref = motor->posPID.output;
     motor->speedPID.fdb = motor->FdbData.rpm;
     PID_Calc_P(&(motor->speedPID));

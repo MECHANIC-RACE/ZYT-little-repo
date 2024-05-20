@@ -12,7 +12,7 @@
 #pragma once
 
 //#include "chassis_start.h"
-#include "UpperStart.h"
+#include "STP_Decode.h"
 #include "wtr_dji.h"
 
 #define r_underpan_3 0.1934
@@ -27,6 +27,7 @@ void CalculateFourMecanumWheels(double *moter_speed, double vx, double vy, doubl
 
 // 位置伺服
 void positionServo(float ref, DJI_t *motor);
+void positionServo_lidar(float ref, DJI_t *motor, LidarPointTypedef lidardata);
 
 // 速度伺服
 void speedServo(float ref, DJI_t *motor);

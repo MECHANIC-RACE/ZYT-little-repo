@@ -13,13 +13,9 @@
 #define PACK_VERSIOM            0x14
 
 
-
-
-extern uint8_t Rxbuffer[4][195];
-extern float distance_aver[4];
-
 typedef struct{
     int16_t distance;               //测量目标距离（单位：mm）
+    float distance_aver;            //为物流赛专门搞的变量，直接计算12个得均值，免得再搞二维数组
     uint16_t noise;                 //环境噪声
     uint32_t peak;                  //接收强度信息
     uint8_t confidence;             //置信度    
@@ -27,13 +23,9 @@ typedef struct{
     int16_t reftof;                 //温度表征值
 } LidarPointTypedef;                //获取的测量数据结构体
 
+
 /*定义接收到的雷达测试数据*/
-extern LidarPointTypedef LidarData[4][12];
 
-/*串口宏定义*/
-#define USART_RX_HANDLE &huart1
-
-
-void STP_23L_Decode(uint16_t num);
+void STP_23L_Decode(uint8_t *buffer, LidarPointTypedef *lidardata);
 
 #endif // __STP_DECODE_H__
