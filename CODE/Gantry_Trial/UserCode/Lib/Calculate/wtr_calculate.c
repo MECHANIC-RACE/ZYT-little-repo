@@ -140,7 +140,7 @@ void speedServo(float ref, DJI_t *motor)
 {
     motor->speedPID.ref = ref;
     motor->speedPID.fdb = motor->FdbData.rpm;
-    PID_Calc(&(motor->speedPID));
+    PID_Calc_P(&(motor->speedPID));
 }
 
 /**
