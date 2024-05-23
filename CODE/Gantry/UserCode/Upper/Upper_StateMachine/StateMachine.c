@@ -10,45 +10,73 @@
 
 void Core_xy_State_Task(void *argument)
 {
+    // inner_ring_flag = 1;
     osDelay(100);
     uint16_t stateflag = 0;
     for (;;) {
         /*用于一个分区的路径规划*/
-        if(stateflag==0){
-            /*if flag=0 在外圈*/
-            // 此处TargetState[i].position.x/y 为预期的与雷达的距离  考虑分开给还是一起给  不过应该没有办法一起给 因为要做不同的路径
-            Core_xy[0].gantry_t.position.x = 245.0;
-            Core_xy[0].gantry_t.position.y = Lidar2.distance_aver;
-            /*if flag=1 在里圈*/
-            // Core_xy[0].gantry_t.position.x = 1062.5;
-            // Core_xy[0].gantry_t.position.y = 675.24;
-            if ((fabs(Core_xy[0].gantry_t.position.x - Lidar1.distance_aver)) < 2 && (fabs(Core_xy[0].gantry_t.position.y - Lidar2.distance_aver) < 1)) 
-            {
-                stateflag = 1;
-            }
-        }
-        //到时这里再补一个状态
-        HAL_GPIO_WritePin(Electromagnet_GPIO_Port, Electromagnet_Pin, 1);
-        osDelay(500);
-        /*前往木桩*/
 
-        if (stateflag == 1) {
-            /*if flag=0 在外圈*/
-            
-            Core_xy[0].gantry_t.position.x = 875.0;
-            Core_xy[0].gantry_t.position.y = Lidar2.distance_aver;
-           
-            if ((fabs(Core_xy[0].gantry_t.position.x - Lidar1.distance_aver)) < 2 && (fabs(Core_xy[0].gantry_t.position.y - Lidar2.distance_aver) < 1)) {
-                stateflag = 2;
+        if (stateflag == 0) // 走到即将取第一个砝码之前
+        {
+            if (inner_ring_flag == 0) // 在外圈
+            {
+                pid_reset(&(Core_xy[0].Motor_X->speedPID), 0, 0, 0);
+                Core_xy[0].gantry_t.position.y = 141;
+                if (fabs(Lidar2.distance_aver - Core_xy[0].gantry_t.position.y)<2)
+                    stateflag = 1;
+            } else {
+                /*if flag=1 在里圈*/
+                Core_xy[0].gantry_t.position.x = 223.0; //->360
+                Core_xy[0].gantry_t.position.y = 498.0;
+                if (fabs(Lidar2.distance_aver - Core_xy[0].gantry_t.position.y) < 2 && fabs(Lidar1.distance_aver - Core_xy[0].gantry_t.position.x) < 2)
+                    stateflag = 1;
             }
+        } else if (stateflag == 1) // 放下气缸，打开磁铁，往前拖行，吸起砝码，提上气缸
+        {
+            pid_reset(&(Core_xy[0].Motor_X->speedPID), 0, 0, 0);
+            pid_reset(&(Core_xy[0].Motor_Y->speedPID), 0, 0, 0);
+            // HAL_GPIO_WritePin(Cylinder_GPIO_Port, Cylinder_Pin, 1);
+            // HAL_GPIO_WritePin(Electromagnet_GPIO_Port, Electromagnet_Pin, 1);   //放下气缸，打开电磁铁
+            stateflag = 2;
+        } else if (stateflag == 2) {
+
+            pid_reset(&(Core_xy[0].Motor_X->speedPID), 5, 0.4, 0.8);
+
+            if (inner_ring_flag == 0) { Core_xy[0].gantry_t.position.x = 185; } // 往前拖行一段
+            else {
+                Core_xy[0].gantry_t.position.x = 325;
+            } // 往前拖行一段
+
+            if (fabs(Lidar1.distance_aver - Core_xy[0].gantry_t.position.x) < 2)
+                stateflag = 3;
+
         }
-        HAL_GPIO_WritePin(Cylinder_GPIO_Port, Cylinder_Pin, 1);
-        //osDelay(5);
-        HAL_GPIO_WritePin(Electromagnet_GPIO_Port, Electromagnet_Pin, 0);
+
+        /*提起气缸，前往木桩*/
+        else if (stateflag == 3) {
+            HAL_GPIO_WritePin(Cylinder_GPIO_Port, Cylinder_Pin, 0);
+            /*GPIO_WRITE_PIN提起气缸*/
+            pid_reset(&(Core_xy[0].Motor_Y->speedPID), 3.5, 0.3, 0.3);
+           
+            Core_xy[0].gantry_t.position.x = 940.0;
+            Core_xy[0].gantry_t.position.y = 551.0;
+
+            if (fabs(Lidar2.distance_aver - Core_xy[0].gantry_t.position.y) < 2 && fabs(Lidar1.distance_aver - Core_xy[0].gantry_t.position.x) < 2)
+                    stateflag = 4;
+
+        } else if (stateflag == 4) {
+            pid_reset(&(Core_xy[0].Motor_X->speedPID), 0, 0, 0);
+            pid_reset(&(Core_xy[0].Motor_Y->speedPID), 0, 0, 0);
+            // HAL_GPIO_WritePin(Cylinder_GPIO_Port, Cylinder_Pin, 1);
+            osDelay(1000);
+            // HAL_GPIO_WritePin(Electromagnet_GPIO_Port, Electromagnet_Pin, 0);
+        }
+        osDelay(2);
+    }
 
         osDelay(2);
     }
-}
+
 
 void Core_xy_StateMachine_Start(void)
 {
@@ -68,4 +96,13 @@ void Core_XY_StateMachine_Init()
    
     Core_xy[0].gantry_t.xMutex_control = xSemaphoreCreateRecursiveMutex();
     Core_xy[1].gantry_t.xMutex_control = xSemaphoreCreateRecursiveMutex();
+}
+
+void pid_reset(PID_t *pid, float kp, float ki, float kd)
+{
+    pid->KP       = kp;
+    pid->KI       = ki;
+    pid->KD       = kd;
+    pid->integral = 0;
+    pid->output   = 0;
 }

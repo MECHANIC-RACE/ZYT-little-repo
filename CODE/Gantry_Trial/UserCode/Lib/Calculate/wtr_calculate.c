@@ -1,7 +1,7 @@
 /*
  * @Author: szf
  * @Date: 2023-02-22 12:04:21
- * @LastEditTime: 2024-05-20 16:58:59
+ * @LastEditTime: 2024-05-23 14:54:02
  * @LastEditors: labbbbbbbbb 
  * @brief 运动学逆解算及PID计算函数
  * @FilePath: \Gantry_Trial\UserCode\Lib\Calculate\wtr_calculate.c
@@ -107,7 +107,7 @@ void positionServo(float ref, DJI_t *motor)
     
     motor->speedPID.ref = motor->posPID.output;
     motor->speedPID.fdb = motor->FdbData.rpm;
-    PID_Calc_P(&(motor->speedPID));
+    PID_Calc(&(motor->speedPID));
 }
 /**
  * @brief: 位置伺服,使用雷达反馈
@@ -126,7 +126,7 @@ void positionServo_lidar(float ref, DJI_t *motor, LidarPointTypedef lidardata)
 
     motor->speedPID.ref = motor->posPID.output;
     motor->speedPID.fdb = motor->FdbData.rpm;
-    PID_Calc_P(&(motor->speedPID));
+    PID_Calc(&(motor->speedPID));
 }
 
 /**
@@ -140,7 +140,7 @@ void speedServo(float ref, DJI_t *motor)
 {
     motor->speedPID.ref = ref;
     motor->speedPID.fdb = motor->FdbData.rpm;
-    PID_Calc_P(&(motor->speedPID));
+    PID_Calc(&(motor->speedPID));
 }
 
 /**

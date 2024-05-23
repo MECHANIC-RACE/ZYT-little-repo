@@ -25,7 +25,7 @@ void UartUpdateTask(void *argument)
             STP_23L_Decode(Rxbuffer_6, &Lidar6);
             UartFlag[3] = 0;
         }
-        osDelay(50);
+        osDelay(2);
     }
     /* USER CODE END UartUpdateTask */
 }

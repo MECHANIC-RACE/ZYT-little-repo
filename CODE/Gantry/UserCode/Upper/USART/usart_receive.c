@@ -17,6 +17,8 @@ uint8_t usart2_rx[1];
 uint8_t usart3_rx[1];
 uint8_t usart6_rx[1];
 
+uint16_t inner_ring_flag;
+
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
     if (huart->Instance == USART1) {

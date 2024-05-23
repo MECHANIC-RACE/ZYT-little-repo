@@ -14,14 +14,14 @@ void Upper_Servo_Task(void *argument)
     for (;;) {
         /*TestCode*/
 
-        // positionServo_lidar(current_pos[0], Core_xy[0].Motor_X,Lidar1);
-        // positionServo_lidar(current_pos[1], Core_xy[0].Motor_Y,Lidar2);
+        positionServo_lidar(current_pos[0], Core_xy[0].Motor_X,Lidar1);
+        positionServo_lidar(current_pos[1], Core_xy[0].Motor_Y,Lidar2);
 
         //speedServo(5*(505-Lidar2.distance_aver), Core_xy[0].Motor_Y);
-        speedServo(8000, Core_xy[0].Motor_X);
+        //speedServo(15000, Core_xy[0].Motor_X);
         CanTransmit_DJI_1234(&hcan1,
                              Core_xy[0].Motor_X->speedPID.output,
-                             0,
+                             Core_xy[0].Motor_Y->speedPID.output,
                              0,
                              0);
 
@@ -54,11 +54,13 @@ void Core_xy_Motor_init()               //电机初始化
     hDJI[2].motorType  = M2006;
     hDJI[3].motorType  = M2006;
     DJI_Init();
-    pid_reset(&(Core_xy[0].Motor_X->speedPID), 1.4, 0.001, 0.0);
-    pid_reset(&(Core_xy[0].Motor_Y->speedPID), 5.0, 0.01, 0.005);
+    pid_reset(&(Core_xy[0].Motor_X->speedPID), 5, 0.4, 0.8);
+    pid_reset(&(Core_xy[0].Motor_Y->speedPID),3.5, 0.3, 0.3);
 
-    pid_reset(&(Core_xy[0].Motor_X->posPID), 200, 0, 0);
+    pid_reset(&(Core_xy[0].Motor_X->posPID), 250, 0, 0);
     pid_reset(&(Core_xy[0].Motor_Y->posPID),-200, 0, 0);
+
+    Core_xy[0].Motor_X->posPID.outputMax = 12000;
     CANFilterInit(&hcan1);
 }
 

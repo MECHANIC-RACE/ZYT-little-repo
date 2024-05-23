@@ -13,10 +13,10 @@ void Upper_Servo_Task(void *argument)
     osDelay(100);
     for (;;) {
         /*TestCode*/
-        //Core_xy[0].gantry_t.position.x = 600;
-        
-        Core_xy[0].gantry_t.velocity.x = (Core_xy[0].gantry_t.position.x - Lidar1.distance_aver)*100;
-        //Core_xy[0].gantry_t.velocity.y = -(Core_xy[0].gantry_t.position.y - Lidar2.distance_aver)*10;
+        Core_xy[0].gantry_t.position.y = 551;
+
+        //Core_xy[0].gantry_t.velocity.x = (Core_xy[0].gantry_t.position.x - Lidar1.distance_aver)*60;
+        Core_xy[0].gantry_t.velocity.y = -(Core_xy[0].gantry_t.position.y - Lidar2.distance_aver)*40;
         Core_xy[1].gantry_t.velocity.x = Core_xy[1].gantry_t.position.x - Lidar3.distance_aver;
         Core_xy[1].gantry_t.velocity.y = Core_xy[1].gantry_t.position.y - Lidar6.distance_aver;
 
@@ -63,17 +63,10 @@ void Core_xy_Motor_init()               //电机初始化
     hDJI[2].motorType  = M2006;
     hDJI[3].motorType  = M2006;
     DJI_Init();
-    for (int i = 0; i < 8; i++) {
-        hDJI[i].speedPID.KP        = 12.0;
-        hDJI[i].speedPID.KI        = 0.2;
-        hDJI[i].speedPID.KD        = 5.0;
-        hDJI[i].speedPID.outputMax = 8000;
 
-        hDJI[i].posPID.KP        = 80.0f;
-        hDJI[i].posPID.KI        = 0.0f;
-        hDJI[i].posPID.KD        = 0.0f;
-        hDJI[i].posPID.outputMax = 5000;
-    }
+    pid_reset(&(Core_xy[0].Motor_X->speedPID), 5, 0.4, 0.8);
+    pid_reset(&(Core_xy[0].Motor_Y->speedPID), 3.5, 0.1, 0.3);
+
     CANFilterInit(&hcan1);
 }
 
