@@ -53,5 +53,7 @@ extern LidarPointTypedef Lidar3;
 extern LidarPointTypedef Lidar6;
 
 extern uint16_t inner_ring_flag;
+extern uint16_t *debug_state;
+extern  uint32_t debug_time;
 
 #endif // __PARAMDEF_H__

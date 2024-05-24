@@ -12,7 +12,8 @@
 #pragma once
 
 //#include "chassis_start.h"
-#include "UpperStart.h"
+#include "STP_Decode.h"
+
 #include "wtr_dji.h"
 
 #define r_underpan_3 0.1934
@@ -38,3 +39,4 @@ void DeadBand(double x, double y, double *new_x, double *new_y, double threshoul
 void DeadBandOneDimensional(double x, double *new_x, double threshould);
 
 void PID_Calc_P(__IO PID_t *pid);
+void positionServo_lidar(float ref, DJI_t *motor, LidarPointTypedef lidardata);

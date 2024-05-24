@@ -1,10 +1,10 @@
 /*
  * @Author: szf
  * @Date: 2023-02-22 12:04:21
- * @LastEditTime: 2024-04-28 16:01:49
+ * @LastEditTime: 2024-05-24 22:15:38
  * @LastEditors: labbbbbbbbb 
  * @brief 运动学逆解算及PID计算函数
- * @FilePath: \Upper_trial01\UserCode\Lib\Calculate\wtr_calculate.c
+ * @FilePath: \Gantry\UserCode\Lib\Calculate\wtr_calculate.c
  */
 
 #include "wtr_calculate.h"
@@ -106,7 +106,21 @@ void positionServo(float ref, DJI_t *motor)
     
     motor->speedPID.ref = motor->posPID.output;
     motor->speedPID.fdb = motor->FdbData.rpm;
-    PID_Calc_P(&(motor->speedPID));
+    PID_Calc(&(motor->speedPID));
+}
+
+
+
+void positionServo_lidar(float ref, DJI_t *motor, LidarPointTypedef lidardata)
+{
+
+    motor->posPID.ref = ref;
+    motor->posPID.fdb = lidardata.distance_aver;
+    P_Calc(&motor->posPID);
+
+    motor->speedPID.ref = motor->posPID.output;
+    motor->speedPID.fdb = motor->FdbData.rpm;
+    PID_Calc(&(motor->speedPID));
 }
 
 /**
