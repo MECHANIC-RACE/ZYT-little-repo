@@ -12,7 +12,10 @@
 #include "wtr_can.h"
 #include "wtr_dji.h"
 #include "UpperServo.h"
-#include "StateMachine.h"
+#include "Area1State.h"
+#include "Area2State.h"
+#include "Area3State.h"
+
 #include "string.h"
 #include "math.h"
 #include "STP_Decode.h" 

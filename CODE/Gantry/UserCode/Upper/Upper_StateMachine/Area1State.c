@@ -1,5 +1,5 @@
 
-#include "StateMachine.h"
+#include "Area1State.h"
 uint16_t *debug_state;
 uint32_t debug_time;
 // CoreXYState TargetState[2];
@@ -9,7 +9,7 @@ uint32_t debug_time;
 // uint16_t MarchingState;
 /****************线程相关函数********************/
 
-void Core_xy_State_Task(void *argument)
+void Area1_State_Task(void *argument)
 {
     //inner_ring_flag = 1;
     osDelay(100);
@@ -52,8 +52,8 @@ void Core_xy_State_Task(void *argument)
         {
             pid_reset(&(Core_xy[0].Motor_X->speedPID), 0, 0, 0);
             pid_reset(&(Core_xy[0].Motor_Y->speedPID), 0, 0, 0);
-            // HAL_GPIO_WritePin(Cylinder_GPIO_Port, Cylinder_Pin, 1);
-            // HAL_GPIO_WritePin(Electromagnet_GPIO_Port, Electromagnet_Pin, 1);   //放下气缸，打开电磁铁
+            // HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 1);
+            // HAL_GPIO_WritePin(Electromagnet01_GPIO_Port, Electromagnet01_Pin, 1);   //放下气缸，打开电磁铁
             stateflag = 2;
         } else if (stateflag == 2) {
             
@@ -76,7 +76,7 @@ void Core_xy_State_Task(void *argument)
 
         /*提起气缸，前往木桩*/
         else if (stateflag == 3) {
-            HAL_GPIO_WritePin(Cylinder_GPIO_Port, Cylinder_Pin, 0);
+            HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 0);
             /*GPIO_WRITE_PIN提起气缸*/
             pid_reset(&(Core_xy[0].Motor_Y->speedPID), 3.5, 8, 0.3);
            
@@ -93,25 +93,25 @@ void Core_xy_State_Task(void *argument)
         } else if (stateflag == 4) {
             pid_reset(&(Core_xy[0].Motor_X->speedPID), 0, 0, 0);
             pid_reset(&(Core_xy[0].Motor_Y->speedPID), 0, 0, 0);
-            // HAL_GPIO_WritePin(Cylinder_GPIO_Port, Cylinder_Pin, 1);
+            // HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 1);
             osDelay(1000);
-            // HAL_GPIO_WritePin(Electromagnet_GPIO_Port, Electromagnet_Pin, 0);
+            // HAL_GPIO_WritePin(Electromagnet01_GPIO_Port, Electromagnet01_Pin, 0);
         }
         osDelay(2);
     }
     }
 
 
-void Core_xy_StateMachine_Start(void)
+void Area1_StateMachine_Start(void)
 {
-    osThreadId_t Core_xy_StateHandle;
-    const osThreadAttr_t Core_xy_State_attributes = {
-        .name       = "Core_xy_State",
+    osThreadId_t Area1_StateHandle;
+    const osThreadAttr_t Area1_State_attributes = {
+        .name       = "Area1_State",
         .stack_size = 128 * 10,
         .priority   = (osPriority_t)osPriorityAboveNormal,
     };
 
-    Core_xy_StateHandle = osThreadNew(Core_xy_State_Task, NULL, &Core_xy_State_attributes);
+    Area1_StateHandle = osThreadNew(Area1_State_Task, NULL, &Area1_State_attributes);
 }
 
 /*******封装函数***********/

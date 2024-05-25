@@ -64,8 +64,8 @@ void Area2_State_Task(void *argument)
         {
             pid_reset(&(Core_xy[1].Motor_X->speedPID), 0, 0, 0);
             pid_reset(&(Core_xy[1].Motor_Y->speedPID), 0, 0, 0);
-            HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 1);
-            HAL_GPIO_WritePin(Electromagnet01_GPIO_Port, Electromagnet01_Pin, 1); // 放下气缸，打开电磁铁
+            HAL_GPIO_WritePin(Cylinder02_GPIO_Port, Cylinder02_Pin, 1);
+            HAL_GPIO_WritePin(Electromagnet02_GPIO_Port, Electromagnet02_Pin, 1); // 放下气缸，打开电磁铁
 
             osDelay(100);
 
@@ -89,7 +89,7 @@ void Area2_State_Task(void *argument)
 
             } while (!isArray1);
             osDelay(100);
-            HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 0);
+            HAL_GPIO_WritePin(Cylinder02_GPIO_Port, Cylinder02_Pin, 0);
             /*GPIO_WRITE_PIN提起气缸*/
             pid_reset(&(Core_xy[1].Motor_Y->speedPID), 3.5, 0.3, 0.3);
             stateflag = 2;
@@ -119,9 +119,9 @@ void Area2_State_Task(void *argument)
             osDelay(200);
             pid_reset(&(Core_xy[1].Motor_X->speedPID), 0, 0, 0);
             pid_reset(&(Core_xy[1].Motor_Y->speedPID), 0, 0, 0);
-            // HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 1);
+            // HAL_GPIO_WritePin(Cylinder02_GPIO_Port, Cylinder02_Pin, 1);
             osDelay(50);
-            HAL_GPIO_WritePin(Electromagnet01_GPIO_Port, Electromagnet01_Pin, 0);
+            HAL_GPIO_WritePin(Electromagnet02_GPIO_Port, Electromagnet02_Pin, 0);
             stateflag = 4;
         } else if (stateflag == 4) {
             pid_reset(&(Core_xy[1].Motor_X->speedPID), 5, 0.4, 0.8);

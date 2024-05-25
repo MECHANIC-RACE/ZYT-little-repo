@@ -15,6 +15,8 @@
 
 #include "UpperServo.h"
 #include "Area1State.h"
+#include "Area2State.h"
+#include "Area3State.h"
 
 #include "string.h"
 #include "math.h"

@@ -63,10 +63,18 @@ void Error_Handler(void);
 #define LED2_GPIO_Port GPIOA
 #define LED3_Pin GPIO_PIN_7
 #define LED3_GPIO_Port GPIOA
-#define Cylinder_Pin GPIO_PIN_13
-#define Cylinder_GPIO_Port GPIOB
-#define Electromagnet_Pin GPIO_PIN_14
-#define Electromagnet_GPIO_Port GPIOB
+#define Cylinder01_Pin GPIO_PIN_13
+#define Cylinder01_GPIO_Port GPIOB
+#define Electromagnet01_Pin GPIO_PIN_14
+#define Electromagnet01_GPIO_Port GPIOB
+#define Cylinder02_Pin GPIO_PIN_12
+#define Cylinder02_GPIO_Port GPIOD
+#define Electromagnet02_Pin GPIO_PIN_13
+#define Electromagnet02_GPIO_Port GPIOD
+#define Cylinder03_Pin GPIO_PIN_14
+#define Cylinder03_GPIO_Port GPIOD
+#define Electromagnet03_Pin GPIO_PIN_15
+#define Electromagnet03_GPIO_Port GPIOD
 
 /* USER CODE BEGIN Private defines */
 

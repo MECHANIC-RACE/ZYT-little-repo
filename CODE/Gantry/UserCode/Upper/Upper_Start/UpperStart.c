@@ -6,10 +6,11 @@
 void StartDefaultTask(void *argument)
 {
     /*初始化函数*/
-    Core_XY_StateMachine_Init();
     Core_xy_Motor_init();
     /*开启线程*/
-    Core_xy_StateMachine_Start();
+    Area1_StateMachine_Start();
+    Area2_StateMachine_Start();
+    Area3_StateMachine_Start();
     Upper_Servo_Start();
     UsartUpdate_Start();
     

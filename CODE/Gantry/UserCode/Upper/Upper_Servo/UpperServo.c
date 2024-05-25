@@ -3,7 +3,7 @@
 #include "UpperServo.h"
 
 
-CoreXY_COMPONENT Core_xy[2];    //两个分区的龙门的数据
+CoreXY_COMPONENT Core_xy[3];    //两个分区的龙门的数据
 
 
 /********线程相关部分*************/
@@ -12,30 +12,27 @@ void Upper_Servo_Task(void *argument)
 {
     osDelay(100);
     for (;;) {
-        /*TestCode*/
-        //Core_xy[0].gantry_t.position.y = 551;
-
-        // Core_xy[0].gantry_t.velocity.x = (Core_xy[0].gantry_t.position.x - Lidar1.distance_aver)*100;
-        // Core_xy[0].gantry_t.velocity.y = -(Core_xy[0].gantry_t.position.y - Lidar2.distance_aver)*120;
-        // Core_xy[1].gantry_t.velocity.x = Core_xy[1].gantry_t.position.x - Lidar3.distance_aver;
-        // Core_xy[1].gantry_t.velocity.y = Core_xy[1].gantry_t.position.y - Lidar6.distance_aver;
-
-        // speedServo(Core_xy[0].gantry_t.velocity.x, Core_xy[0].Motor_X);
-        // speedServo(Core_xy[0].gantry_t.velocity.y, Core_xy[0].Motor_Y);
-        // speedServo(Core_xy[1].gantry_t.velocity.x, Core_xy[1].Motor_X);
-        // speedServo(Core_xy[1].gantry_t.velocity.y, Core_xy[1].Motor_Y);
+     
 
         positionServo_lidar(Core_xy[0].gantry_t.position.x, Core_xy[0].Motor_X,Lidar1);
         positionServo_lidar(Core_xy[0].gantry_t.position.y, Core_xy[0].Motor_Y,Lidar2);
+        positionServo_lidar(Core_xy[1].gantry_t.position.x, Core_xy[0].Motor_X, Lidar3);
+        positionServo_lidar(Core_xy[1].gantry_t.position.y, Core_xy[0].Motor_Y, Lidar6);
+        positionServo_lidar(Core_xy[2].gantry_t.position.x, Core_xy[0].Motor_X, Lidar4);
+       
 
-        //speedServo(8000, Core_xy[0].Motor_X);
-        //speedServo(-8000, Core_xy[0].Motor_Y);
+    
         CanTransmit_DJI_1234(&hcan1,
                              Core_xy[0].Motor_X->speedPID.output,
                              Core_xy[0].Motor_Y->speedPID.output,
                              Core_xy[1].Motor_X->speedPID.output,
                              Core_xy[1].Motor_Y->speedPID.output);
-        // CanTransmit_DJI_1234(&hcan1, 0, -1600, 0, 0);
+        CanTransmit_DJI_5678(&hcan1,
+                             Core_xy[2].Motor_X->speedPID.output,
+                             0,
+                             0,
+                             0);
+       
         osDelay(2);
     }
     
@@ -55,21 +52,33 @@ void Upper_Servo_Start(void)
 /*******封装函数部分********/
 void Core_xy_Motor_init()               //电机初始化
 {
-    
+
     Core_xy[0].Motor_X = &hDJI[0];
     Core_xy[0].Motor_Y = &hDJI[1];
     Core_xy[1].Motor_X = &hDJI[2];
     Core_xy[1].Motor_Y = &hDJI[3];
-    hDJI[0].motorType = M2006;      
-    hDJI[1].motorType = M2006;
+    Core_xy[2].Motor_X = &hDJI[4];
+    hDJI[0].motorType  = M2006;
+    hDJI[1].motorType  = M2006;
     hDJI[2].motorType  = M2006;
     hDJI[3].motorType  = M2006;
+    hDJI[4].motorType  = M2006;
     DJI_Init();
-
     pid_reset(&(Core_xy[0].Motor_X->speedPID), 5, 0.4, 0.8);
-    pid_reset(&(Core_xy[0].Motor_Y->speedPID), 3.5, 0.1, 0.3);
-    pid_reset(&(Core_xy[0].Motor_X->posPID), 100,0,0);
-    pid_reset(&(Core_xy[0].Motor_Y->posPID), -150, 0, 0);
+    pid_reset(&(Core_xy[0].Motor_Y->speedPID), 3.5, 0.3, 0.3);
+    pid_reset(&(Core_xy[1].Motor_X->speedPID), 5, 0.4, 0.8);
+    pid_reset(&(Core_xy[1].Motor_Y->speedPID), 3.5, 0.3, 0.3);
+    pid_reset(&(Core_xy[2].Motor_X->speedPID), 5, 0.4, 0.8);
+
+    pid_reset(&(Core_xy[0].Motor_X->posPID), 250, 0, 0);
+    pid_reset(&(Core_xy[0].Motor_Y->posPID), -200, 0, 0);
+    pid_reset(&(Core_xy[1].Motor_X->posPID), 250, 0, 0);
+    pid_reset(&(Core_xy[1].Motor_Y->posPID), -200, 0, 0);
+    pid_reset(&(Core_xy[2].Motor_X->posPID), 250, 0, 0);
+
+    Core_xy[0].Motor_X->posPID.outputMax = 12000;
+    Core_xy[1].Motor_X->posPID.outputMax = 12000;
+    Core_xy[2].Motor_X->posPID.outputMax = 12000;
     CANFilterInit(&hcan1);
 }
 
