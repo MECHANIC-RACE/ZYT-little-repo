@@ -32,26 +32,32 @@ typedef __IO struct {
     CoreXYState gantry_t;
 } CoreXY_COMPONENT;
 
-extern CoreXY_COMPONENT Core_xy[2];       //全局的Corexy状态参数
-//extern CoreXYState TargetState[2];              //目标状态
+extern CoreXY_COMPONENT Core_xy[3];       //全局的Corexy状态参数
 
-extern float initial_pos[3];
-extern float current_pos[3];
-extern uint16_t UartFlag[4];
+//extern float initial_pos01[2];
+extern float current_pos01[2];
+//extern float initial_pos02[2];
+extern float current_pos02[2];
+//extern float initial_pos03[2];
+extern float current_pos03[1];
+extern uint16_t UartFlag[5];
 
 extern uint8_t usart1_rx[1];
 extern uint8_t usart2_rx[1];
 extern uint8_t usart3_rx[1];
+extern uint8_t usart4_rx[1];
 extern uint8_t usart6_rx[1];
 
 extern uint8_t Rxbuffer_1[195];
 extern uint8_t Rxbuffer_2[195];
 extern uint8_t Rxbuffer_3[195];
+extern uint8_t Rxbuffer_4[195];
 extern uint8_t Rxbuffer_6[195];
 
 extern LidarPointTypedef Lidar1;
 extern LidarPointTypedef Lidar2;
 extern LidarPointTypedef Lidar3;
+extern LidarPointTypedef Lidar4;
 extern LidarPointTypedef Lidar6;
 
 extern uint16_t inner_ring_flag;

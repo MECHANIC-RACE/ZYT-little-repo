@@ -3,18 +3,21 @@
 uint8_t Rxbuffer_1[195];
 uint8_t Rxbuffer_2[195];
 uint8_t Rxbuffer_3[195];
+uint8_t Rxbuffer_4[195];
 uint8_t Rxbuffer_6[195];
 
 LidarPointTypedef Lidar1;
 LidarPointTypedef Lidar2;
 LidarPointTypedef Lidar3;
+LidarPointTypedef Lidar4;
 LidarPointTypedef Lidar6;
 
-uint16_t UartFlag[4];
+uint16_t UartFlag[5];
 
 uint8_t usart1_rx[1];
 uint8_t usart2_rx[1];
 uint8_t usart3_rx[1];
+uint8_t usart4_rx[1];
 uint8_t usart6_rx[1];
 
 uint16_t inner_ring_flag;
@@ -136,6 +139,35 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
         };
 
         HAL_UART_Receive_IT(&huart6, usart6_rx, 1);
+    }
+
+    if (huart->Instance == UART4) {
+        static uint16_t u4state = 0; // 状态机计数
+        static uint16_t crc4    = 0; // 校验和
+        uint8_t tmp4            = usart4_rx[0];
+        if (u4state < 4) {
+            if (tmp4 == 0xAA) {
+                Rxbuffer_4[u4state] = tmp4;
+                u4state++;
+
+            } else {
+                u4state = 0;
+            }
+        } else if (u4state < 194) {
+            Rxbuffer_4[u4state] = tmp4;
+            u4state++;
+            crc4 += tmp4;
+        } else if (u4state == 194) {
+            Rxbuffer_4[u4state] = tmp4;
+            if (tmp4 == crc4 % 256) {
+                UartFlag[4] = 1;
+            }
+            u4state = 0;
+            crc4    = 0;
+        } else {
+        };
+
+        HAL_UART_Receive_IT(&huart4, usart4_rx, 1);
     }
 }
 

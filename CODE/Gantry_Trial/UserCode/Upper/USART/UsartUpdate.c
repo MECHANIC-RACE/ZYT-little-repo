@@ -47,10 +47,12 @@ void Usart_start()
     HAL_UART_Receive_IT(&huart2, usart2_rx, 1);
     HAL_UART_Receive_IT(&huart3, usart3_rx, 1);
     HAL_UART_Receive_IT(&huart6, usart6_rx, 1);
+    HAL_UART_Receive_IT(&huart4, usart4_rx, 1);
+
     // HAL_UART_Receive_DMA(&huart1, usart1_rx, 1);
     // HAL_UART_Receive_DMA(&huart2, usart2_rx, 1);
     // HAL_UART_Receive_DMA(&huart3, usart3_rx, 1);
     // HAL_UART_Receive_DMA(&huart6, usart6_rx, 1);
     /*2，3，6串口的使能函数*/
-    __HAL_UART_ENABLE(&huart4);
+    __HAL_UART_ENABLE(&huart5);
 }
