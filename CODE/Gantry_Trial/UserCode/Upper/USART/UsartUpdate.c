@@ -22,16 +22,16 @@ void UartUpdateTask(void *argument)
                 for (int i = 0; i < 5; i++) {
                     weight_placement_tmp[i] = weight_placement[i];
                 }
-                Uartflag[3]   = 0;
+                UartFlag[5]   = 0;
                 tar_count = 1; // 首次接收时，计数器初始化为1
                 Uart_State    = 1;
             }
         }
         else if(Uart_State==1){
               
-                    if (UartFlag[3] == 1) {
+                    if (UartFlag[5] == 1) {
                         Upper_Target_Decode();
-                        UartFlag[3]     = 0;
+                        UartFlag[5]     = 0;
                         switch_flag = 0;
 
                         for (int i = 0; i < 5; i++) {
@@ -56,6 +56,7 @@ void UartUpdateTask(void *argument)
                         // 如果连续十次接收到同样的数组，则把这个数组设置为最终值
                         if (tar_count >= 10) {
                             Uart_State = 2;
+                            __HAL_UART_DISABLE_IT(&huart5, UART_IT_RXNE);
                         }
                     }
                     osDelay(2);
@@ -78,6 +79,10 @@ void UartUpdateTask(void *argument)
         if (UartFlag[3]) {
             STP_23L_Decode(Rxbuffer_6, &Lidar6);
             UartFlag[3] = 0;
+        }
+        if (UartFlag[4]) {
+            STP_23L_Decode(Rxbuffer_4, &Lidar4);
+            UartFlag[4] = 0;
         }
         osDelay(2);
         }

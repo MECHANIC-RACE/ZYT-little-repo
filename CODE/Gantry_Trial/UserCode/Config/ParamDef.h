@@ -62,6 +62,6 @@ extern LidarPointTypedef Lidar6;
 
 extern uint16_t inner_ring_flag;
 extern uint8_t receive_buffer[24];
-extern float weight_placement[5] = {0};
+extern float weight_placement[5];
 extern uint16_t Uart_State;
 #endif // __PARAMDEF_H__
