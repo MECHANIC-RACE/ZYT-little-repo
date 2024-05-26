@@ -4,7 +4,7 @@
 void StartDefaultTask(void *argument)
 {
     /*等待树莓派数据*/
-    void RaspReceive_Enable();
+    RaspReceive_Enable();
     UsartUpdate_Start();
     while(Uart_State!=2)
     {
