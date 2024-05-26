@@ -3,6 +3,14 @@
 
 void StartDefaultTask(void *argument)
 {
+    /*等待树莓派数据*/
+    void RaspReceive_Enable();
+    UsartUpdate_Start();
+    while(Uart_State!=2)
+    {
+        ;       //若未收到上位机数据则一直循环
+    }
+
     /*初始化函数*/
     Core_xy_Motor_init();
     /*开启线程*/
@@ -10,7 +18,6 @@ void StartDefaultTask(void *argument)
     Area2_StateMachine_Start();
     Area3_StateMachine_Start();
     Upper_Servo_Start();
-    UsartUpdate_Start();
    
     /*串口使能*/
     Usart_start();
