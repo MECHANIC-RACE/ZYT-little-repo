@@ -176,6 +176,7 @@ void Area1_StateMachine_Init()
     Core_xy[1].gantry_t.xMutex_control = xSemaphoreCreateRecursiveMutex();
 }
 
+
 void pid_reset(PID_t *pid,float kp,float ki,float kd)
 {
     pid->KP = kp;

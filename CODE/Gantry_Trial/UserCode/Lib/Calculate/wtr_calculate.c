@@ -1,8 +1,8 @@
 /*
  * @Author: szf
  * @Date: 2023-02-22 12:04:21
- * @LastEditTime: 2024-05-23 14:54:02
- * @LastEditors: labbbbbbbbb 
+ * @LastEditTime: 2024-05-26 23:25:14
+ * @LastEditors: ZYT
  * @brief 运动学逆解算及PID计算函数
  * @FilePath: \Gantry_Trial\UserCode\Lib\Calculate\wtr_calculate.c
  */
@@ -117,6 +117,7 @@ void positionServo(float ref, DJI_t *motor)
  * @param {LidarData} lidardata 电机结构体
  * @return {*}
  */
+
 void positionServo_lidar(float ref, DJI_t *motor, LidarPointTypedef lidardata)
 {
 

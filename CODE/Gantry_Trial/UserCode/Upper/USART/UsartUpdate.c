@@ -1,3 +1,4 @@
+
 #include "UsartUpdate.h"
 #include "UpperStart.h"
 
@@ -84,7 +85,7 @@ void UartUpdateTask(void *argument)
             STP_23L_Decode(Rxbuffer_4, &Lidar4);
             UartFlag[4] = 0;
         }
-        osDelay(2);
+        osDelay(6);
         }
     }
     /* USER CODE END UartUpdateTask */
@@ -95,7 +96,7 @@ void UsartUpdate_Start()
     osThreadId_t UsartUpdateHandle;
     const osThreadAttr_t UsartUpdate_attributes = {
         .name       = "UsartUpdate",
-        .stack_size = 128 * 4,
+        .stack_size = 128 * 10,
         .priority   = (osPriority_t)osPriorityAboveNormal,
     };
     UsartUpdateHandle = osThreadNew(UartUpdateTask, NULL, &UsartUpdate_attributes);
@@ -105,18 +106,22 @@ void Usart_start()
 {
     HAL_UART_Receive_IT(&huart1, usart1_rx, 1);
     HAL_UART_Receive_IT(&huart2, usart2_rx, 1);
-    HAL_UART_Receive_IT(&huart3, usart3_rx, 1);
-    HAL_UART_Receive_IT(&huart6, usart6_rx, 1);
-    HAL_UART_Receive_IT(&huart4, usart4_rx, 1);
+    //HAL_UART_Receive_IT(&huart3, usart3_rx, 1);
+    //HAL_UART_Receive_IT(&huart6, usart6_rx, 1);
+    //HAL_UART_Receive_IT(&huart4, usart4_rx, 1);
 
     // HAL_UART_Receive_DMA(&huart1, usart1_rx, 1);
     // HAL_UART_Receive_DMA(&huart2, usart2_rx, 1);
-    // HAL_UART_Receive_DMA(&huart3, usart3_rx, 1);
-    // HAL_UART_Receive_DMA(&huart6, usart6_rx, 1);
+    HAL_UART_Receive_DMA(&huart3, usart3_rx, 1);
+    HAL_UART_Receive_DMA(&huart6, usart6_rx, 1);
+    HAL_UART_Receive_DMA(&huart4, usart4_rx, 1);
+
     /*2，3，6串口的使能函数*/
     __HAL_UART_ENABLE(&huart5);//到时串口5将被用作树莓派接收
    
 }
+
+
 void RaspReceive_Enable()
 {
     HAL_UART_Receive_IT(&huart5, receive_buffer, sizeof(receive_buffer));

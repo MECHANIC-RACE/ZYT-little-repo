@@ -12,22 +12,24 @@ void Upper_Servo_Task(void *argument)
 {
     osDelay(100);
     for (;;) {
-        /*TestCode*/
+        
 
-        positionServo_lidar(current_pos01[0], Core_xy[0].Motor_X,Lidar1);
-        positionServo_lidar(current_pos01[1], Core_xy[0].Motor_Y,Lidar2);
-        positionServo_lidar(current_pos02[0], Core_xy[1].Motor_X, Lidar3);
-        positionServo_lidar(current_pos02[1], Core_xy[1].Motor_Y, Lidar6);
-        positionServo_lidar(current_pos03[0], Core_xy[2].Motor_X, Lidar4);
+        // positionServo_lidar(current_pos01[0], Core_xy[0].Motor_X,Lidar1);
+        // positionServo_lidar(current_pos01[1], Core_xy[0].Motor_Y,Lidar2);
+        // positionServo_lidar(current_pos02[0], Core_xy[1].Motor_X, Lidar3);
+        // positionServo_lidar(current_pos02[1], Core_xy[1].Motor_Y, Lidar6);
+        // positionServo_lidar(current_pos03[0], Core_xy[2].Motor_X, Lidar4);
       
 
-        //speedServo(5*(505-Lidar2.distance_aver), Core_xy[0].Motor_Y);
-        //speedServo(15000, Core_xy[0].Motor_X);
+        speedServo(10000, Core_xy[1].Motor_X);
+        //speedServo(5000, Core_xy[1].Motor_Y);
+        //speedServo(5000, Core_xy[2].Motor_X);
+
         CanTransmit_DJI_1234(&hcan1,
                              Core_xy[0].Motor_X->speedPID.output,
                              Core_xy[0].Motor_Y->speedPID.output,
                              Core_xy[1].Motor_X->speedPID.output,
-                             Core_xy[1].Motor_X->speedPID.output);
+                             Core_xy[1].Motor_Y->speedPID.output);
         CanTransmit_DJI_5678(&hcan1,
                              Core_xy[2].Motor_X->speedPID.output,
                              0,
