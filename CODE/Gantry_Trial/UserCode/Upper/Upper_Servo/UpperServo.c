@@ -16,14 +16,15 @@ void Upper_Servo_Task(void *argument)
 
         // positionServo_lidar(current_pos01[0], Core_xy[0].Motor_X,Lidar1);
         // positionServo_lidar(current_pos01[1], Core_xy[0].Motor_Y,Lidar2);
-        // positionServo_lidar(current_pos02[0], Core_xy[1].Motor_X, Lidar3);
-        // positionServo_lidar(current_pos02[1], Core_xy[1].Motor_Y, Lidar6);
-        // positionServo_lidar(current_pos03[0], Core_xy[2].Motor_X, Lidar4);
+        //positionServo_lidar(current_pos02[0], Core_xy[1].Motor_X, Lidar3);
+        //positionServo_lidar(current_pos02[1], Core_xy[1].Motor_Y, Lidar6);
+        //positionServo_lidar(current_pos03[0], Core_xy[2].Motor_X, Lidar4);
       
 
-        speedServo(10000, Core_xy[1].Motor_X);
-        //speedServo(5000, Core_xy[1].Motor_Y);
-        //speedServo(5000, Core_xy[2].Motor_X);
+        
+        //speedServo(15000, Core_xy[1].Motor_X);//正的时候往前走指远离中心
+        //speedServo(-10000, Core_xy[1].Motor_Y);   //正的时候往左走
+        //speedServo(-5000, Core_xy[2].Motor_X);  //正的时候往后走
 
         CanTransmit_DJI_1234(&hcan1,
                              Core_xy[0].Motor_X->speedPID.output,
@@ -74,15 +75,15 @@ void Core_xy_Motor_init()               //电机初始化
     pid_reset(&(Core_xy[2].Motor_X->speedPID), 5, 0.4, 0.8);
    
 
-    pid_reset(&(Core_xy[0].Motor_X->posPID), 250, 0, 0);
-    pid_reset(&(Core_xy[0].Motor_Y->posPID),-200, 0, 0);
+    pid_reset(&(Core_xy[0].Motor_X->posPID), 200, 0, 0);
+    pid_reset(&(Core_xy[0].Motor_Y->posPID), 200, 0, 0);
     pid_reset(&(Core_xy[1].Motor_X->posPID), 250, 0, 0);
-    pid_reset(&(Core_xy[1].Motor_Y->posPID), -200, 0, 0);
+    pid_reset(&(Core_xy[1].Motor_Y->posPID), 200, 0, 0);
     pid_reset(&(Core_xy[2].Motor_X->posPID), 250, 0, 0);
 
-    Core_xy[0].Motor_X->posPID.outputMax = 12000;
-    Core_xy[1].Motor_X->posPID.outputMax = 12000;
-    Core_xy[2].Motor_X->posPID.outputMax = 12000;
+    Core_xy[0].Motor_X->posPID.outputMax = 20000;
+    Core_xy[1].Motor_X->posPID.outputMax = 20000;
+    Core_xy[2].Motor_X->posPID.outputMax = 20000;
     CANFilterInit(&hcan1);
 }
 

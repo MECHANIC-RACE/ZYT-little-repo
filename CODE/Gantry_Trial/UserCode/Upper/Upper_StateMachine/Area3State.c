@@ -11,6 +11,7 @@ float current_pos03[1];
 void Area3_State_Task(void *argument)
 {
     osDelay(100);
+    current_pos03[0]   = Lidar4.distance_aver;
     uint16_t stateflag = 0;
     for (;;) {
 

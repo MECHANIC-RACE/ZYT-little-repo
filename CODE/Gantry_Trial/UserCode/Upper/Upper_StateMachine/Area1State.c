@@ -16,6 +16,8 @@ void Area1_State_Task(void *argument)
 {
     inner_ring_flag = 1;
     osDelay(100);
+    current_pos01[0] = Lidar1.distance_aver;
+    current_pos01[1] = Lidar2.distance_aver;
     uint16_t stateflag = 0;
     for (;;) {
         /*用于一个分区的路径规划*/
@@ -184,4 +186,39 @@ void pid_reset(PID_t *pid,float kp,float ki,float kd)
     pid->KD = kd;
     pid->integral = 0;
     pid->output   = 0;
+}
+
+void Cylinder_down(uint16_t i)
+{
+    switch (i)
+    {
+    case 1:
+        HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 1);
+        break;
+    case 2:
+        HAL_GPIO_WritePin(Cylinder02_GPIO_Port, Cylinder02_Pin, 1);
+        break;
+    case 3:
+        HAL_GPIO_WritePin(Cylinder03_GPIO_Port, Cylinder03_Pin, 1);
+        break;
+    default:
+        break;
+    }
+}
+
+void Cylinder_up(uint16_t i)
+{
+    switch (i) {
+        case 1:
+            HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 0);
+            break;
+        case 2:
+            HAL_GPIO_WritePin(Cylinder02_GPIO_Port, Cylinder02_Pin, 0);
+            break;
+        case 3:
+            HAL_GPIO_WritePin(Cylinder03_GPIO_Port, Cylinder03_Pin, 0);
+            break;
+        default:
+            break;
+    }
 }
