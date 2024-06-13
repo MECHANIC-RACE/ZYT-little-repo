@@ -32,7 +32,7 @@ void StartDefaultTask(void *argument)
     /*开启线程*/
     //Area1_StateMachine_Start();
     //Area2_StateMachine_Start();
-    Area3_StateMachine_Start();
+    //Area3_StateMachine_Start();
     Upper_Servo_Start();
    
     
@@ -40,7 +40,7 @@ void StartDefaultTask(void *argument)
     for (;;) {
 
         printf("%f,%f,%f,%f,%f\n",
-               Lidar4.distance_aver,
+               Lidar1.distance_aver,
                Core_xy[2].Motor_X->speedPID.output,
                current_pos03[0],
                Core_xy[2].Motor_X->posPID.output,
