@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-06-06 12:03:15
  * @LastEditors: ZYT
- * @LastEditTime: 2024-06-12 22:08:54
+ * @LastEditTime: 2024-06-14 22:27:48
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Area1State.c
  * @Brief: 
  * 
@@ -28,7 +28,7 @@ float current_pos01[2];
 
 void Area1_State_Task(void *argument)
 {
-    inner_ring_flag = 1;
+    inner_ring_flag = 0;
     osDelay(100);
     uint16_t stateflag = 0;
     for (;;) {
@@ -43,23 +43,19 @@ void Area1_State_Task(void *argument)
                     stateflag = 1;
                 } else {
                     /*if flag=1 在wai圈*/
-                    Core_xy[0].gantry_t.position.x = 1434;  //->360
-                    Core_xy[0].gantry_t.position.y = -2950;
+                    Core_xy[0].gantry_t.position.y = -2940;     //-2950
                     TickType_t StartTick = xTaskGetTickCount();
-                    initial_pos01[0]       = Core_xy[0].Motor_X->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°
 
                     initial_pos01[1]       = Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°
 
                     _Bool isArray1       = 0;
-                    float diff[2]        = {0};
+                    float diff[1]        = {0};
                     do {
                         TickType_t CurrentTick = xTaskGetTickCount();
                         float current_time     = (CurrentTick - StartTick) * 1.0 / 1000.0;
-                        VelocityPlanning(initial_pos01[0], X_maxvelocity, X_Acceleration, Core_xy[0].gantry_t.position.x, current_time, &(current_pos01[0]));
                         VelocityPlanning(initial_pos01[1], Y_maxvelocity, Y_Acceleration, Core_xy[0].gantry_t.position.y, current_time, &(current_pos01[1]));
-                        diff[0] = fabs(Core_xy[0].gantry_t.position.x - current_pos01[0]);
-                        diff[1] = fabs(Core_xy[0].gantry_t.position.y - current_pos01[1]);
-                        if ((diff[0] < 0.01) && (diff[1] < 0.01)) { isArray1 = 1; }
+                        diff[0] = fabs(Core_xy[0].gantry_t.position.y - current_pos01[1]);
+                        if ((diff[0] < 0.01) ) { isArray1 = 1; }
 
                     } while (!isArray1);
                     stateflag = 1;
@@ -77,9 +73,9 @@ void Area1_State_Task(void *argument)
             pid_reset(&(Core_xy[0].Motor_X->speedPID), 5, 0.4, 0.8);
 
             if(inner_ring_flag==0)
-                {Core_xy[0].gantry_t.position.x = 100;}       //往前拖行一段
+                {Core_xy[0].gantry_t.position.x = 400;}       //往前拖行一段 100
             else
-                {Core_xy[0].gantry_t.position.x = 2200;}       //往前拖行一段
+                {Core_xy[0].gantry_t.position.x = 2200;}       //往前拖行一段 2200
 
             TickType_t StartTick           = xTaskGetTickCount();
             initial_pos01[0]                 = Core_xy[0].Motor_X->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°
@@ -88,7 +84,7 @@ void Area1_State_Task(void *argument)
             do {
                 TickType_t CurrentTick = xTaskGetTickCount();
                 float current_time     = (CurrentTick - StartTick) * 1.0 / 1000.0;
-                VelocityPlanning(initial_pos01[0], X_maxvelocity, X_Acceleration, Core_xy[0].gantry_t.position.x, current_time, &(current_pos01[0]));
+                VelocityPlanning(initial_pos01[0], 20000,3000, Core_xy[0].gantry_t.position.x, current_time, &(current_pos01[0]));
                 diff[0] = fabs(Core_xy[0].gantry_t.position.x - current_pos01[0]);
                 if ((diff[0] < 0.01)) { isArray1 = 1; }
 
@@ -171,6 +167,7 @@ void Area1_State_Task(void *argument)
 
             } while (!isArray1);
             pid_reset(&(Core_xy[0].Motor_X->speedPID), 0, 0, 0);
+            stateflag = 5;
         }
         //osDelay(2); 
     }

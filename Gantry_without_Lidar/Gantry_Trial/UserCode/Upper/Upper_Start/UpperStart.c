@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-05-19 14:41:19
  * @LastEditors: ZYT
- * @LastEditTime: 2024-06-12 22:01:01
+ * @LastEditTime: 2024-06-14 22:14:09
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_Start\UpperStart.c
  * @Brief: 
  * 
@@ -31,7 +31,9 @@ void StartDefaultTask(void *argument)
     // Area2_StateMachine_Start();
     // Area3_StateMachine_Start();
     Upper_Servo_Start();
-    //HAL_GPIO_WritePin(Electromagnet01_GPIO_Port, Electromagnet01_Pin, 1);
+    // HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 1);
+
+    // HAL_GPIO_WritePin(Electromagnet01_GPIO_Port, Electromagnet01_Pin, 1);
     
 
     for (;;) {
@@ -49,6 +51,7 @@ void StartDefaultTask(void *argument)
                current_pos01[1],
                Lidar1.distance_aver,
                detect01, angle_memory01);
+        
 
         osDelay(50);
     }

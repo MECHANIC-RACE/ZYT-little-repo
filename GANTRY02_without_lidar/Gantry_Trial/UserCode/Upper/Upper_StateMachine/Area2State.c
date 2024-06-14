@@ -1,9 +1,9 @@
 #include "Area2State.h"
 
-#define X_maxvelocity  5000 // 396  390-600都可，不过时间差不多，而且到后面就有点贴不上了
-#define Y_maxvelocity  5000 // 264.5
-#define X_Acceleration 1000
-#define Y_Acceleration 1000
+#define X_maxvelocity  6000 // 396  390-600都可，不过时间差不多，而且到后面就有点贴不上了
+#define Y_maxvelocity  6000 // 264.5
+#define X_Acceleration 3000
+#define Y_Acceleration 3000
 
 float initial_pos02[2];
 float current_pos02[2];
@@ -26,21 +26,17 @@ void Area2_State_Task(void *argument)
                 stateflag = 1;
             } else {
                 /*if flag=1 在外圈*/
-                Core_xy[1].gantry_t.position.x = -1380.0; //
                 Core_xy[1].gantry_t.position.y = -2824.0;
                 TickType_t StartTick           = xTaskGetTickCount();
-                initial_pos02[0]                 = Core_xy[1].Motor_X->AxisData.AxisAngle_inDegree;
                 initial_pos02[1]                 = Core_xy[1].Motor_Y->AxisData.AxisAngle_inDegree;
                 _Bool isArray1                 = 0;
-                float diff[2]                  = {0};
+                float diff[1]                  = {0};
                 do {
                     TickType_t CurrentTick = xTaskGetTickCount();
                     float current_time     = (CurrentTick - StartTick) * 1.0 / 1000.0;
-                    VelocityPlanning(initial_pos02[0], X_maxvelocity, X_Acceleration, Core_xy[1].gantry_t.position.x, current_time, &(current_pos02[0]));
                     VelocityPlanning(initial_pos02[1], 6000, 3000, Core_xy[1].gantry_t.position.y, current_time, &(current_pos02[1]));
-                    diff[0] = fabs(Core_xy[1].gantry_t.position.x - current_pos02[0]);
-                    diff[1] = fabs(Core_xy[1].gantry_t.position.y - current_pos02[1]);
-                    if ((diff[0] < 0.01) && (diff[1] < 0.01)) { isArray1 = 1; }
+                    diff[0] = fabs(Core_xy[1].gantry_t.position.y - current_pos02[1]);
+                    if ((diff[0] < 0.01) ) { isArray1 = 1; }
 
                 } while (!isArray1);
                 stateflag = 1;
