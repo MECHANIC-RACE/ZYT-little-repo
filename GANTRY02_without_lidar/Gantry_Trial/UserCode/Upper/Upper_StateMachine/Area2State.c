@@ -1,8 +1,8 @@
 #include "Area2State.h"
 
-#define X_maxvelocity  6000 // 396  390-600都可，不过时间差不多，而且到后面就有点贴不上了
-#define Y_maxvelocity  6000 // 264.5
-#define X_Acceleration 3000
+#define X_maxvelocity  5000 // 
+#define Y_maxvelocity  6000 // du/s
+#define X_Acceleration 1000
 #define Y_Acceleration 3000
 
 float initial_pos02[2];

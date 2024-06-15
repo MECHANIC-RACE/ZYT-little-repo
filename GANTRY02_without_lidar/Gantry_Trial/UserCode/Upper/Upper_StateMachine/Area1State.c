@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-06-06 12:03:15
  * @LastEditors: ZYT
- * @LastEditTime: 2024-06-15 01:16:07
+ * @LastEditTime: 2024-06-16 00:23:54
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Area1State.c
  * @Brief: 
  * 
@@ -98,8 +98,8 @@ void Area1_State_Task(void *argument)
         /*前往木桩*/
         else if (stateflag == 2) {
 
-            Core_xy[0].gantry_t.position.x = -7550;  //7600
-            Core_xy[0].gantry_t.position.y = 3890;
+            Core_xy[0].gantry_t.position.x = -7480;  //7600
+            Core_xy[0].gantry_t.position.y = 3880;
             TickType_t StartTick           = xTaskGetTickCount();
             initial_pos01[0]               = Core_xy[0].Motor_X->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°
             initial_pos01[1]               = Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°
@@ -144,7 +144,7 @@ void Area1_State_Task(void *argument)
         } else if (stateflag == 4) {
             pid_reset(&(Core_xy[0].Motor_X->speedPID), 5, 0.4, 0.8);
              
-            Core_xy[0].gantry_t.position.x = -7300;
+            Core_xy[0].gantry_t.position.x = -7200;
          
 
             TickType_t StartTick = xTaskGetTickCount();
