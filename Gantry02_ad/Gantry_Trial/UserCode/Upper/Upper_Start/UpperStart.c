@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-05-19 14:41:19
  * @LastEditors: ZYT
- * @LastEditTime: 2024-06-17 02:01:18
+ * @LastEditTime: 2024-06-18 01:42:34
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_Start\UpperStart.c
  * @Brief: 
  * 
@@ -27,7 +27,7 @@ void StartDefaultTask(void *argument)
     /*初始化函数*/
     Core_xy_Motor_init();
     /*开启线程*/
-    //  Area1_StateMachine_Start();
+    // Area1_StateMachine_Start();
     //  Area2_StateMachine_Start();
     // Area3_StateMachine_Start();
     Upper_Servo_Start();
@@ -42,10 +42,12 @@ void StartDefaultTask(void *argument)
         //        Core_xy[2].Motor_X->speedPID.output,
         //        Core_xy[2].Motor_X->posPID.output,
         //        Core_xy[2].Motor_X->FdbData.rpm);
-        printf("%f,%f,%f,%f,%f\n",
-               Core_xy[0].Motor_X->AxisData.AxisAngle_inDegree,
-               current_pos01[0],
-               angle_memory01xtree,
+        printf("%f,%f,%f,%d,%f,%f,%f\n",
+              current_pos01[0],
+               current_pos01[1],
+               angle_memory01weight,
+               detect01_weight,
+               angle_memory01ytree,
                Lidar1.distance_aver,
                Lidar2.distance_aver);
 

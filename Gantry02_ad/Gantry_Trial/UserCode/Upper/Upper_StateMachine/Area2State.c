@@ -64,7 +64,7 @@ void Area2_State_Task(void *argument)
             do {
                 TickType_t CurrentTick = xTaskGetTickCount();
                 float current_time     = (CurrentTick - StartTick) * 1.0 / 1000.0;
-                VelocityPlanning(initial_pos02[0], X_maxvelocity, X_Acceleration, Core_xy[1].gantry_t.position.x, current_time, &(current_pos02[0]));
+                VelocityPlanning(initial_pos02[0], 10000, 3000, Core_xy[1].gantry_t.position.x, current_time, &(current_pos02[0]));
                 diff[0] = fabs(Core_xy[1].gantry_t.position.x - current_pos02[0]);
                 if ((diff[0] < 0.01)) { isArray1 = 1; }
 

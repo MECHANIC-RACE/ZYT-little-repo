@@ -1,8 +1,18 @@
 /*
  * @Author: ZYT
+ * @Date: 2024-06-16 21:22:14
+ * @LastEditors: ZYT
+ * @LastEditTime: 2024-06-18 01:45:31
+ * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Area1State.c
+ * @Brief: 
+ * 
+ * Copyright (c) 2024 by zyt, All Rights Reserved. 
+ */
+/*
+ * @Author: ZYT
  * @Date: 2024-06-06 12:03:15
  * @LastEditors: ZYT
- * @LastEditTime: 2024-06-17 01:58:54
+ * @LastEditTime: 2024-06-17 23:18:27
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Area1State.c
  * @Brief: 
  * 
@@ -16,9 +26,9 @@
 #define X_Acceleration 3000
 #define Y_Acceleration 3000
 
-#define X_offset 790
-#define Y_offset01 200
-#define Y_offset02 100
+#define X_offset 780
+#define Y_offset01 -135      //fama
+#define Y_offset02 95      //muzhuang
 
 uint16_t detect01xtree;
 uint16_t detect01ytree;
@@ -32,37 +42,61 @@ float current_pos01[2];
 
 void Area1_State_Task(void *argument)
 {
-    inner_ring_flag = 1;
+    inner_ring_flag = 1;            //到时直接换成weight_detect[]就好
     osDelay(100);
     uint16_t stateflag = 0;
+    uint16_t statechoose = Check_LidarStatus(Lidar1,Lidar2);
     for (;;) {
         /*用于一个分区的路径规划*/
-        if (stateflag == 0) // 走到即将取第一个砝码之前
+        if(1){        /*雷达状态正确*/
+        if (stateflag == 0) // 在y轴上走到底，测出砝码和木桩的y轴位置
         {
 
-            if (inner_ring_flag == 0) // 在li圈
-            {
-                pid_reset(&(Core_xy[0].Motor_X->speedPID), 0, 0, 0);
-                stateflag = 1;
-            } else {
+            
                 /*if flag=1 在wai圈*/
-                Core_xy[0].gantry_t.position.y = 2950;
+                Core_xy[0].gantry_t.position.y = 4200;  //2950
                 TickType_t StartTick           = xTaskGetTickCount();
                 initial_pos01[1]               = Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°
                 _Bool isArray1                 = 0;
                 float diff[1]                  = {0};
+                detect01_weight                = 1;
+                detect01ytree                  = 1;
                 do {
                     TickType_t CurrentTick = xTaskGetTickCount();
                     float current_time     = (CurrentTick - StartTick) * 1.0 / 1000.0;
-                    VelocityPlanning(initial_pos01[1], Y_maxvelocity, Y_Acceleration, Core_xy[0].gantry_t.position.y, current_time, &(current_pos01[1]));
+                    VelocityPlanning(initial_pos01[1], 4000, 1000, Core_xy[0].gantry_t.position.y, current_time, &(current_pos01[1]));
                     diff[0] = fabs(Core_xy[0].gantry_t.position.y - current_pos01[1]);
                     if ((diff[0] < 0.01)) { isArray1 = 1; }
 
                 } while (!isArray1);
-                stateflag            = 1;
-               
+
+                stateflag = 1;
+            }else if(stateflag==1){
+
+                if(detect01_weight==0)
+                {
+                    Core_xy[0].gantry_t.position.y = angle_memory01weight+Y_offset01;
+                }else{
+                    Core_xy[0].gantry_t.position.y = 2950;
+                }
+                    TickType_t StartTick           = xTaskGetTickCount();
+                    initial_pos01[1]               = Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°
+                    _Bool isArray1                 = 0;
+                    float diff[1]                  = {0};
+                    do {
+                        TickType_t CurrentTick = xTaskGetTickCount();
+                        float current_time     = (CurrentTick - StartTick) * 1.0 / 1000.0;
+                        VelocityPlanning(initial_pos01[1], Y_maxvelocity, Y_Acceleration, Core_xy[0].gantry_t.position.y, current_time, &(current_pos01[1]));
+                        diff[0] = fabs(Core_xy[0].gantry_t.position.y - current_pos01[1]);
+                        if ((diff[0] < 0.01)) { isArray1 = 1; }
+
+                    } while (!isArray1);
+                
+                detect01_weight = 2;//跳开状态，防止受后续进程影响
+                stateflag       = 2;
+
             }
-        } else if (stateflag == 1) // 放下气缸，打开磁铁，往前拖行，吸起砝码，提上气缸
+        else if (stateflag == 2) // 放下气缸，打开磁铁，往前拖行，吸起砝码，提上气缸
         {
 
             pid_reset(&(Core_xy[0].Motor_X->speedPID), 0, 0, 0);
@@ -96,14 +130,18 @@ void Area1_State_Task(void *argument)
             /*GPIO_WRITE_PIN提起气缸*/
             osDelay(50);
             pid_reset(&(Core_xy[0].Motor_Y->speedPID), 3.5, 0.3, 0.3);
-            stateflag = 2;
+            stateflag = 3;
         }
 
         /*前往木桩*/
-        else if (stateflag == 2) {
+        else if (stateflag == 3) {
 
             Core_xy[0].gantry_t.position.x = -7480;  //7600
-            Core_xy[0].gantry_t.position.y = 3880;
+            if(detect01ytree==0){
+            Core_xy[0].gantry_t.position.y = Y_offset02+angle_memory01ytree;
+            }else{
+                Core_xy[0].gantry_t.position.y = 3880;
+            }
             TickType_t StartTick           = xTaskGetTickCount();
             initial_pos01[0]               = Core_xy[0].Motor_X->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°
             initial_pos01[1]               = Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°
@@ -120,8 +158,8 @@ void Area1_State_Task(void *argument)
                 if ((diff[0] < 0.01) && (diff[1] < 0.01)) { isArray2 = 1; }
 
         } while (!isArray2);
-        stateflag = 3;
-        } else if (stateflag == 3) {
+        stateflag = 4;
+        } else if (stateflag == 4) {
             osDelay(100);
             if(detect01xtree==0){
             Core_xy[0].gantry_t.position.x = angle_memory01xtree + (-1*X_offset);
@@ -142,10 +180,10 @@ void Area1_State_Task(void *argument)
             pid_reset(&(Core_xy[0].Motor_X->speedPID), 0, 0, 0);
             pid_reset(&(Core_xy[0].Motor_Y->speedPID), 0, 0, 0);
             
-            osDelay(50);
+            osDelay(200);
             HAL_GPIO_WritePin(Electromagnet01_GPIO_Port, Electromagnet01_Pin, 0);
-            stateflag = 4;
-        } else if (stateflag == 4) {
+            stateflag = 5;
+        } else if (stateflag == 5) {
             pid_reset(&(Core_xy[0].Motor_X->speedPID), 5, 0.4, 0.8);
              
             Core_xy[0].gantry_t.position.x = -7200;
@@ -164,11 +202,13 @@ void Area1_State_Task(void *argument)
 
             } while (!isArray1);
             pid_reset(&(Core_xy[0].Motor_X->speedPID), 0, 0, 0);
-            stateflag = 5;
+            stateflag = 6;
         }
         
         // osDelay(2);
-        
+        }else{
+            /*雷达状态有误时*/
+        }
     }
 }
 

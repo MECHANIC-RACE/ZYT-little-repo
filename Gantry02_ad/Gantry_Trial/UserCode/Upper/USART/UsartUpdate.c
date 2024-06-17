@@ -4,6 +4,9 @@
 
 uint16_t Uart_State = 0;
 uint16_t detect01xtree_cnt;
+uint16_t detect01ytree_cnt;
+uint16_t detect01weight_cnt;
+
 float angle_memory01xtree;
 float angle_memory01ytree;
 float angle_memory01weight;
@@ -81,6 +84,19 @@ void UartUpdateTask(void *argument)
         }
         if (UartFlag[1]) {
             STP_23L_Decode(Rxbuffer_2,&Lidar2);
+            if (detect01_weight==1 && Lidar2.distance_aver < 300) detect01weight_cnt++;
+            
+            if (detect01_weight==1 && detect01weight_cnt == 1) {     //写1风险是比较大的
+                detect01_weight       = 0;      //如果为0说明置数成功，否则就是没有识别上
+                angle_memory01weight = Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree;
+            }
+            if (detect01ytree == 1 && Lidar2.distance_aver < 900 && Lidar2.distance_aver > 700) detect01ytree_cnt++;
+            if (detect01ytree==1 && detect01ytree_cnt == 3)
+            {
+                detect01ytree = 0;
+                angle_memory01ytree = Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree;
+            }
+            
             UartFlag[1] = 0;
         }
         if (UartFlag[2]) {
@@ -133,4 +149,28 @@ void Usart_start()
 void RaspReceive_Enable()
 {
     HAL_UART_Receive_IT(&huart5, receive_buffer, sizeof(receive_buffer));
+}
+
+uint16_t Check_LidarStatus(LidarPointTypedef lidara, LidarPointTypedef lidarb)
+{
+    uint16_t status1 = 0;
+    uint16_t status2 = 0;
+    float a[4]={0};
+    float b[4]={0};
+    a[0]             = lidara.distance_aver;
+    b[0]             = lidarb.distance_aver;
+    osDelay(3);
+    a[1] = lidara.distance_aver;
+    b[1] = lidarb.distance_aver;
+    osDelay(3);
+    a[2] = lidara.distance_aver;
+    b[2] = lidarb.distance_aver;
+    osDelay(3);
+    a[3] = lidara.distance_aver;
+    b[3] = lidarb.distance_aver;
+    if (a[0] == a[1] && a[1] == a[2] && a[2] == a[3]) status1 = 1;
+    if (b[0] == b[1] && b[1] == b[2] && b[2] == b[3]) status2 = 1;
+    if (status1 || status2) return 0;        //错误状态
+    else
+        return 1;                            //OK状态
 }
