@@ -34,7 +34,6 @@ void Area2_State_Task(void *argument)
                 do {
                     TickType_t CurrentTick = xTaskGetTickCount();
                     float current_time     = (CurrentTick - StartTick) * 1.0 / 1000.0;
-                    VelocityPlanning(initial_pos02[0], X_maxvelocity, X_Acceleration, Core_xy[1].gantry_t.position.x, current_time, &(current_pos02[0]));
                     VelocityPlanning(initial_pos02[1], 6000, 3000, Core_xy[1].gantry_t.position.y, current_time, &(current_pos02[1]));
                     diff[0] = fabs(Core_xy[1].gantry_t.position.y - current_pos02[1]);
                     if ((diff[0] < 0.01) ) { isArray1 = 1; }
@@ -55,7 +54,7 @@ void Area2_State_Task(void *argument)
 
             if (inner_ring_flag == 0) { Core_xy[1].gantry_t.position.x = 20; } // 往前拖行一段
             else {
-                Core_xy[1].gantry_t.position.x = 1929;
+                Core_xy[1].gantry_t.position.x = 2000;
             } // 往前拖行一段
 
             TickType_t StartTick = xTaskGetTickCount();
@@ -65,7 +64,7 @@ void Area2_State_Task(void *argument)
             do {
                 TickType_t CurrentTick = xTaskGetTickCount();
                 float current_time     = (CurrentTick - StartTick) * 1.0 / 1000.0;
-                VelocityPlanning(initial_pos02[0], X_maxvelocity, X_Acceleration, Core_xy[1].gantry_t.position.x, current_time, &(current_pos02[0]));
+                VelocityPlanning(initial_pos02[0], 10000, 3000, Core_xy[1].gantry_t.position.x, current_time, &(current_pos02[0]));
                 diff[0] = fabs(Core_xy[1].gantry_t.position.x - current_pos02[0]);
                 if ((diff[0] < 0.01)) { isArray1 = 1; }
 
@@ -80,7 +79,7 @@ void Area2_State_Task(void *argument)
         /*前往木桩*/
         else if (stateflag == 2) {
             Core_xy[1].gantry_t.position.x = 18665.0;
-            Core_xy[1].gantry_t.position.y = 3748.0;
+            Core_xy[1].gantry_t.position.y = 3753.0;
             TickType_t StartTick           = xTaskGetTickCount();
             initial_pos02[0]                 = Core_xy[1].Motor_X->AxisData.AxisAngle_inDegree;
             initial_pos02[1]                 = Core_xy[1].Motor_Y->AxisData.AxisAngle_inDegree;
@@ -102,7 +101,7 @@ void Area2_State_Task(void *argument)
             pid_reset(&(Core_xy[1].Motor_X->speedPID), 0, 0, 0);
             pid_reset(&(Core_xy[1].Motor_Y->speedPID), 0, 0, 0);
             // HAL_GPIO_WritePin(Cylinder02_GPIO_Port, Cylinder02_Pin, 1);
-            osDelay(50);
+            osDelay(100);
             HAL_GPIO_WritePin(Electromagnet02_GPIO_Port, Electromagnet02_Pin, 0);
             stateflag = 4;
         } else if (stateflag == 4) {

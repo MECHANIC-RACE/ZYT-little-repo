@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-06-06 12:03:15
  * @LastEditors: ZYT
- * @LastEditTime: 2024-06-16 00:23:54
+ * @LastEditTime: 2024-06-19 01:04:20
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Area1State.c
  * @Brief: 
  * 
@@ -42,7 +42,7 @@ void Area1_State_Task(void *argument)
                 stateflag = 1;
             } else {
                 /*if flag=1 在wai圈*/
-                Core_xy[0].gantry_t.position.y = 2950;
+                Core_xy[0].gantry_t.position.y = 2920;
                 TickType_t StartTick           = xTaskGetTickCount();
                 initial_pos01[1]               = Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°
                 _Bool isArray1                 = 0;
@@ -72,7 +72,7 @@ void Area1_State_Task(void *argument)
 
             if (inner_ring_flag == 0) { Core_xy[0].gantry_t.position.x = -400; } // 往前拖行一段
             else {
-                Core_xy[0].gantry_t.position.x = -2200;
+                Core_xy[0].gantry_t.position.x = -2100;
             } // 往前拖行一段
 
             TickType_t StartTick           = xTaskGetTickCount();
@@ -98,8 +98,8 @@ void Area1_State_Task(void *argument)
         /*前往木桩*/
         else if (stateflag == 2) {
 
-            Core_xy[0].gantry_t.position.x = -7480;  //7600
-            Core_xy[0].gantry_t.position.y = 3880;
+            Core_xy[0].gantry_t.position.x = -7470;  //7600
+            Core_xy[0].gantry_t.position.y = 3840;
             TickType_t StartTick           = xTaskGetTickCount();
             initial_pos01[0]               = Core_xy[0].Motor_X->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°
             initial_pos01[1]               = Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°
@@ -119,22 +119,7 @@ void Area1_State_Task(void *argument)
         stateflag = 3;
         } else if (stateflag == 3) {
             osDelay(100);
-            // if(detect01==0){
-            // Core_xy[0].gantry_t.position.x = angle_memory01 + X_offset;
-            // TickType_t StartTick           = xTaskGetTickCount();
-            // initial_pos01[0]               = Core_xy[0].Motor_X->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°
-            // _Bool isArray1                 = 0;
-            // float diff[1]                  = {0};
-            // do {
-            //     TickType_t CurrentTick = xTaskGetTickCount();
-            //     float current_time     = (CurrentTick - StartTick) * 1.0 / 1000.0;
-            //     VelocityPlanning(initial_pos01[0], X_maxvelocity, X_Acceleration, Core_xy[0].gantry_t.position.x, current_time, &(current_pos01[0]));
-            //     diff[0] = fabs(Core_xy[0].gantry_t.position.x - current_pos01[0]);
-            //     if ((diff[0] < 0.01)) { isArray1 = 1; }
-
-            // } while (!isArray1);
-            // osDelay(100);
-            // }
+            
             pid_reset(&(Core_xy[0].Motor_X->speedPID), 0, 0, 0);
             pid_reset(&(Core_xy[0].Motor_Y->speedPID), 0, 0, 0);
             
@@ -144,7 +129,7 @@ void Area1_State_Task(void *argument)
         } else if (stateflag == 4) {
             pid_reset(&(Core_xy[0].Motor_X->speedPID), 5, 0.4, 0.8);
              
-            Core_xy[0].gantry_t.position.x = -7200;
+            Core_xy[0].gantry_t.position.x = -7000;
          
 
             TickType_t StartTick = xTaskGetTickCount();

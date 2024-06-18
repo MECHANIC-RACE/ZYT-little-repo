@@ -19,11 +19,12 @@ void Upper_Servo_Task(void *argument)
         // positionServo(current_pos02[0], Core_xy[1].Motor_X);
         // positionServo(current_pos02[1], Core_xy[1].Motor_Y);
         //positionServo(current_pos03[0], Core_xy[2].Motor_X);
-        // positionServo(-18670, Core_xy[1].Motor_X);
+
+        //positionServo(-18670, Core_xy[1].Motor_X);
         // positionServo(-3000, Core_xy[1].Motor_Y);
-    //     positionServo(-7500, Core_xy[0].Motor_X);
-    //    positionServo(3500, Core_xy[0].Motor_Y);
-        //speedServo(-20000,Core_xy[0].Motor_X);
+        // positionServo(-7500, Core_xy[0].Motor_X);
+        // positionServo(3500, Core_xy[0].Motor_Y);
+        //speedServo(-5000,Core_xy[0].Motor_X);
         // speedServo(-5000, Core_xy[2].Motor_X);
         CanTransmit_DJI_1234(&hcan1,
                              Core_xy[0].Motor_X->speedPID.output,

@@ -14,10 +14,10 @@ void Upper_Servo_Task(void *argument)
     for (;;) {
         /*TestCode*/
 
-        // positionServo(current_pos01[0], Core_xy[0].Motor_X);
-        // positionServo(current_pos01[1], Core_xy[0].Motor_Y);
-        // positionServo(current_pos02[0], Core_xy[1].Motor_X);
-        // positionServo(current_pos02[1], Core_xy[1].Motor_Y);
+        positionServo(current_pos01[0], Core_xy[0].Motor_X);
+        positionServo(current_pos01[1], Core_xy[0].Motor_Y);
+        positionServo(current_pos02[0], Core_xy[1].Motor_X);
+        positionServo(current_pos02[1], Core_xy[1].Motor_Y);
 
         // positionServo(18670, Core_xy[1].Motor_X);
         // positionServo(3000, Core_xy[1].Motor_Y);

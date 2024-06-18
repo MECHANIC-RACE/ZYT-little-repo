@@ -78,8 +78,8 @@ void Area2_State_Task(void *argument)
 
         /*前往木桩*/
         else if (stateflag == 2) {
-            Core_xy[1].gantry_t.position.x = -18630.0;
-            Core_xy[1].gantry_t.position.y = -3748.0;
+            Core_xy[1].gantry_t.position.x = -18590.0;
+            Core_xy[1].gantry_t.position.y = -3760.0;
             TickType_t StartTick           = xTaskGetTickCount();
             initial_pos02[0]                 = Core_xy[1].Motor_X->AxisData.AxisAngle_inDegree;
             initial_pos02[1]                 = Core_xy[1].Motor_Y->AxisData.AxisAngle_inDegree;

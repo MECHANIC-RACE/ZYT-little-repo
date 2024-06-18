@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-05-19 14:41:19
  * @LastEditors: ZYT
- * @LastEditTime: 2024-06-18 01:42:34
+ * @LastEditTime: 2024-06-18 22:52:01
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_Start\UpperStart.c
  * @Brief: 
  * 
@@ -27,7 +27,7 @@ void StartDefaultTask(void *argument)
     /*初始化函数*/
     Core_xy_Motor_init();
     /*开启线程*/
-    // Area1_StateMachine_Start();
+     Area1_StateMachine_Start();
     //  Area2_StateMachine_Start();
     // Area3_StateMachine_Start();
     Upper_Servo_Start();

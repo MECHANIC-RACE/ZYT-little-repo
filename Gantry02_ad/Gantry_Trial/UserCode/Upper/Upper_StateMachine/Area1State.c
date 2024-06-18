@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-06-16 21:22:14
  * @LastEditors: ZYT
- * @LastEditTime: 2024-06-18 01:45:31
+ * @LastEditTime: 2024-06-18 22:36:42
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Area1State.c
  * @Brief: 
  * 
@@ -27,7 +27,7 @@
 #define Y_Acceleration 3000
 
 #define X_offset 780
-#define Y_offset01 -135      //fama
+#define Y_offset01 -130      //fama
 #define Y_offset02 95      //muzhuang
 
 uint16_t detect01xtree;
@@ -64,7 +64,7 @@ void Area1_State_Task(void *argument)
                 do {
                     TickType_t CurrentTick = xTaskGetTickCount();
                     float current_time     = (CurrentTick - StartTick) * 1.0 / 1000.0;
-                    VelocityPlanning(initial_pos01[1], 4000, 1000, Core_xy[0].gantry_t.position.y, current_time, &(current_pos01[1]));
+                    VelocityPlanning(initial_pos01[1], 2500, 500, Core_xy[0].gantry_t.position.y, current_time, &(current_pos01[1]));
                     diff[0] = fabs(Core_xy[0].gantry_t.position.y - current_pos01[1]);
                     if ((diff[0] < 0.01)) { isArray1 = 1; }
 
