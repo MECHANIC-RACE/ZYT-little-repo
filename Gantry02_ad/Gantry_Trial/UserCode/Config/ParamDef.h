@@ -69,7 +69,15 @@ extern float angle_memory01xtree;
 extern float angle_memory01ytree;
 extern float angle_memory01weight;
 
+extern float angle_memory02xtree;
+extern float angle_memory02ytree;
+extern float angle_memory02weight;
+
 extern uint16_t detect01xtree;
 extern uint16_t detect01ytree;
 extern uint16_t detect01_weight;
+
+extern uint16_t detect02xtree;
+extern uint16_t detect02ytree;
+extern uint16_t detect02_weight;
 #endif // __PARAMDEF_H__

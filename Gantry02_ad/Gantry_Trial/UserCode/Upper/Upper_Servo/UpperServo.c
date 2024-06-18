@@ -14,8 +14,7 @@ void Upper_Servo_Task(void *argument)
     for (;;) {
         /*TestCode*/
 
-        // positionServo(current_pos01[0], Core_xy[0].Motor_X);
-        // positionServo(current_pos01[1], Core_xy[0].Motor_Y);
+        // /
         // positionServo(current_pos02[0], Core_xy[1].Motor_X);
         // positionServo(current_pos02[1], Core_xy[1].Motor_Y);
 
@@ -66,7 +65,9 @@ void Core_xy_Motor_init()               //电机初始化
     hDJI[2].motorType  = M2006;
     hDJI[3].motorType  = M2006;
     hDJI[4].motorType  = M2006;
+
     DJI_Init();
+    
     pid_reset(&(Core_xy[0].Motor_X->speedPID), 5, 0.4, 0.8);
     pid_reset(&(Core_xy[0].Motor_Y->speedPID),3.5, 0.3, 0.3);
     pid_reset(&(Core_xy[1].Motor_X->speedPID), 5, 0.4, 0.8);
