@@ -12,7 +12,7 @@ float current_pos02[2];
 
 void Area2_State_Task(void *argument)
 {
-    inner_ring_flag = 1;
+    inner_ring_flag = 0;
     osDelay(100);
     uint16_t stateflag = 0;
     for (;;) {
@@ -52,7 +52,7 @@ void Area2_State_Task(void *argument)
 
             pid_reset(&(Core_xy[1].Motor_X->speedPID), 5, 0.4, 0.8);
 
-            if (inner_ring_flag == 0) { Core_xy[1].gantry_t.position.x = 20; } // 往前拖行一段
+            if (inner_ring_flag == 0) { Core_xy[1].gantry_t.position.x = 300; } // 往前拖行一段
             else {
                 Core_xy[1].gantry_t.position.x = 2000;
             } // 往前拖行一段
@@ -78,7 +78,7 @@ void Area2_State_Task(void *argument)
 
         /*前往木桩*/
         else if (stateflag == 2) {
-            Core_xy[1].gantry_t.position.x = 18665.0;
+            Core_xy[1].gantry_t.position.x = 18660.0;
             Core_xy[1].gantry_t.position.y = 3753.0;
             TickType_t StartTick           = xTaskGetTickCount();
             initial_pos02[0]                 = Core_xy[1].Motor_X->AxisData.AxisAngle_inDegree;

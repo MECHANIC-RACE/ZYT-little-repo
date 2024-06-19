@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-06-06 12:03:15
  * @LastEditors: ZYT
- * @LastEditTime: 2024-06-11 23:03:35
+ * @LastEditTime: 2024-06-19 13:44:33
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Area3State.c
  * @Brief: 
  * 
@@ -10,7 +10,7 @@
  */
 #include "Area3State.h"
 
-#define X_maxvelocity  3000 
+#define X_maxvelocity  5000 
 #define X_Acceleration 1000
 
 float initial_pos03[1];
@@ -28,9 +28,9 @@ void Area3_State_Task(void *argument)
         {
             if (weight_placement[4] == 0)                                         // 在外圈
             {
-                Core_xy[2].gantry_t.position.x = 3410; //?待定
+                Core_xy[2].gantry_t.position.x = 2410; //?待定
             }else{
-                Core_xy[2].gantry_t.position.x = 6380;
+                Core_xy[2].gantry_t.position.x = 3380;
             }
                 TickType_t StartTick           = xTaskGetTickCount();
                 initial_pos03[0]               = Core_xy[2].Motor_X->AxisData.AxisAngle_inDegree;
