@@ -3,7 +3,7 @@
  * @Author: ZYT
  * @Date: 2024-06-06 12:03:15
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-08 19:55:39
+ * @LastEditTime: 2024-07-09 21:58:42
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Area1State.c
  * @Brief: 
  * 
@@ -18,8 +18,8 @@
 #define Y_Acceleration 3000
 
 #define X_offset 780
-#define Y_offset01 -45      //fama //-40
-#define Y_offset02 100      //muzhuang
+#define Y_offset01 10      //fama //-40
+#define Y_offset02 140      //muzhuang
 
 uint16_t detect01xtree;
 uint16_t detect01ytree;
@@ -35,7 +35,7 @@ float current_pos01[2];
 
 void Area1_State_Task(void *argument)
 {
-    weight_placement[2] = 0; // 到时直接换成weight_detect[]就好
+    weight_placement[2] = 1; // 到时直接换成weight_detect[]就好
     osDelay(100);
     uint16_t stateflag = 0;
     uint16_t statechoose = Check_LidarStatus(Lidar1,Lidar2);
@@ -199,7 +199,7 @@ void Area1_State_Task(void *argument)
             if(Lidar2.distance_aver!=0)  
             {
                 UseLidar01 = 1;        //稍微检验一下雷达是否异常 将雷达标志位置一
-                Core_xy[0].gantry_t.position.x = 86;
+                Core_xy[0].gantry_t.position.x = 83;
                 initial_pos01[0]               = Lidar2.distance_aver; // 电机轴输出角度 单位 度°
             }else{
                 Core_xy[0].gantry_t.position.x = -7200;
@@ -220,14 +220,14 @@ void Area1_State_Task(void *argument)
                 if ((diff[0] < 0.01)) { isArray1 = 1; }
 
             } while (!isArray1);
-            osDelay(100);
+            osDelay(200);
             pid_reset(&(Core_xy[0].Motor_X->speedPID), 0, 0, 0);
             HAL_GPIO_WritePin(Electromagnet01_GPIO_Port, Electromagnet01_Pin, 0);
             stateflag = 7;
         } else if (stateflag == 7) {
             pid_reset(&(Core_xy[0].Motor_X->speedPID), 5, 0.4, 0.8);
             UseLidar01                     = 0;
-            Core_xy[0].gantry_t.position.x = -7200;
+            Core_xy[0].gantry_t.position.x = -6800;
 
             TickType_t StartTick = xTaskGetTickCount();
             initial_pos01[0]     = Core_xy[0].Motor_X->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°

@@ -15,12 +15,12 @@ void Upper_Servo_Task(void *argument)
         /*TestCode*/
 
         // /
-        if(UseLidar01==1){
-            positionServo_lidar(current_pos01[0], Core_xy[0].Motor_X, Lidar2);
-        } else {
-            positionServo(current_pos01[0], Core_xy[0].Motor_X);
-        }
-        positionServo(current_pos01[1], Core_xy[0].Motor_Y);
+        // if(UseLidar01==1){
+        //     positionServo_lidar(current_pos01[0], Core_xy[0].Motor_X, Lidar2);
+        // } else {
+        //     positionServo(current_pos01[0], Core_xy[0].Motor_X);
+        // }
+        // positionServo(current_pos01[1], Core_xy[0].Motor_Y);
         
         // if (UseLidar02 == 1) {
         //     positionServo_lidar(current_pos02[0], Core_xy[1].Motor_X, Lidar6);
@@ -29,10 +29,10 @@ void Upper_Servo_Task(void *argument)
         // }
         //     positionServo(current_pos02[1], Core_xy[1].Motor_Y);
 
-            // positionServo(18670, Core_xy[1].Motor_X);
-            // positionServo(3000, Core_xy[1].Motor_Y);
-            // positionServo(7500, Core_xy[0].Motor_X);
-            // positionServo(-3500, Core_xy[0].Motor_Y);
+            positionServo(18670, Core_xy[1].Motor_X);
+            //positionServo(3000, Core_xy[1].Motor_Y);
+            //positionServo(7500, Core_xy[0].Motor_X);
+            //positionServo(-3500, Core_xy[0].Motor_Y);
 
             // speedServo(9000, Core_xy[0].Motor_X );
             CanTransmit_DJI_1234(&hcan1,

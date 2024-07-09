@@ -89,13 +89,13 @@ void UartUpdateTask(void *argument)
         }
         if (UartFlag[1]) {
             STP_23L_Decode(Rxbuffer_2,&Lidar2);
-            if (detect01_weight == 1 && Lidar2.distance_aver < 280 && Lidar2.distance_aver > 100) detect01weight_cnt++;
+            if (detect01_weight == 1 && Lidar2.distance_aver < 300 && Lidar2.distance_aver > 100) detect01weight_cnt++;
 
             if (detect01_weight==1 && detect01weight_cnt == 5) {     //写1风险是比较大的
                 detect01_weight       = 0;      //如果为0说明置数成功，否则就是没有识别上
                 angle_memory01weight = Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree;
             }
-            if (detect01ytree == 1 && Lidar2.distance_aver < 180 && Lidar2.distance_aver > 50) detect01ytree_cnt++;
+            if (detect01ytree == 1 && Lidar2.distance_aver < 250 && Lidar2.distance_aver > 50) detect01ytree_cnt++;
             if (detect01ytree==1 && detect01ytree_cnt == 3)
             {
                 detect01ytree = 0;
@@ -117,11 +117,11 @@ void UartUpdateTask(void *argument)
             STP_23L_Decode(Rxbuffer_6, &Lidar6);
             if (detect02_weight == 1 && Lidar6.distance_aver < 300 &&Lidar6.distance_aver>100) detect02weight_cnt++;
 
-            if (detect02_weight == 1 && detect02weight_cnt == 1) { // 写1风险是比较大的
+            if (detect02_weight == 1 && detect02weight_cnt == 5) { // 写1风险是比较大的
                 detect02_weight      = 0;                          // 如果为0说明置数成功，否则就是没有识别上
                 angle_memory02weight = Core_xy[1].Motor_Y->AxisData.AxisAngle_inDegree;
             }
-            if (detect02ytree == 1 && Lidar6.distance_aver < 2400 && Lidar6.distance_aver > 2600) detect02ytree_cnt++;          /*这个范围内的数可能会很多，不知道可不可行*/
+            if (detect02ytree == 1 && Lidar6.distance_aver < 250 && Lidar6.distance_aver > 50) detect02ytree_cnt++;          /*这个范围内的数可能会很多，不知道可不可行*/
             if (detect02ytree == 1 && detect02ytree_cnt == 3) {
                 detect02ytree       = 0;
                 angle_memory02ytree = Core_xy[1].Motor_Y->AxisData.AxisAngle_inDegree;
