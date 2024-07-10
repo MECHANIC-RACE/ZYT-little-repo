@@ -115,9 +115,9 @@ void UartUpdateTask(void *argument)
         }
         if (UartFlag[3]) {
             STP_23L_Decode(Rxbuffer_6, &Lidar6);
-            if (detect02_weight == 1 && Lidar6.distance_aver < 280 &&Lidar6.distance_aver>100) detect02weight_cnt++;
+            if (detect02_weight == 1 && Lidar6.distance_aver < 350 &&Lidar6.distance_aver>100) detect02weight_cnt++;
 
-            if (detect02_weight == 1 && detect02weight_cnt == 1) { // 写1风险是比较大的
+            if (detect02_weight == 1 && detect02weight_cnt == 5) { // 写1风险是比较大的
                 detect02_weight      = 0;                          // 如果为0说明置数成功，否则就是没有识别上
                 angle_memory02weight = Core_xy[1].Motor_Y->AxisData.AxisAngle_inDegree;
             }

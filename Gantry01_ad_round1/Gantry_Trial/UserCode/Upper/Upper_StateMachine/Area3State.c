@@ -28,9 +28,9 @@ void Area3_State_Task(void *argument)
         {
             if (weight_placement[4] == 0)                                         // 在外圈
             {
-                Core_xy[2].gantry_t.position.x = 3410; //?待定
+                Core_xy[2].gantry_t.position.x = 3200; //?待定
             }else{
-                Core_xy[2].gantry_t.position.x = 6380;
+                Core_xy[2].gantry_t.position.x = 6000;
             }
                 TickType_t StartTick           = xTaskGetTickCount();
                 initial_pos03[0]               = Core_xy[2].Motor_X->AxisData.AxisAngle_inDegree;
@@ -82,7 +82,7 @@ void Area3_State_Task(void *argument)
             // osDelay(2);
     }else if(stateflag==2){     //前往木桩
         pid_reset(&(Core_xy[2].Motor_X->speedPID), 5, 0.4, 0.8);
-        Core_xy[2].gantry_t.position.x = 9400;
+        Core_xy[2].gantry_t.position.x = 9500;
         TickType_t StartTick = xTaskGetTickCount();
         initial_pos03[0]     = Core_xy[2].Motor_X->AxisData.AxisAngle_inDegree;
         _Bool isArray1       = 0;

@@ -154,7 +154,7 @@ void Area2_State_Task(void *argument)
             if(detect02ytree==0){
                 Core_xy[1].gantry_t.position.y = angle_memory02ytree + Y_offset02;
             }else{
-                Core_xy[1].gantry_t.position.y = 3764; //wangle 记得再验证一下
+                Core_xy[1].gantry_t.position.y = 3780; //wangle 记得再验证一下
             }
             TickType_t StartTick = xTaskGetTickCount();
             initial_pos02[1]       = Core_xy[1].Motor_Y->AxisData.AxisAngle_inDegree;
@@ -175,12 +175,12 @@ void Area2_State_Task(void *argument)
             if(Lidar6.distance_aver!=0)
             {
                 UseLidar02 = 1;
-                Core_xy[1].gantry_t.position.x = 80;
+                Core_xy[1].gantry_t.position.x = 74;
                 pid_reset(&(Core_xy[1].Motor_X->posPID), -300, 0, 0);
                 initial_pos02[0]               = Lidar6.distance_aver;
             }else
             {
-                Core_xy[1].gantry_t.position.x = 18670;        //待验证
+                Core_xy[1].gantry_t.position.x = 18680;        //待验证//可
                 initial_pos02[0]               = Core_xy[1].Motor_X->AxisData.AxisAngle_inDegree;
             }
             TickType_t StartTick = xTaskGetTickCount();
@@ -190,7 +190,8 @@ void Area2_State_Task(void *argument)
             do {
                 TickType_t CurrentTick = xTaskGetTickCount();
                 float current_time     = (CurrentTick - StartTick) * 1.0 / 1000.0;
-                VelocityPlanning(initial_pos02[0],1500, 75, Core_xy[1].gantry_t.position.x, current_time, &(current_pos02[0]));
+                if(UseLidar02==1)  VelocityPlanning(initial_pos02[0],1500, 75, Core_xy[1].gantry_t.position.x, current_time, &(current_pos02[0]));
+                else VelocityPlanning(initial_pos02[0], 3000, 400, Core_xy[1].gantry_t.position.x, current_time, &(current_pos02[0]));
                 diff[0] = fabs(Core_xy[1].gantry_t.position.x - current_pos02[0]);
                 if (diff[0] < 0.01) { isArray2 = 1; }
             } while (!isArray2);
@@ -215,11 +216,11 @@ void Area2_State_Task(void *argument)
                     TickType_t CurrentTick = xTaskGetTickCount();
                     float current_time     = (CurrentTick - StartTick) * 1.0 / 1000.0;
                     VelocityPlanning(initial_pos02[0], X_maxvelocity, X_Acceleration, Core_xy[1].gantry_t.position.x, current_time, &(current_pos02[0]));
-                    diff[0] = fabs(Core_xy[0].gantry_t.position.x - current_pos01[0]);
+                    diff[0] = fabs(Core_xy[1].gantry_t.position.x - current_pos02[0]);
                     if ((diff[0] < 0.01)) { isArray1 = 1; }
 
                 } while (!isArray1);
-                pid_reset(&(Core_xy[0].Motor_X->speedPID), 0, 0, 0);
+                pid_reset(&(Core_xy[1].Motor_X->speedPID), 0, 0, 0);
                 stateflag = 8;
         }
     }else{

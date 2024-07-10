@@ -201,7 +201,7 @@ void Area1_State_Task(void *argument)
                 UseLidar01 = 1;        //稍微检验一下雷达是否异常 将雷达标志位置一
                 pid_reset(&(Core_xy[0].Motor_X->posPID), -250, 0, 0);
                 Core_xy[0]
-                    .gantry_t.position.x       = 86;
+                    .gantry_t.position.x       = 83;
                 initial_pos01[0]               = Lidar2.distance_aver; // 电机轴输出角度 单位 度°
             }else{
                 Core_xy[0].gantry_t.position.x = 7200;
@@ -224,6 +224,7 @@ void Area1_State_Task(void *argument)
             } while (!isArray1);
             osDelay(100);
             pid_reset(&(Core_xy[0].Motor_X->speedPID), 0, 0, 0);
+            osDelay(500);
             HAL_GPIO_WritePin(Electromagnet01_GPIO_Port, Electromagnet01_Pin, 0);
             stateflag = 7;
         } else if (stateflag == 7) {
