@@ -23,11 +23,15 @@ void StartDefaultTask(void *argument)
     {
         ;       //若未收到上位机数据则一直循环
     }
-    
+    HAL_GPIO_WritePin(Cylinder02_GPIO_Port, Cylinder02_Pin, 1);
+    HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 1);
+    osDelay(1000);
+    HAL_GPIO_WritePin(Cylinder02_GPIO_Port, Cylinder02_Pin, 0);
+    HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 0);
     /*初始化函数*/
     Core_xy_Motor_init();
     /*开启线程*/
-    // Area1_StateMachine_Start();
+     Area1_StateMachine_Start();
     // Area2_StateMachine_Start();
     // Area3_StateMachine_Start();
     Upper_Servo_Start();
@@ -43,10 +47,10 @@ void StartDefaultTask(void *argument)
         //        Core_xy[2].Motor_X->posPID.output,
         //        Core_xy[2].Motor_X->FdbData.rpm);
         printf("%f,%f,%f,%f,%f,%f,%f\n",
-               current_pos02[0],
-               Core_xy[1].Motor_X->AxisData.AxisAngle_inDegree,
-               current_pos02[1],
-               Core_xy[1].Motor_Y->AxisData.AxisAngle_inDegree,
+               current_pos01[0],
+               Core_xy[0].Motor_X->AxisData.AxisAngle_inDegree,
+               current_pos01[1],
+               Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree,
                angle_memory02weight,
                angle_memory02ytree,
                Lidar6.distance_aver);

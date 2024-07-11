@@ -3,7 +3,7 @@
  * @Author: ZYT
  * @Date: 2024-06-06 12:03:15
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-09 22:59:25
+ * @LastEditTime: 2024-07-11 17:05:07
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Area1State.c
  * @Brief: 
  * 
@@ -69,7 +69,7 @@ void Area1_State_Task(void *argument)
                 {
                     Core_xy[0].gantry_t.position.y = angle_memory01weight - Y_offset01;
                 }else{
-                    Core_xy[0].gantry_t.position.y = -2950;
+                    Core_xy[0].gantry_t.position.y = -2905;
                 }
                     TickType_t StartTick           = xTaskGetTickCount();
                     initial_pos01[1]               = Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°
@@ -174,7 +174,7 @@ void Area1_State_Task(void *argument)
             if (detect01ytree==0){
                 Core_xy[0].gantry_t.position.y = angle_memory01ytree -  Y_offset02;
             }else{
-                Core_xy[0].gantry_t.position.y = -3200;
+                Core_xy[0].gantry_t.position.y = -3822;
             }
             detect01ytree                  = 2;
             TickType_t StartTick           = xTaskGetTickCount();
@@ -201,10 +201,10 @@ void Area1_State_Task(void *argument)
                 UseLidar01 = 1;        //稍微检验一下雷达是否异常 将雷达标志位置一
                 pid_reset(&(Core_xy[0].Motor_X->posPID), -250, 0, 0);
                 Core_xy[0]
-                    .gantry_t.position.x       = 83;
+                    .gantry_t.position.x       = 79;
                 initial_pos01[0]               = Lidar2.distance_aver; // 电机轴输出角度 单位 度°
             }else{
-                Core_xy[0].gantry_t.position.x = 7200;
+                Core_xy[0].gantry_t.position.x = 7440;
                 initial_pos01[0]               = Core_xy[0].Motor_X->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°
             }
             pid_reset(&(Core_xy[0].Motor_X->speedPID), 5, 0.4, 0.8);
@@ -216,10 +216,11 @@ void Area1_State_Task(void *argument)
             do {
                 TickType_t CurrentTick = xTaskGetTickCount();
                 float current_time     = (CurrentTick - StartTick) * 1.0 / 1000.0;
-            //看这个参数合不合适 不合适再用标志位换一个
+            if(UseLidar01==1)
                 VelocityPlanning(initial_pos01[0], 1000, 50, Core_xy[0].gantry_t.position.x, current_time, &(current_pos01[0]));
-                diff[0] = fabs(Core_xy[0].gantry_t.position.x - current_pos01[0]);
-                if ((diff[0] < 0.01)) { isArray1 = 1; }
+            else VelocityPlanning(initial_pos01[0], 4000, 500, Core_xy[0].gantry_t.position.x, current_time, &(current_pos01[0]));
+            diff[0] = fabs(Core_xy[0].gantry_t.position.x - current_pos01[0]);
+            if ((diff[0] < 0.01)) { isArray1 = 1; }
 
             } while (!isArray1);
             osDelay(100);
