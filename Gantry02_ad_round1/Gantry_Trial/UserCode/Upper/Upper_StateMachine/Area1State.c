@@ -3,7 +3,7 @@
  * @Author: ZYT
  * @Date: 2024-06-06 12:03:15
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-11 16:41:15
+ * @LastEditTime: 2024-07-14 21:18:07
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Area1State.c
  * @Brief: 
  * 
@@ -35,7 +35,7 @@ float current_pos01[2];
 
 void Area1_State_Task(void *argument)
 {
-    weight_placement[2] = 1; // 到时直接换成weight_detect[]就好
+    //weight_placement[0] = 1; // 到时直接换成weight_detect[]就好
     osDelay(100);
     uint16_t stateflag = 0;
     uint16_t statechoose = Check_LidarStatus(Lidar1,Lidar2);
@@ -44,7 +44,7 @@ void Area1_State_Task(void *argument)
         if(1){        /*雷达状态正确*/
         if (stateflag == 0) // 在y轴上走半段，测出砝码的y轴位置
         {
-            if(weight_placement[2]==1){
+            if(weight_placement[0]==1){
                 Core_xy[0].gantry_t.position.y = 3400;  //2950
                 TickType_t StartTick           = xTaskGetTickCount();
                 initial_pos01[1]               = Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°
@@ -64,7 +64,7 @@ void Area1_State_Task(void *argument)
             }
                 stateflag = 1;
         }else if(stateflag==1){
-            if(weight_placement[2]==1){
+            if(weight_placement[0]==1){
                 if(detect01_weight==0)
                 {
                     Core_xy[0].gantry_t.position.y = angle_memory01weight+Y_offset01;
@@ -100,7 +100,7 @@ void Area1_State_Task(void *argument)
 
             pid_reset(&(Core_xy[0].Motor_X->speedPID), 5, 0.4, 0.8);
 
-            if (weight_placement[2] == 0) { Core_xy[0].gantry_t.position.x = -400; } // 往前拖行一段
+            if (weight_placement[0] == 0) { Core_xy[0].gantry_t.position.x = -400; } // 往前拖行一段
             else {
                 Core_xy[0].gantry_t.position.x = -2300;
             } // 往前拖行一段

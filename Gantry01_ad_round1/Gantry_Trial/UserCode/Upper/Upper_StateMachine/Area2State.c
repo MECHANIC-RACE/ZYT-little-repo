@@ -22,7 +22,7 @@ float current_pos02[2];
 
 void Area2_State_Task(void *argument)
 {
-    weight_placement[3] = 1;
+    //weight_placement[1] = 1;
     osDelay(100);
     uint16_t stateflag = 0;
     uint16_t statechoose = Check_LidarStatus(Lidar3, Lidar6);       //检查雷达状态的函数是失败的
@@ -31,7 +31,7 @@ void Area2_State_Task(void *argument)
     if(1){      /*雷达状态正常*/
         if (stateflag == 0) 
         {
-            if(weight_placement[3]==1){
+            if(weight_placement[1]==1){
                 Core_xy[1].gantry_t.position.y = 3200;  //-2824.0
                 TickType_t StartTick           = xTaskGetTickCount();
                 initial_pos02[1]                 = Core_xy[1].Motor_Y->AxisData.AxisAngle_inDegree;
@@ -86,7 +86,7 @@ void Area2_State_Task(void *argument)
 
                 pid_reset(&(Core_xy[1].Motor_X->speedPID), 5, 0.4, 0.8);
 
-                if (weight_placement[3] == 0) { Core_xy[1].gantry_t.position.x = 200; } // 往前拖行一段
+                if (weight_placement[1] == 0) { Core_xy[1].gantry_t.position.x = 200; } // 往前拖行一段
                 else {
                     Core_xy[1].gantry_t.position.x = 2300;
                 } // 往前拖行一段

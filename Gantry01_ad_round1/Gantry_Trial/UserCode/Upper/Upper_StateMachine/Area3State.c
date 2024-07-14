@@ -10,8 +10,8 @@
  */
 #include "Area3State.h"
 
-#define X_maxvelocity  3000 
-#define X_Acceleration 1000
+#define X_maxvelocity  4000 
+#define X_Acceleration 2000
 
 float initial_pos03[1];
 float current_pos03[1];
@@ -26,12 +26,12 @@ void Area3_State_Task(void *argument)
 
         if (stateflag == 0) 
         {
-            if (weight_placement[4] == 0)                                         // 在外圈
-            {
+            // if (weight_placement[4] == 0)                                         // 在外圈
+            // {
                 Core_xy[2].gantry_t.position.x = 3200; //?待定
-            }else{
-                Core_xy[2].gantry_t.position.x = 6000;
-            }
+            // }else{
+            //     Core_xy[2].gantry_t.position.x = 6000;
+            // }
                 TickType_t StartTick           = xTaskGetTickCount();
                 initial_pos03[0]               = Core_xy[2].Motor_X->AxisData.AxisAngle_inDegree;
                 _Bool isArray1                 = 0;
@@ -53,13 +53,13 @@ void Area3_State_Task(void *argument)
         } else if (stateflag == 1) //往前走一小段，抬起气缸
         {
             pid_reset(&(Core_xy[2].Motor_X->speedPID), 5, 0.4, 0.8);
-            if (weight_placement[4] == 0) // 在外圈
-            {
-                Core_xy[2].gantry_t.position.x = 3720; 
-            }
-            else{
+            // if (weight_placement[4] == 0) // 在外圈
+            // {
+            //     Core_xy[2].gantry_t.position.x = 3720; 
+            // }
+            // else{
                 Core_xy[2].gantry_t.position.x = 6745;
-            }
+            //}
             TickType_t StartTick           = xTaskGetTickCount();
             initial_pos03[0]               = Core_xy[2].Motor_X->AxisData.AxisAngle_inDegree; 
             _Bool isArray1                 = 0;

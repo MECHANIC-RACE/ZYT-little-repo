@@ -1,3 +1,13 @@
+/*
+ * @Author: ZYT
+ * @Date: 2024-07-09 19:34:26
+ * @LastEditors: ZYT
+ * @LastEditTime: 2024-07-13 19:03:40
+ * @FilePath: \Gantry_Trial\UserCode\Config\ParamDef.h
+ * @Brief: 
+ * 
+ * Copyright (c) 2024 by zyt, All Rights Reserved. 
+ */
 
 #ifndef __PARAMDEF_H__
 #define __PARAMDEF_H__
@@ -61,8 +71,8 @@ extern LidarPointTypedef Lidar4;
 extern LidarPointTypedef Lidar6;
 
 extern uint16_t inner_ring_flag;
-extern uint8_t receive_buffer[24];
-extern float weight_placement[5];
+extern uint8_t receive_buffer[12];
+extern float weight_placement[2];
 extern uint16_t Uart_State;
 
 extern float angle_memory01xtree;

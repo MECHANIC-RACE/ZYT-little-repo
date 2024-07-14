@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-05-19 14:41:19
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-09 22:06:25
+ * @LastEditTime: 2024-07-14 21:24:15
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_Start\UpperStart.c
  * @Brief: 
  * 
@@ -14,15 +14,15 @@
 void StartDefaultTask(void *argument)
 {
     /*等待树莓派数据*/
-    Uart_State = 2;
+    Uart_State = 0;
     RaspReceive_Enable();
     /*串口使能*/
     Usart_start();
     UsartUpdate_Start();
-    while(Uart_State!=2)
-    {
-        ;       //若未收到上位机数据则一直循环
-    }
+    // while(Uart_State!=2)
+    // {
+    //     ;       //若未收到上位机数据则一直循环
+    // }
     HAL_GPIO_WritePin(Cylinder02_GPIO_Port, Cylinder02_Pin, 1);
     HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 1);
     osDelay(1000);
@@ -46,14 +46,15 @@ void StartDefaultTask(void *argument)
         //        Core_xy[2].Motor_X->speedPID.output,
         //        Core_xy[2].Motor_X->posPID.output,
         //        Core_xy[2].Motor_X->FdbData.rpm);
-        printf("%f,%f,%f,%f,%f,%f\n",
-              current_pos01[0],
-               current_pos01[1],
-               angle_memory02weight,
-               angle_memory02ytree,
-               Lidar6.distance_aver,
-               Lidar2.distance_aver
-               );
+        // printf("%f,%f,%f,%f,%f,%f\n",
+        //       current_pos01[0],
+        //        current_pos01[1],
+        //        angle_memory02weight,
+        //        angle_memory02ytree,
+        //        Lidar6.distance_aver,
+        //        Lidar2.distance_aver
+        //        );
+        printf("%f,%f,%d\n", weight_placement[0], weight_placement[1], Uart_State);
 
         osDelay(50);
     }

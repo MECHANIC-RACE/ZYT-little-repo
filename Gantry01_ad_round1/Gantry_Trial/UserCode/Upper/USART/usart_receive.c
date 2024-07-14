@@ -24,8 +24,8 @@ uint8_t usart4_rx[1];
 uint8_t usart6_rx[1];
 /*********************STP_23L***********************/
 /*********************Ras_pi************************/
-uint8_t receive_buffer[24];
-float weight_placement[5] = {0};
+uint8_t receive_buffer[12];
+float weight_placement[2] = {0};
 void Upper_Target_Decode();
 /*********************Ras_pi************************/
 
@@ -150,38 +150,38 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
         HAL_UART_Receive_IT(&huart6, usart6_rx, 1);
     }
 
+    // if (huart->Instance == UART4) {
+    //     static uint16_t u4state = 0; // 状态机计数
+    //     static uint16_t crc4    = 0; // 校验和
+    //     uint8_t tmp4            = usart4_rx[0];
+    //     if (u4state < 4) {
+    //         if (tmp4 == 0xAA) {
+    //             Rxbuffer_4[u4state] = tmp4;
+    //             u4state++;
+
+    //         } else {
+    //             u4state = 0;
+    //         }
+    //     } else if (u4state < 194) {
+    //         Rxbuffer_4[u4state] = tmp4;
+    //         u4state++;
+    //         crc4 += tmp4;
+    //     } else if (u4state == 194) {
+    //         Rxbuffer_4[u4state] = tmp4;
+    //         if (tmp4 == crc4 % 256) {
+    //             UartFlag[4] = 1;
+    //         }
+    //         u4state = 0;
+    //         crc4    = 0;
+    //     } else {
+    //     };
+
+    //     HAL_UART_Receive_IT(&huart4, usart4_rx, 1);
+    // }
+
     if (huart->Instance == UART4) {
-        static uint16_t u4state = 0; // 状态机计数
-        static uint16_t crc4    = 0; // 校验和
-        uint8_t tmp4            = usart4_rx[0];
-        if (u4state < 4) {
-            if (tmp4 == 0xAA) {
-                Rxbuffer_4[u4state] = tmp4;
-                u4state++;
-
-            } else {
-                u4state = 0;
-            }
-        } else if (u4state < 194) {
-            Rxbuffer_4[u4state] = tmp4;
-            u4state++;
-            crc4 += tmp4;
-        } else if (u4state == 194) {
-            Rxbuffer_4[u4state] = tmp4;
-            if (tmp4 == crc4 % 256) {
-                UartFlag[4] = 1;
-            }
-            u4state = 0;
-            crc4    = 0;
-        } else {
-        };
-
-        HAL_UART_Receive_IT(&huart4, usart4_rx, 1);
-    }
-
-    if (huart->Instance == UART5) {
-        UartFlag[5] = 0;
-        HAL_UART_Receive_IT(&huart5, receive_buffer, sizeof(receive_buffer));
+        UartFlag[5] = 1;
+        HAL_UART_Receive_IT(&huart4, receive_buffer, sizeof(receive_buffer));
     }
 }
 // void HAL_UART_ErrorCallback(UART_HandleTypeDef *uartHandle)
@@ -198,16 +198,16 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 void Upper_Target_Decode()
 {
     static union {
-        uint8_t data[20];
-        float weight_state[5];
+        uint8_t data[8];
+        float weight_state[2];
     } state;
-
-    if ((receive_buffer[0] == 0xFF) && (receive_buffer[1] == 0xFE) && (receive_buffer[22] == 0xFE) && (receive_buffer[23] == 0xFF)) {
-        for (int i = 0; i < 20; i++) {
+ //   osDelay(1000);
+    if ((receive_buffer[0] == 0xFF) && (receive_buffer[1] == 0xFE) && (receive_buffer[10] == 0xFE) && (receive_buffer[11] == 0xFF)) {
+        for (int i = 0; i < 8; i++) {
             state.data[i] = receive_buffer[i + 2];
         }
 
-        for (int t = 0; t < 5; t++) {
+        for (int t = 0; t < 2; t++) {
             weight_placement[t] = state.weight_state[t];
         }
     }

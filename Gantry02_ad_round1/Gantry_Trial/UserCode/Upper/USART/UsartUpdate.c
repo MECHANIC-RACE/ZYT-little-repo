@@ -1,8 +1,10 @@
+#pragma GCC push_options
+#pragma GCC optimize(0)
 
 #include "UsartUpdate.h"
 #include "UpperStart.h"
 
-uint16_t Uart_State = 0;
+uint16_t Uart_State;
 uint16_t detect01xtree_cnt;
 uint16_t detect01ytree_cnt;
 uint16_t detect01weight_cnt;
@@ -20,7 +22,7 @@ void UartUpdateTask(void *argument)
 {
     /* USER CODE BEGIN UartUpdateTask */
     
-    float weight_placement_tmp[5] = {0};
+    float weight_placement_tmp[2] = {0};
     int switch_flag               = 0; // 判断每次接收到的数组与基准数组是否相等
     int tar_count                 = 0; // 计数连续相同数组的次数
     // osDelay(100);
@@ -32,7 +34,7 @@ void UartUpdateTask(void *argument)
         {
             if (UartFlag[5] == 1) {
                 Upper_Target_Decode();
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < 2; i++) {
                     weight_placement_tmp[i] = weight_placement[i];
                 }
                 UartFlag[5]   = 0;
@@ -47,7 +49,7 @@ void UartUpdateTask(void *argument)
                         UartFlag[5]     = 0;
                         switch_flag = 0;
 
-                        for (int i = 0; i < 5; i++) {
+                        for (int i = 0; i < 2; i++) {
                             if (weight_placement_tmp[i] != weight_placement[i]) {
                                 switch_flag = 1;
                                 break;
@@ -61,7 +63,7 @@ void UartUpdateTask(void *argument)
                         // 收到的数组与基准数组不相等
                         else {
                             tar_count = 1; // 重新计数
-                            for (int i = 0; i < 5; i++) {
+                            for (int i = 0; i < 2; i++) {
                                 weight_placement_tmp[i] = weight_placement[i];
                             }
                         }
@@ -69,7 +71,7 @@ void UartUpdateTask(void *argument)
                         // 如果连续十次接收到同样的数组，则把这个数组设置为最终值
                         if (tar_count >= 10) {
                             Uart_State = 2;
-                            __HAL_UART_DISABLE_IT(&huart5, UART_IT_RXNE);
+                           // __HAL_UART_DISABLE_IT(&huart4, UART_IT_RXNE);
                         }
                     }
                     osDelay(2);
@@ -115,23 +117,23 @@ void UartUpdateTask(void *argument)
         }
         if (UartFlag[3]) {
             STP_23L_Decode(Rxbuffer_6, &Lidar6);
-            if (detect02_weight == 1 && Lidar6.distance_aver < 300 &&Lidar6.distance_aver>100) detect02weight_cnt++;
+            if (detect02_weight == 1 && Lidar6.distance_aver < 350 &&Lidar6.distance_aver>100) detect02weight_cnt++;
 
             if (detect02_weight == 1 && detect02weight_cnt == 5) { // 写1风险是比较大的
                 detect02_weight      = 0;                          // 如果为0说明置数成功，否则就是没有识别上
                 angle_memory02weight = Core_xy[1].Motor_Y->AxisData.AxisAngle_inDegree;
             }
-            if (detect02ytree == 1 && Lidar6.distance_aver < 250 && Lidar6.distance_aver > 50) detect02ytree_cnt++;          /*这个范围内的数可能会很多，不知道可不可行*/
+            if (detect02ytree == 1 && Lidar6.distance_aver < 200 && Lidar6.distance_aver > 50) detect02ytree_cnt++;          /*这个范围内的数可能会很多，不知道可不可行*/
             if (detect02ytree == 1 && detect02ytree_cnt == 3) {
                 detect02ytree       = 0;
                 angle_memory02ytree = Core_xy[1].Motor_Y->AxisData.AxisAngle_inDegree;
             }
             UartFlag[3] = 0;
         }
-        if (UartFlag[4]) {
-            STP_23L_Decode(Rxbuffer_4, &Lidar4);
-            UartFlag[4] = 0;
-        }
+        // if (UartFlag[4]) {
+        //     STP_23L_Decode(Rxbuffer_4, &Lidar4);
+        //     UartFlag[4] = 0;
+        // }
         osDelay(2);
         }
     }
@@ -143,7 +145,7 @@ void UsartUpdate_Start()
     osThreadId_t UsartUpdateHandle;
     const osThreadAttr_t UsartUpdate_attributes = {
         .name       = "UsartUpdate",
-        .stack_size = 128 * 4,
+        .stack_size = 128 * 10,
         .priority   = (osPriority_t)osPriorityAboveNormal,
     };
     UsartUpdateHandle = osThreadNew(UartUpdateTask, NULL, &UsartUpdate_attributes);
@@ -155,21 +157,21 @@ void Usart_start()
     HAL_UART_Receive_IT(&huart2, usart2_rx, 1);
     HAL_UART_Receive_IT(&huart3, usart3_rx, 1);
     HAL_UART_Receive_IT(&huart6, usart6_rx, 1);
-    HAL_UART_Receive_IT(&huart4, usart4_rx, 1);
+    //HAL_UART_Receive_IT(&huart4, usart4_rx, 1);
 
     // HAL_UART_Receive_DMA(&huart1, usart1_rx, 1);
     // HAL_UART_Receive_DMA(&huart2, usart2_rx, 1);
     // HAL_UART_Receive_DMA(&huart3, usart3_rx, 1);
     // HAL_UART_Receive_DMA(&huart6, usart6_rx, 1);
     /*2，3，6串口的使能函数*/
-    __HAL_UART_ENABLE(&huart5);//到时串口5将被用作树莓派接收
+    // __HAL_UART_ENABLE(&huart5);
    
 }
 
 
 void RaspReceive_Enable()
 {
-    HAL_UART_Receive_IT(&huart5, receive_buffer, sizeof(receive_buffer));
+    HAL_UART_Receive_IT(&huart4, receive_buffer, sizeof(receive_buffer));
 }
 
 uint16_t Check_LidarStatus(LidarPointTypedef lidara, LidarPointTypedef lidarb)
@@ -195,3 +197,5 @@ uint16_t Check_LidarStatus(LidarPointTypedef lidara, LidarPointTypedef lidarb)
     else
         return 1;                            //OK状态
 }
+
+#pragma GCC pop_options
