@@ -14,17 +14,20 @@
 void StartDefaultTask(void *argument)
 {
     /*等待树莓派数据*/
-    //RaspReceive_Enable();
+    HAL_GPIO_WritePin(Cylinder02_GPIO_Port, Cylinder02_Pin, 1);
+    HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 1);
+    osDelay(1000);
+
+    // RaspReceive_Enable();
     /*串口使能*/
     Usart_start();
 
-    Uart_State = 2; //后续要删！
-    
+    Uart_State = 2; // 后续要删！
+
     __HAL_UART_ENABLE(&huart5);
     UsartUpdate_Start();
-    while(Uart_State!=2)
-    {
-        ;       //若未收到上位机数据则一直循环
+    while (Uart_State != 2) {
+        ; // 若未收到上位机数据则一直循环
     }
 
     /*初始化函数*/
@@ -40,11 +43,11 @@ void StartDefaultTask(void *argument)
     for (;;) {
 
         printf("%f,%f,%f,%f,%f\n",
-               Lidar1.distance_aver,
-               Core_xy[2].Motor_X->speedPID.output,
-               current_pos03[0],
-               Core_xy[2].Motor_X->posPID.output,
-               Core_xy[2].Motor_X->FdbData.rpm);
+               Lidar6.distance_aver,
+               Core_xy[1].Motor_X->speedPID.output,
+               current_pos02[0],
+               Core_xy[1].Motor_X->posPID.output,
+               Core_xy[1].Motor_X->FdbData.rpm);
         // printf("%f,%f,%f,%f\n",
         //        Lidar4.distance_aver,
         //        current_pos03[0],

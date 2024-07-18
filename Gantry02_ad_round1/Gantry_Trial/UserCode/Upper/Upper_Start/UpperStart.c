@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-05-19 14:41:19
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-14 21:24:15
+ * @LastEditTime: 2024-07-18 15:03:51
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_Start\UpperStart.c
  * @Brief: 
  * 
@@ -14,7 +14,7 @@
 void StartDefaultTask(void *argument)
 {
     /*等待树莓派数据*/
-    Uart_State = 0;
+    //Uart_State = 2;
     RaspReceive_Enable();
     /*串口使能*/
     Usart_start();
@@ -23,16 +23,15 @@ void StartDefaultTask(void *argument)
     // {
     //     ;       //若未收到上位机数据则一直循环
     // }
-    HAL_GPIO_WritePin(Cylinder02_GPIO_Port, Cylinder02_Pin, 1);
-    HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 1);
-    osDelay(1000);
-    HAL_GPIO_WritePin(Cylinder02_GPIO_Port, Cylinder02_Pin, 0);
-    HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 0);
+    osDelay(3000);
+    // HAL_GPIO_WritePin(Cylinder02_GPIO_Port, Cylinder02_Pin, 1);
+    // HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 1);
+    
     /*初始化函数*/
     Core_xy_Motor_init();
     /*开启线程*/
       Area1_StateMachine_Start();
-    //  Area2_StateMachine_Start();
+      Area2_StateMachine_Start();
     // Area3_StateMachine_Start();
     Upper_Servo_Start();
     //HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 1);
@@ -46,15 +45,14 @@ void StartDefaultTask(void *argument)
         //        Core_xy[2].Motor_X->speedPID.output,
         //        Core_xy[2].Motor_X->posPID.output,
         //        Core_xy[2].Motor_X->FdbData.rpm);
-        // printf("%f,%f,%f,%f,%f,%f\n",
-        //       current_pos01[0],
-        //        current_pos01[1],
-        //        angle_memory02weight,
-        //        angle_memory02ytree,
-        //        Lidar6.distance_aver,
-        //        Lidar2.distance_aver
-        //        );
-        printf("%f,%f,%d\n", weight_placement[0], weight_placement[1], Uart_State);
+        printf("%f,%f,%f,%f,%f,%f\n",
+               current_pos02[0],
+               current_pos01[0],
+               Core_xy[1].Motor_X->AxisData.AxisAngle_inDegree,
+               Core_xy[1].Motor_X->AxisData.AxisVelocity,
+               Core_xy[1].Motor_X->posPID.output,
+               Lidar6.distance_aver);
+        //printf("%f,%f,%d\n", weight_placement[0], weight_placement[1], Uart_State);
 
         osDelay(50);
     }

@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-06-06 12:03:15
  * @LastEditors: ZYT
- * @LastEditTime: 2024-06-11 23:03:35
+ * @LastEditTime: 2024-07-16 22:16:29
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Area3State.c
  * @Brief: 
  * 
@@ -10,8 +10,8 @@
  */
 #include "Area3State.h"
 
-#define X_maxvelocity  4000 
-#define X_Acceleration 2000
+#define X_maxvelocity  6000 
+#define X_Acceleration 3000
 
 float initial_pos03[1];
 float current_pos03[1];
@@ -48,7 +48,7 @@ void Area3_State_Task(void *argument)
                 osDelay(50);
                 pid_reset(&(Core_xy[2].Motor_X->speedPID), 0, 0, 0);
                 osDelay(50);
-                HAL_GPIO_WritePin(Cylinder03_GPIO_Port, Cylinder03_Pin, 1);
+                HAL_GPIO_WritePin(Cylinder03_GPIO_Port, Cylinder03_Pin, 0);
                 HAL_GPIO_WritePin(Electromagnet03_GPIO_Port, Electromagnet03_Pin, 1); // 放下气缸，打开电磁铁
         } else if (stateflag == 1) //往前走一小段，抬起气缸
         {
@@ -76,13 +76,13 @@ void Area3_State_Task(void *argument)
             osDelay(100);
             pid_reset(&(Core_xy[2].Motor_X->speedPID), 0, 0, 0);
             osDelay(100);
-            HAL_GPIO_WritePin(Cylinder03_GPIO_Port, Cylinder03_Pin, 0);
+            HAL_GPIO_WritePin(Cylinder03_GPIO_Port, Cylinder03_Pin, 1);
             osDelay(50);
             stateflag = 2;
             // osDelay(2);
     }else if(stateflag==2){     //前往木桩
         pid_reset(&(Core_xy[2].Motor_X->speedPID), 5, 0.4, 0.8);
-        Core_xy[2].gantry_t.position.x = 9500;
+        Core_xy[2].gantry_t.position.x = 9600;
         TickType_t StartTick = xTaskGetTickCount();
         initial_pos03[0]     = Core_xy[2].Motor_X->AxisData.AxisAngle_inDegree;
         _Bool isArray1       = 0;

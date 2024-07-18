@@ -22,13 +22,13 @@ void Upper_Servo_Task(void *argument)
         }
         positionServo(current_pos01[1], Core_xy[0].Motor_Y);
         
-        // if (UseLidar02 == 1) {
-        //     positionServo_lidar(current_pos02[0], Core_xy[1].Motor_X, Lidar6);
-        // } else {
-        //     positionServo(current_pos02[0], Core_xy[1].Motor_X);
-        // }
-        //     positionServo(current_pos02[1], Core_xy[1].Motor_Y);
-        //    positionServo(current_pos03[0], Core_xy[2].Motor_X);
+        if (UseLidar02 == 1) {
+            positionServo_lidar(current_pos02[0], Core_xy[1].Motor_X, Lidar6);
+        } else {
+            positionServo(current_pos02[0], Core_xy[1].Motor_X);
+        }
+            positionServo(current_pos02[1], Core_xy[1].Motor_Y);
+            positionServo(current_pos03[0], Core_xy[2].Motor_X);
 
             // positionServo(-18670, Core_xy[1].Motor_X);
             // positionServo(-3000, Core_xy[1].Motor_Y);

@@ -22,12 +22,12 @@ void Upper_Servo_Task(void *argument)
         }
         positionServo(current_pos01[1], Core_xy[0].Motor_Y);
         
-        // if (UseLidar02 == 1) {
-        //     positionServo_lidar(current_pos02[0], Core_xy[1].Motor_X, Lidar6);
-        // } else {
-        //     positionServo(current_pos02[0], Core_xy[1].Motor_X);
-        // }
-        //     positionServo(current_pos02[1], Core_xy[1].Motor_Y);
+        if (UseLidar02 == 1) {
+            positionServo_lidar(current_pos02[0], Core_xy[1].Motor_X, Lidar6);
+        } else {
+            positionServo(current_pos02[0], Core_xy[1].Motor_X);
+        }
+            positionServo(current_pos02[1], Core_xy[1].Motor_Y);
 
             //positionServo(18670, Core_xy[1].Motor_X);
             //positionServo(3000, Core_xy[1].Motor_Y);
@@ -85,11 +85,11 @@ void Core_xy_Motor_init()               //电机初始化
     pid_reset(&(Core_xy[2].Motor_X->speedPID), 5, 0.4, 0.8);
    
 
-    pid_reset(&(Core_xy[0].Motor_X->posPID), 250, 0, 0);
+    pid_reset(&(Core_xy[0].Motor_X->posPID), 200, 0, 0);
     pid_reset(&(Core_xy[0].Motor_Y->posPID), 200, 0, 0);
-    pid_reset(&(Core_xy[1].Motor_X->posPID), 300, 0, 0);
+    pid_reset(&(Core_xy[1].Motor_X->posPID), 200, 0, 0);
     pid_reset(&(Core_xy[1].Motor_Y->posPID), 200, 0, 0);
-    pid_reset(&(Core_xy[2].Motor_X->posPID), 250, 0, 0);
+    pid_reset(&(Core_xy[2].Motor_X->posPID), 200, 0, 0);
 
     Core_xy[0].Motor_X->posPID.outputMax = 20000;
     Core_xy[0].Motor_Y->posPID.outputMax = 15000;

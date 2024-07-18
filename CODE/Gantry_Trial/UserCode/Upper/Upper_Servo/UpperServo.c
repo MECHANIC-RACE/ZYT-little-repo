@@ -22,7 +22,7 @@ void Upper_Servo_Task(void *argument)
       
 
         
-        //speedServo(15000, Core_xy[1].Motor_X);//正的时候往前走指远离中心
+        speedServo(-20000, Core_xy[1].Motor_X);//正的时候往前走指远离中心
         //speedServo(-10000, Core_xy[1].Motor_Y);   //正的时候往左走
         //speedServo(-5000, Core_xy[2].Motor_X);  //正的时候往后走
 
