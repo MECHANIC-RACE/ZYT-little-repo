@@ -57,6 +57,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define Reset_Pin GPIO_PIN_7
+#define Reset_GPIO_Port GPIOE
 #define Cylinder01_Pin GPIO_PIN_13
 #define Cylinder01_GPIO_Port GPIOB
 #define Electromagnet01_Pin GPIO_PIN_14

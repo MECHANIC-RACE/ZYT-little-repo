@@ -1,4 +1,5 @@
 #include "Area2State.h"
+osThreadId_t Area2_StateHandle;
 
 #define X_maxvelocity  5000 // 
 #define Y_maxvelocity  6000 // du/s
@@ -254,7 +255,6 @@ void Area2_State_Task(void *argument)
 
 void Area2_StateMachine_Start(void)
 {
-    osThreadId_t Area2_StateHandle;
     const osThreadAttr_t Area2_State_attributes = {
         .name       = "Area2_State",
         .stack_size = 128 * 10,

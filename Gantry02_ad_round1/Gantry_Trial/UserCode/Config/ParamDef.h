@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-07-07 21:23:02
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-14 19:12:29
+ * @LastEditTime: 2024-07-19 13:24:53
  * @FilePath: \Gantry_Trial\UserCode\Config\ParamDef.h
  * @Brief: 
  * 
@@ -93,5 +93,9 @@ extern uint16_t detect02_weight;
 
 extern uint16_t UseLidar01;
 extern uint16_t UseLidar02;
+
+extern osThreadId_t Area1_StateHandle;
+extern osThreadId_t Area2_StateHandle;
+
 
 #endif // __PARAMDEF_H__

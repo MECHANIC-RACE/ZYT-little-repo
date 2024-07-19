@@ -9,6 +9,7 @@
  * Copyright (c) 2024 by zyt, All Rights Reserved. 
  */
 #include "Area3State.h"
+osThreadId_t Area3_StateHandle;
 
 #define X_maxvelocity  6000 
 #define X_Acceleration 3000
@@ -127,7 +128,6 @@ void Area3_State_Task(void *argument)
 
 void Area3_StateMachine_Start(void)
 {
-    osThreadId_t Area3_StateHandle;
     const osThreadAttr_t Area3_State_attributes = {
         .name       = "Area3_State",
         .stack_size = 128 * 10,

@@ -3,7 +3,7 @@
  * @Author: ZYT
  * @Date: 2024-06-06 12:03:15
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-18 14:55:40
+ * @LastEditTime: 2024-07-19 14:16:24
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Area1State.c
  * @Brief: 
  * 
@@ -11,6 +11,7 @@
  */
 
 #include "Area1State.h"
+osThreadId_t Area1_StateHandle;
 
 #define X_maxvelocity 6000   //396  390-600都可，不过时间差不多，而且到后面就有点贴不上了
 #define Y_maxvelocity 6000   //264.5 
@@ -282,7 +283,6 @@ void Area1_State_Task(void *argument)
 
 void Area1_StateMachine_Start(void)
 {
-    osThreadId_t Area1_StateHandle;
     const osThreadAttr_t Area1_State_attributes = {
         .name       = "Area1_State",
         .stack_size = 128 * 20,

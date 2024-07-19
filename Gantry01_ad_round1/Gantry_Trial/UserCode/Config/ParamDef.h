@@ -94,4 +94,8 @@ extern uint16_t detect02_weight;
 extern uint16_t UseLidar01;
 extern uint16_t UseLidar02;
 
+extern osThreadId_t Area1_StateHandle;
+extern osThreadId_t Area2_StateHandle;
+extern osThreadId_t Area3_StateHandle;
+
 #endif // __PARAMDEF_H__

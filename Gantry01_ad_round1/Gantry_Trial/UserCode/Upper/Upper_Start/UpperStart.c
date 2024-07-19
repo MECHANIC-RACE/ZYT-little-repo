@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-05-19 14:41:19
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-19 01:42:56
+ * @LastEditTime: 2024-07-19 14:18:35
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_Start\UpperStart.c
  * @Brief: 
  * 
@@ -22,11 +22,11 @@ void StartDefaultTask(void *argument)
     osDelay(3000);
     // HAL_GPIO_WritePin(Cylinder02_GPIO_Port, Cylinder02_Pin, 1);
     // HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 1);
-     HAL_GPIO_WritePin(Cylinder03_GPIO_Port, Cylinder03_Pin, 1);
-     HAL_GPIO_WritePin(Electromagnet01_GPIO_Port, Electromagnet01_Pin, 1);
+     
      /*初始化函数*/
      Core_xy_Motor_init();
      /*开启线程*/
+     Reset_Start();
      Area1_StateMachine_Start();
      Area2_StateMachine_Start();
      Area3_StateMachine_Start();
