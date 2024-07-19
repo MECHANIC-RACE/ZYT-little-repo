@@ -113,7 +113,7 @@ void Area2_State_Task(void *argument)
 
                 pid_reset(&(Core_xy[1].Motor_X->speedPID), 5, 0.4, 0.8);
 
-                if (weight_placement[1] == 0) { Core_xy[1].gantry_t.position.x = 450; } // 往前拖行一段
+                if (weight_placement[1] == 0) { Core_xy[1].gantry_t.position.x = 600; } // 往前拖行一段
                 else {
                     Core_xy[1].gantry_t.position.x = 2250;
                 } // 往前拖行一段

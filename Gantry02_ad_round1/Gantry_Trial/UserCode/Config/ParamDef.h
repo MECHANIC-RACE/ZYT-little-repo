@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-07-07 21:23:02
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-19 13:24:53
+ * @LastEditTime: 2024-07-19 23:04:36
  * @FilePath: \Gantry_Trial\UserCode\Config\ParamDef.h
  * @Brief: 
  * 
@@ -97,5 +97,6 @@ extern uint16_t UseLidar02;
 extern osThreadId_t Area1_StateHandle;
 extern osThreadId_t Area2_StateHandle;
 
-
+extern float lidar_bad_flag2;
+extern float lidar_bad_flag6;
 #endif // __PARAMDEF_H__

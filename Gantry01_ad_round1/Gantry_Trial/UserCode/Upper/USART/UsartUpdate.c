@@ -30,111 +30,74 @@ void UartUpdateTask(void *argument)
 
     /* Infinite loop */
     for (;;) {
-        if(Uart_State==0)
-        {
+        if (Uart_State == 0) {
             if (UartFlag[5] == 1) {
                 Upper_Target_Decode();
-                for (int i = 0; i < 2; i++) {
-                    weight_placement_tmp[i] = weight_placement[i];
+                UartFlag[5] = 0;
+                if (weight_placement[0] == 1) weight_placement_tmp[0] = 1;
+                if (weight_placement[1] == 1) weight_placement_tmp[1] = 1;
+                tar_count++; // 首次接收时，计数器初始化为1
+                if (tar_count >= 15) {
+                    if (weight_placement_tmp[0] == 1) weight_placement[0] = 1;
+                    if (weight_placement_tmp[1] == 1) weight_placement[1] = 1;
+                    Uart_State = 1;
                 }
-                UartFlag[5]   = 0;
-                tar_count = 1; // 首次接收时，计数器初始化为1
-                Uart_State    = 1;
             }
-        }
-        else if(Uart_State==1){
-              
-                    if (UartFlag[5] == 1) {
-                        Upper_Target_Decode();
-                        UartFlag[5]     = 0;
-                        switch_flag = 0;
-
-                        for (int i = 0; i < 2; i++) {
-                            if (weight_placement_tmp[i] != weight_placement[i]) {
-                                switch_flag = 1;
-                                break;
-                            }
-                        }
-
-                        // 收到的数组与基准数组相等
-                        if (switch_flag == 0) {
-                            tar_count++;
-                        }
-                        // 收到的数组与基准数组不相等
-                        else {
-                            tar_count = 1; // 重新计数
-                            for (int i = 0; i < 2; i++) {
-                                weight_placement_tmp[i] = weight_placement[i];
-                            }
-                        }
-
-                        // 如果连续十次接收到同样的数组，则把这个数组设置为最终值
-                        if (tar_count >= 10) {
-                            Uart_State = 2;
-                           // __HAL_UART_DISABLE_IT(&huart4, UART_IT_RXNE);
-                        }
-                    }
-                    osDelay(2);
+        } else if (Uart_State == 1) {
+            if (UartFlag[0]) {
+                STP_23L_Decode(Rxbuffer_1, &Lidar1);
+                if (detect01xtree == 1 && Lidar1.distance_aver < 300 && Lidar1.distance_aver > 100) detect01xtree_cnt++;
+                if (detect01xtree && detect01xtree_cnt == 1) {
+                    detect01xtree       = 0;
+                    angle_memory01xtree = Core_xy[0].Motor_X->AxisData.AxisAngle_inDegree;
                 }
-            
-        
-        else if(Uart_State==2){
-        if (UartFlag[0]) {
-            STP_23L_Decode(Rxbuffer_1,&Lidar1);
-            if (detect01xtree==1 && Lidar1.distance_aver < 300 && Lidar1.distance_aver > 100) detect01xtree_cnt++;
-            if(detect01xtree && detect01xtree_cnt==1)
-            {
-                detect01xtree = 0;
-                angle_memory01xtree = Core_xy[0].Motor_X->AxisData.AxisAngle_inDegree;
+                UartFlag[0] = 0;
             }
-            UartFlag[0] = 0;
-        }
-        if (UartFlag[1]) {
-            STP_23L_Decode(Rxbuffer_2,&Lidar2);
-            if (detect01_weight == 1 && Lidar2.distance_aver < 300 && Lidar2.distance_aver > 100) detect01weight_cnt++;
+            if (UartFlag[1]) {
+                STP_23L_Decode(Rxbuffer_2, &Lidar2);
+                if (detect01_weight == 1 && Lidar2.distance_aver < 300 && Lidar2.distance_aver > 100) detect01weight_cnt++;
 
-            if (detect01_weight==1 && detect01weight_cnt == 5) {     //写1风险是比较大的
-                detect01_weight       = 0;      //如果为0说明置数成功，否则就是没有识别上
-                angle_memory01weight = Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree;
-            }
-            if (detect01ytree == 1 && Lidar2.distance_aver < 250 && Lidar2.distance_aver > 50) detect01ytree_cnt++;
-            if (detect01ytree==1 && detect01ytree_cnt == 3)
-            {
-                detect01ytree = 0;
-                angle_memory01ytree = Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree;
-            }
-            
-            UartFlag[1] = 0;
-        }
-        if (UartFlag[2]) {
-            STP_23L_Decode(Rxbuffer_3, &Lidar3);
-            if (detect02xtree==1 && Lidar3.distance_aver < 300 && Lidar3.distance_aver > 100) detect02xtree_cnt++;
-            if (detect02xtree && detect02xtree_cnt == 3) {
-                detect02xtree       = 0;
-                angle_memory02xtree = Core_xy[1].Motor_X->AxisData.AxisAngle_inDegree;
-            }
-            UartFlag[2] = 0;
-        }
-        if (UartFlag[3]) {
-            STP_23L_Decode(Rxbuffer_6, &Lidar6);
-            if (detect02_weight == 1 && Lidar6.distance_aver < 350 &&Lidar6.distance_aver>100) detect02weight_cnt++;
+                if (detect01_weight == 1 && detect01weight_cnt == 5) { // 写1风险是比较大的
+                    detect01_weight      = 0;                          // 如果为0说明置数成功，否则就是没有识别上
+                    angle_memory01weight = Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree;
+                }
+                if (detect01ytree == 1 && Lidar2.distance_aver < 250 && Lidar2.distance_aver > 50) detect01ytree_cnt++;
+                if (detect01ytree == 1 && detect01ytree_cnt == 3) {
+                    detect01ytree       = 0;
+                    angle_memory01ytree = Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree;
+                }
 
-            if (detect02_weight == 1 && detect02weight_cnt == 5) { // 写1风险是比较大的
-                detect02_weight      = 0;                          // 如果为0说明置数成功，否则就是没有识别上
-                angle_memory02weight = Core_xy[1].Motor_Y->AxisData.AxisAngle_inDegree;
+                UartFlag[1] = 0;
             }
-            if (detect02ytree == 1 && Lidar6.distance_aver < 200 && Lidar6.distance_aver > 50) detect02ytree_cnt++;          /*这个范围内的数可能会很多，不知道可不可行*/
-            if (detect02ytree == 1 && detect02ytree_cnt == 3) {
-                detect02ytree       = 0;
-                angle_memory02ytree = Core_xy[1].Motor_Y->AxisData.AxisAngle_inDegree;
+            if (UartFlag[2]) {
+                STP_23L_Decode(Rxbuffer_3, &Lidar3);
+                if (detect02xtree == 1 && Lidar3.distance_aver < 300 && Lidar3.distance_aver > 100) detect02xtree_cnt++;
+                if (detect02xtree && detect02xtree_cnt == 3) {
+                    detect02xtree       = 0;
+                    angle_memory02xtree = Core_xy[1].Motor_X->AxisData.AxisAngle_inDegree;
+                }
+                UartFlag[2] = 0;
             }
-            UartFlag[3] = 0;
-        }
-        // if (UartFlag[4]) {
-        //     STP_23L_Decode(Rxbuffer_4, &Lidar4);
-        //     UartFlag[4] = 0;
-        // }
-        osDelay(2);
+            if (UartFlag[3]) {
+                STP_23L_Decode(Rxbuffer_6, &Lidar6);
+                if (detect02_weight == 1 && Lidar6.distance_aver < 350 && Lidar6.distance_aver > 100) detect02weight_cnt++;
+
+                if (detect02_weight == 1 && detect02weight_cnt == 5) { // 写1风险是比较大的
+                    detect02_weight      = 0;                          // 如果为0说明置数成功，否则就是没有识别上
+                    angle_memory02weight = Core_xy[1].Motor_Y->AxisData.AxisAngle_inDegree;
+                }
+                if (detect02ytree == 1 && Lidar6.distance_aver < 200 && Lidar6.distance_aver > 50) detect02ytree_cnt++; /*这个范围内的数可能会很多，不知道可不可行*/
+                if (detect02ytree == 1 && detect02ytree_cnt == 3) {
+                    detect02ytree       = 0;
+                    angle_memory02ytree = Core_xy[1].Motor_Y->AxisData.AxisAngle_inDegree;
+                }
+                UartFlag[3] = 0;
+            }
+            // if (UartFlag[4]) {
+            //     STP_23L_Decode(Rxbuffer_4, &Lidar4);
+            //     UartFlag[4] = 0;
+            // }
+            osDelay(2);
         }
     }
     /* USER CODE END UartUpdateTask */

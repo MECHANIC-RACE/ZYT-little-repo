@@ -3,7 +3,7 @@
  * @Author: ZYT
  * @Date: 2024-06-06 12:03:15
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-19 14:16:24
+ * @LastEditTime: 2024-07-20 01:11:31
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Area1State.c
  * @Brief: 
  * 
@@ -124,7 +124,7 @@ void Area1_State_Task(void *argument)
 
             pid_reset(&(Core_xy[0].Motor_X->speedPID), 5, 0.4, 0.8);
 
-            if (weight_placement[0] == 0) { Core_xy[0].gantry_t.position.x = 400; } // 往前拖行一段
+            if (weight_placement[0] == 0) { Core_xy[0].gantry_t.position.x = 600; } // 往前拖行一段
             else {
                 Core_xy[0].gantry_t.position.x = 2250;
             } // 往前拖行一段
