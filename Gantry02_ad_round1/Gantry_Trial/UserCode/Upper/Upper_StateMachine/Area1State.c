@@ -3,7 +3,7 @@
  * @Author: ZYT
  * @Date: 2024-06-06 12:03:15
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-19 12:37:37
+ * @LastEditTime: 2024-07-20 14:30:42
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Area1State.c
  * @Brief: 
  * 
@@ -153,7 +153,7 @@ void Area1_State_Task(void *argument)
         else if (stateflag == 4) {
             
             
-            Core_xy[0].gantry_t.position.x = -6900;  //7600
+            Core_xy[0].gantry_t.position.x = -6600;  //7600
             Core_xy[0].gantry_t.position.y = 2893;  
             TickType_t StartTick           = xTaskGetTickCount();
             initial_pos01[0]               = Core_xy[0].Motor_X->AxisData.AxisAngle_inDegree; // 电机轴输出角度 单位 度°

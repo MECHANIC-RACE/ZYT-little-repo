@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-05-19 14:41:19
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-20 00:20:48
+ * @LastEditTime: 2024-07-20 15:25:03
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_Start\UpperStart.c
  * @Brief: 
  * 
@@ -47,16 +47,16 @@ void StartDefaultTask(void *argument)
         //        Core_xy[2].Motor_X->speedPID.output,
         //        Core_xy[2].Motor_X->posPID.output,
         //        Core_xy[2].Motor_X->FdbData.rpm);
-        // printf("%f,%f,%f,%f,%f,%f\n",
-        //        current_pos02[0],
-        //        current_pos01[0],
-        //        Core_xy[1].Motor_X->AxisData.AxisAngle_inDegree,
-        //        Core_xy[1].Motor_X->AxisData.AxisVelocity,
-        //        Core_xy[1].Motor_X->posPID.output,
-        //        Lidar6.distance_aver
-        //        );
+        printf("%f,%f,%f,%f,%f,%f,%f\n",
+               current_pos01[0],
+               current_pos01[1],
+               Core_xy[0].Motor_X->AxisData.AxisAngle_inDegree,
+               Core_xy[0].Motor_Y->AxisData.AxisAngle_inDegree,
+               Core_xy[1].Motor_X->AxisData.AxisAngle_inDegree,
+               Core_xy[1].Motor_Y->AxisData.AxisAngle_inDegree,
+               Lidar1.distance_aver);
         //printf("%f,%f,%d\n", weight_placement[0], weight_placement[1], Uart_State);
-        printf("%f,%f,%f,%f\n", Lidar2.distance_aver, Lidar6.distance_aver, lidar_bad_flag2,lidar_bad_flag6);
+        //printf("%f,%f,%f,%f\n", Lidar2.distance_aver, Lidar6.distance_aver, lidar_bad_flag2,lidar_bad_flag6);
 
         osDelay(50);
     }

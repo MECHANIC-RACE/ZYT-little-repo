@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-07-19 12:40:45
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-19 14:12:04
+ * @LastEditTime: 2024-07-20 14:25:30
  * @FilePath: \Gantry_Trial\UserCode\Upper\Protect\reset.c
  * @Brief: 
  * 
@@ -15,7 +15,6 @@ void Reset_Task(void *argument)
     uint16_t flag = 0;
     while(1){
         uint16_t ResetFlag = HAL_GPIO_ReadPin(Reset_GPIO_Port, Reset_Pin);
-        Lidar1.distance    = ResetFlag;
         if (ResetFlag)
         {
             // float degree1x = Core_xy[0].Motor_X->AxisData.AxisAngle_inDegree;
@@ -27,9 +26,9 @@ void Reset_Task(void *argument)
                 osThreadSuspend(Area2_StateHandle);
                 osThreadSuspend(Area3_StateHandle);
                 pid_reset(&(Core_xy[0].Motor_X->speedPID), 5, 0.4, 0.8);
-                pid_reset(&(Core_xy[0].Motor_Y->speedPID), 3.5, 0.3, 0.3);
+                pid_reset(&(Core_xy[0].Motor_Y->speedPID), 0, 0, 0);
                 pid_reset(&(Core_xy[1].Motor_X->speedPID), 5, 0.4, 0.8);
-                pid_reset(&(Core_xy[1].Motor_Y->speedPID), 3.5, 0.3, 0.3);
+                pid_reset(&(Core_xy[1].Motor_Y->speedPID), 0, 0, 0);
                 pid_reset(&(Core_xy[2].Motor_X->speedPID), 5, 0.4, 0.8);
 
                 pid_reset(&(Core_xy[0].Motor_X->posPID), 250, 0, 0);
@@ -39,7 +38,7 @@ void Reset_Task(void *argument)
                 pid_reset(&(Core_xy[2].Motor_X->posPID), 250, 0, 0);
                 flag = 1;
             }
-
+            else if(flag==1){
             HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 1);
             HAL_GPIO_WritePin(Cylinder02_GPIO_Port, Cylinder02_Pin, 1);
             HAL_GPIO_WritePin(Cylinder03_GPIO_Port, Cylinder02_Pin, 1);
@@ -51,10 +50,19 @@ void Reset_Task(void *argument)
             current_pos01[0] = 0;
             current_pos02[0] = 0;
             current_pos03[0] = 0;
+            if(fabs(Core_xy[1].Motor_X->AxisData.AxisAngle_inDegree)<200)
+            {
+                flag             = 2;       
+            }
+        }else if (flag==2)
+        {
+            pid_reset(&(Core_xy[0].Motor_Y->speedPID), 3.5, 0.3, 0.3);
+            pid_reset(&(Core_xy[1].Motor_Y->speedPID), 3.5, 0.3, 0.3);
             current_pos01[1] = 0;
             current_pos02[1] = 0;
         }
     }
+}
 }
 
 void Reset_Start(void)

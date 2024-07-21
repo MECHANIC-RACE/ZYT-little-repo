@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-06-06 12:03:15
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-16 22:16:29
+ * @LastEditTime: 2024-07-20 17:14:02
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Area3State.c
  * @Brief: 
  * 
@@ -83,7 +83,7 @@ void Area3_State_Task(void *argument)
             // osDelay(2);
     }else if(stateflag==2){     //前往木桩
         pid_reset(&(Core_xy[2].Motor_X->speedPID), 5, 0.4, 0.8);
-        Core_xy[2].gantry_t.position.x = 9600;
+        Core_xy[2].gantry_t.position.x = 9500;
         TickType_t StartTick = xTaskGetTickCount();
         initial_pos03[0]     = Core_xy[2].Motor_X->AxisData.AxisAngle_inDegree;
         _Bool isArray1       = 0;

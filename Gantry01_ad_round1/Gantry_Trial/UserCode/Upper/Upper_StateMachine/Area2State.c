@@ -200,7 +200,7 @@ void Area2_State_Task(void *argument)
             {
                 UseLidar02 = 1;
                 Core_xy[1].gantry_t.position.x = 75;
-                pid_reset(&(Core_xy[1].Motor_X->posPID), -200, 0, 0);
+                pid_reset(&(Core_xy[1].Motor_X->posPID), -180, 0, 0);
                 initial_pos02[0]               = Lidar6.distance_aver;
             }else
             {
