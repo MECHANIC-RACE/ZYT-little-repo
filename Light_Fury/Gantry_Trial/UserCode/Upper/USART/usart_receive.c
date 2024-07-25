@@ -119,7 +119,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
         } else {
         };
 
-        //HAL_UART_Receive_IT(&huart3, usart3_rx, 1);
+        HAL_UART_Receive_IT(&huart3, usart3_rx, 1);
     }
     if (huart->Instance == USART6) {
         static uint16_t u6state = 0; // 状态机计数

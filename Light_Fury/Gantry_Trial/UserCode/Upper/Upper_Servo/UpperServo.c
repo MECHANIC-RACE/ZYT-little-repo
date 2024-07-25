@@ -12,16 +12,18 @@ void Upper_Servo_Task(void *argument)
 {
     osDelay(100);
     for (;;) {
-        
 
-        // positionServo_lidar(current_posX, LightFury.Motor_X,Lidar1);
-        // positionServo_lidar(current_posYL, LightFury.Motor_YL, Lidar3);
-        // positionServo_lidar(current_posYR, LightFury.Motor_YR, Lidar6);
-       
-        
+        //speedServo(15000, LightFury.Motor_X);    //为正时向左走
+        //speedServo(1000, LightFury.Motor_YL);       //为正时向外
+        //speedServo(-5000, LightFury.Motor_YR); // 为正时向里
+        //positionServo_lidar(1000, LightFury.Motor_X, Lidar1);
+        positionServo_lidar(current_posX, LightFury.Motor_X,Lidar1);
+        positionServo_lidar(current_posYL, LightFury.Motor_YL, Lidar2);
+        positionServo_lidar(current_posYR, LightFury.Motor_YR, Lidar3);
+
         CanTransmit_DJI_1234(&hcan1,
                              LightFury.Motor_X->speedPID.output,
-                             LightFury.Motor_X->speedPID.output,
+                             -1 * LightFury.Motor_X->speedPID.output,
                              LightFury.Motor_YL->speedPID.output,
                              LightFury.Motor_YR->speedPID.output);
         CanTransmit_DJI_5678(&hcan1,
@@ -51,8 +53,8 @@ void LightFury_Motor_init()               //电机初始化
 {
     
     LightFury.Motor_X  = &hDJI[0];
-    LightFury.Motor_YL = &hDJI[1];
-    LightFury.Motor_YR = &hDJI[2];
+    LightFury.Motor_YL = &hDJI[2];
+    LightFury.Motor_YR = &hDJI[3];
     
     hDJI[0].motorType  = M2006;
     hDJI[1].motorType  = M2006;
@@ -65,9 +67,9 @@ void LightFury_Motor_init()               //电机初始化
     
    
 
-    pid_reset(&(LightFury.Motor_X->posPID), 200, 0, 0);
-    pid_reset(&(LightFury.Motor_YL->posPID), 200, 0, 0);
-    pid_reset(&(LightFury.Motor_YR->posPID), 250, 0, 0);
+    pid_reset(&(LightFury.Motor_X->posPID), -20, 0, 0);
+    pid_reset(&(LightFury.Motor_YL->posPID), -60, 0, 0);
+    pid_reset(&(LightFury.Motor_YR->posPID), 60, 0, 0);
     
 
     LightFury.Motor_X->posPID.outputMax = 20000;

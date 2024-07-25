@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-05-19 14:41:19
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-20 22:30:20
+ * @LastEditTime: 2024-07-26 00:21:53
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_Start\UpperStart.c
  * @Brief: 
  * 
@@ -33,7 +33,11 @@ void StartDefaultTask(void *argument)
 
     for (;;) {
 
-       
+        printf("%f,%f,%f,%f,%f,%f\n", Lidar1.distance_aver, Lidar2.distance_aver, Lidar3.distance_aver,current_posX,current_posYL,current_posYR);
+        // HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 0);
+        // osDelay(1000);
+
+        // HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 1);
 
         osDelay(50);
     }

@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-05-19 14:41:19
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-19 17:07:29
+ * @LastEditTime: 2024-07-25 21:38:00
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_Start\UpperStart.c
  * @Brief: 
  * 
@@ -26,9 +26,9 @@ void StartDefaultTask(void *argument)
      Core_xy_Motor_init();
      /*开启线程*/
      Reset_Start();
-     Area1_StateMachine_Start();
-     Area2_StateMachine_Start();
-     Area3_StateMachine_Start();
+    //  Area1_StateMachine_Start();
+    //  Area2_StateMachine_Start();
+    //  Area3_StateMachine_Start();
      Upper_Servo_Start();
      // HAL_GPIO_WritePin(Cylinder01_GPIO_Port, Cylinder01_Pin, 1);
 
