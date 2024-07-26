@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-07-20 21:33:49
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-26 00:18:11
+ * @LastEditTime: 2024-07-26 15:36:58
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Light_fury_state.c
  * @Brief: 
  * 
@@ -10,9 +10,9 @@
  */
 #include "Light_fury_state.h"
 
-#define X_maxvelocity   300
+#define X_maxvelocity   4000
 #define Y_maxvelocity   300
-#define X_Acceleration  60
+#define X_Acceleration  500
 #define Y_Acceleration  60
 
 float initial_posX;
@@ -27,9 +27,7 @@ float current_posYR;
 void StateMachine_Task(void *argument)
 {
     osDelay(100);
-    current_posX = Lidar1.distance_aver;
-    current_posYL = Lidar2.distance_aver;
-    current_posYR = Lidar3.distance_aver;
+    
     /******距离变量******
     float weight5_01 = 0;//5区砝码 滑行前
     float weight5_02 = 0;//5区砝码 滑行后
@@ -62,9 +60,33 @@ void StateMachine_Task(void *argument)
     ******距离变量******/
 
     uint16_t stateflag = 0;
+    
     for (;;) {
+        // current_posYL = Lidar2.distance_aver;
+        // current_posYR = Lidar3.distance_aver;
+        pid_reset(&(LightFury.Motor_YL->speedPID),0,0,0);
+        pid_reset(&(LightFury.Motor_YR->speedPID),0,0,0);
+        LightFury.gantry_t.position.x = 500;
+        
+        TickType_t StartTick = xTaskGetTickCount();
+        initial_posX         = Lidar1.distance_aver; // 电机轴输出角度 单位 度°
+        _Bool isArray1       = 0;
+        float diff[1]        = {0};
+        do {
+            TickType_t CurrentTick = xTaskGetTickCount();
+            float current_time     = (CurrentTick - StartTick) * 1.0 / 1000.0;
+            VelocityPlanning(initial_posX, X_maxvelocity, X_Acceleration, LightFury.gantry_t.position.x, current_time, &(current_posX));
+            diff[0] = fabs(LightFury.gantry_t.position.x - current_posX);
+            if ((diff[0] < 0.01)) { isArray1 = 1; }
+
+        } while (!isArray1);
+        osDelay(200);
+        /*
         if(stateflag==0)//抓取中间的砝码
         {
+            current_posX  = Lidar1.distance_aver;
+            current_posYL = Lidar2.distance_aver;
+            current_posYR = Lidar3.distance_aver;
             if(weight_placement[4]==1){     //neiquan
                 LightFury.gantry_t.position.x = 1710;
             }else{
@@ -413,7 +435,7 @@ void StateMachine_Task(void *argument)
             HAL_GPIO_WritePin(CylinderYR_GPIO_Port, CylinderYR_Pin, 1);
             osDelay(500);
 
-            /*先让左右的爪子退到两边*/
+            //先让左右的爪子退到两边
 
             LightFury.gantry_t.position.yL = 612;
             LightFury.gantry_t.position.yR = 612;
@@ -776,7 +798,7 @@ void StateMachine_Task(void *argument)
             HAL_GPIO_WritePin(CylinderYR_GPIO_Port, CylinderYR_Pin, 1);
             osDelay(500);
 
-            /*先让左右的爪子退到两边*/
+            //先让左右的爪子退到两边
 
             LightFury.gantry_t.position.yL = 612;
             LightFury.gantry_t.position.yR = 612;
@@ -826,11 +848,12 @@ void StateMachine_Task(void *argument)
             HAL_GPIO_WritePin(ElectromagnetYL_GPIO_Port, ElectromagnetYL_Pin, 0);
             HAL_GPIO_WritePin(ElectromagnetYR_GPIO_Port, ElectromagnetYR_Pin, 0);
             stateflag = 13;
-        }
+        */
+       }
 
         osDelay(2);
     }
-}
+
 
 void StateMachine_Start(void)
 {

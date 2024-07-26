@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-05-19 14:41:19
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-26 00:21:53
+ * @LastEditTime: 2024-07-26 14:48:38
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_Start\UpperStart.c
  * @Brief: 
  * 
@@ -23,7 +23,7 @@ void StartDefaultTask(void *argument)
     /*初始化函数*/
     LightFury_Motor_init();
     /*开启线程*/
-    StateMachine_Start();
+    //StateMachine_Start();
     Upper_Servo_Start();
 
     HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 1);
@@ -33,10 +33,15 @@ void StartDefaultTask(void *argument)
 
     for (;;) {
 
-        printf("%f,%f,%f,%f,%f,%f\n", Lidar1.distance_aver, Lidar2.distance_aver, Lidar3.distance_aver,current_posX,current_posYL,current_posYR);
+        printf("%f,%f,%f,%f,%f\n",
+               Lidar2.distance_aver,
+               current_posX,
+               LightFury.Motor_YL->speedPID.output,
+               LightFury.Motor_YL->FdbData.rpm,
+               LightFury.Motor_YL->posPID.output);
         // HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 0);
         // osDelay(1000);
-
+        
         // HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 1);
 
         osDelay(50);
