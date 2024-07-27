@@ -16,13 +16,14 @@ void Upper_Servo_Task(void *argument)
         //speedServo(-15000, LightFury.Motor_X);    //为正时向左走
         //speedServo(1000, LightFury.Motor_YL);       //为正时向外
         //speedServo(-5000, LightFury.Motor_YR); // 为正时向里
-        //positionServo_lidar(500, LightFury.Motor_X, Lidar1);
-        positionServo_lidar(600, LightFury.Motor_YL, Lidar2);
-        positionServo_lidar(600, LightFury.Motor_YR, Lidar3);
+        positionServo_lidar(LightFury.gantry_t.position.x, LightFury.Motor_X, Lidar1);
+        positionServo_lidar(LightFury.gantry_t.position.yL, LightFury.Motor_YL, Lidar2);
+        positionServo_lidar(LightFury.gantry_t.position.yR, LightFury.Motor_YR, Lidar3);
+        // positionServo_lidar(500, LightFury.Motor_X, Lidar1);
 
-        //positionServo_lidar(current_posX,  LightFury.Motor_X,  Lidar1);
-        //positionServo_lidar(current_posYL, LightFury.Motor_YL, Lidar2);
-        //positionServo_lidar(current_posYR, LightFury.Motor_YR, Lidar3);
+        // positionServo_lidar(current_posX,  LightFury.Motor_X,  Lidar1);
+        // positionServo_lidar(current_posYL, LightFury.Motor_YL, Lidar2);
+        // positionServo_lidar(current_posYR, LightFury.Motor_YR, Lidar3);
 
         CanTransmit_DJI_1234(&hcan1,
                              LightFury.Motor_X->speedPID.output,
@@ -65,14 +66,14 @@ void LightFury_Motor_init()               //电机初始化
    
     DJI_Init();
     pid_reset(&(LightFury.Motor_X->speedPID), 3, 0.3, 0.3);
-    pid_reset(&(LightFury.Motor_YL->speedPID),3.5, 0.3, 0.3);
-    pid_reset(&(LightFury.Motor_YR->speedPID),3.5, 0.3, 0.3);
+    pid_reset(&(LightFury.Motor_YL->speedPID),5, 0.4, 0.3);
+    pid_reset(&(LightFury.Motor_YR->speedPID),5, 0.4, 0.3);
     
    
 
     pid_reset(&(LightFury.Motor_X->posPID), -20, 0, 0);
-    pid_reset(&(LightFury.Motor_YL->posPID), 20, 0, 0);
-    pid_reset(&(LightFury.Motor_YR->posPID), -20, 0, 0);
+    pid_reset(&(LightFury.Motor_YL->posPID), 30, 0, 0);
+    pid_reset(&(LightFury.Motor_YR->posPID), -30, 0, 0);
     
 
     LightFury.Motor_X->posPID.outputMax = 20000;
@@ -147,6 +148,6 @@ void pid_reset(PID_t *pid, float kp, float ki, float kd)
     pid->KP       = kp;
     pid->KI       = ki;
     pid->KD       = kd;
-    pid->integral = 0;
-    pid->output   = 0;
+    // pid->integral = 0;
+    // pid->output   = 0;
 }
