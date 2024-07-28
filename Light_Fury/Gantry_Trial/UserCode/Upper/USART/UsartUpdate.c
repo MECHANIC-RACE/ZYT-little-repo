@@ -1,3 +1,13 @@
+/*
+ * @Author: ZYT
+ * @Date: 2024-07-20 21:31:27
+ * @LastEditors: ZYT
+ * @LastEditTime: 2024-07-28 22:48:49
+ * @FilePath: \Gantry_Trial\UserCode\Upper\USART\UsartUpdate.c
+ * @Brief: 
+ * 
+ * Copyright (c) 2024 by zyt, All Rights Reserved. 
+ */
 
 #include "UsartUpdate.h"
 #include "UpperStart.h"
@@ -16,76 +26,48 @@ void UartUpdateTask(void *argument)
 
     /* Infinite loop */
     for (;;) {
-        if(Uart_State==0)
-        {
-            if (UartFlag[5] == 1) {
+        if (Uart_State == 0) {
+            if (UartFlag[4] == 1) {
                 Upper_Target_Decode();
-                for (int i = 0; i < 5; i++) {
-                    weight_placement_tmp[i] = weight_placement[i];
+                UartFlag[4] = 0;
+                if (weight_placement[0] == 1) weight_placement_tmp[0] = 1;
+                if (weight_placement[1] == 1) weight_placement_tmp[1] = 1;
+                if (weight_placement[2] == 1) weight_placement_tmp[2] = 1;
+                if (weight_placement[3] == 1) weight_placement_tmp[3] = 1;
+                if (weight_placement[4] == 1) weight_placement_tmp[4] = 1;
+                
+                tar_count++; // 首次接收时，计数器初始化为1
+                if (tar_count >= 15) {
+                    if (weight_placement_tmp[0] == 1) weight_placement[0] = 1;
+                    if (weight_placement_tmp[1] == 1) weight_placement[1] = 1;
+                    if (weight_placement_tmp[2] == 1) weight_placement[2] = 1;
+                    if (weight_placement_tmp[3] == 1) weight_placement[3] = 1;
+                    if (weight_placement_tmp[4] == 1) weight_placement[4] = 1;
+                    Uart_State = 1;
                 }
-                UartFlag[5]   = 0;
-                tar_count = 1; // 首次接收时，计数器初始化为1
-                Uart_State    = 1;
             }
-        }
-        else if(Uart_State==1){
-              
-                    if (UartFlag[5] == 1) {
-                        Upper_Target_Decode();
-                        UartFlag[5]     = 0;
-                        switch_flag = 0;
-
-                        for (int i = 0; i < 5; i++) {
-                            if (weight_placement_tmp[i] != weight_placement[i]) {
-                                switch_flag = 1;
-                                break;
-                            }
-                        }
-
-                        // 收到的数组与基准数组相等
-                        if (switch_flag == 0) {
-                            tar_count++;
-                        }
-                        // 收到的数组与基准数组不相等
-                        else {
-                            tar_count = 1; // 重新计数
-                            for (int i = 0; i < 5; i++) {
-                                weight_placement_tmp[i] = weight_placement[i];
-                            }
-                        }
-
-                        // 如果连续十次接收到同样的数组，则把这个数组设置为最终值
-                        if (tar_count >= 10) {
-                            Uart_State = 2;
-                            __HAL_UART_DISABLE_IT(&huart5, UART_IT_RXNE);
-                        }
-                    }
-                    osDelay(2);
-                }
-            
-        
-        else if(Uart_State==2){
-        if (UartFlag[0]) {
-            STP_23L_Decode(Rxbuffer_1,&Lidar1);
-            UartFlag[0] = 0;
-        }
-        if (UartFlag[1]) {
-            STP_23L_Decode(Rxbuffer_2,&Lidar2);
-            UartFlag[1] = 0;
-        }
-        if (UartFlag[2]) {
-            STP_23L_Decode(Rxbuffer_3, &Lidar3);
-            UartFlag[2] = 0;
-        }
-        if (UartFlag[3]) {
-            STP_23L_Decode(Rxbuffer_6, &Lidar6);
-            UartFlag[3] = 0;
-        }
-        if (UartFlag[4]) {
-            STP_23L_Decode(Rxbuffer_4, &Lidar4);
-            UartFlag[4] = 0;
-        }
-        osDelay(6);
+        } else if (Uart_State == 1) {
+            if (UartFlag[0]) {
+                STP_23L_Decode(Rxbuffer_1, &Lidar1);
+                UartFlag[0] = 0;
+            }
+            if (UartFlag[1]) {
+                STP_23L_Decode(Rxbuffer_2, &Lidar2);
+                UartFlag[1] = 0;
+            }
+            if (UartFlag[2]) {
+                STP_23L_Decode(Rxbuffer_3, &Lidar3);
+                UartFlag[2] = 0;
+            }
+            if (UartFlag[3]) {
+                STP_23L_Decode(Rxbuffer_6, &Lidar6);
+                UartFlag[3] = 0;
+            }
+            if (UartFlag[4]) {
+                STP_23L_Decode(Rxbuffer_4, &Lidar4);
+                UartFlag[4] = 0;
+            }
+            osDelay(6);
         }
     }
     /* USER CODE END UartUpdateTask */

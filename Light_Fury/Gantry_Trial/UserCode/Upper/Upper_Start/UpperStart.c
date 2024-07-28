@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-05-19 14:41:19
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-26 19:11:39
+ * @LastEditTime: 2024-07-28 22:22:42
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_Start\UpperStart.c
  * @Brief: 
  * 
@@ -13,7 +13,7 @@
 
 void StartDefaultTask(void *argument)
 {
-    Uart_State = 2; // 后续要删！
+     Uart_State = 1; // 后续要删！
     /*等待树莓派数据*/
     RaspReceive_Enable();
     /*串口使能*/
@@ -33,19 +33,16 @@ void StartDefaultTask(void *argument)
 
     for (;;) {
 
-        printf("%f,%f,%f,%f,%f,%f,%f,%f,%f\n",
-               Lidar1.distance_aver,
-               Lidar2.distance_aver, Lidar3.distance_aver,
-               LightFury.gantry_t.position.x,
-               LightFury.gantry_t.position.yL,
-               LightFury.gantry_t.position.yR,
-               LightFury.Motor_X->speedPID.output,
-               LightFury.Motor_YL->speedPID.output,
-               LightFury.Motor_YR->speedPID.output);
-        // HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 0);
-        // osDelay(1000);
-        
-        // HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 1);
+        // printf("%f,%f,%f,%f,%f,%f,%f,%f,%f\n",
+        //        Lidar1.distance_aver,
+        //        Lidar2.distance_aver, Lidar3.distance_aver,
+        //        LightFury.gantry_t.position.x,
+        //        LightFury.gantry_t.position.yL,
+        //        LightFury.gantry_t.position.yR,
+        //        LightFury.Motor_X->speedPID.output,
+        //        LightFury.Motor_YL->speedPID.output,
+        //        LightFury.Motor_YR->speedPID.output);
+        printf("%f,%f\n", LightFury.Motor_YR->AxisData.AxisAngle_inDegree,remem_12xR);
 
         osDelay(50);
     }

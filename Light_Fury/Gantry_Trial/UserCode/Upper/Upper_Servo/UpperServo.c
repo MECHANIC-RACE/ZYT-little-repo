@@ -13,13 +13,14 @@ void Upper_Servo_Task(void *argument)
     osDelay(100);
     for (;;) {
 
-        //speedServo(-15000, LightFury.Motor_X);    //为正时向左走
-        //speedServo(1000, LightFury.Motor_YL);       //为正时向外
-        //speedServo(-5000, LightFury.Motor_YR); // 为正时向里
         positionServo_lidar(LightFury.gantry_t.position.x, LightFury.Motor_X, Lidar1);
+       
         positionServo_lidar(LightFury.gantry_t.position.yL, LightFury.Motor_YL, Lidar2);
+        
         positionServo_lidar(LightFury.gantry_t.position.yR, LightFury.Motor_YR, Lidar3);
-        // positionServo_lidar(500, LightFury.Motor_X, Lidar1);
+        
+        //positionServo_lidar(565, LightFury.Motor_YR, Lidar3);
+        //positionServo(-1000, LightFury.Motor_YR);
 
         // positionServo_lidar(current_posX,  LightFury.Motor_X,  Lidar1);
         // positionServo_lidar(current_posYL, LightFury.Motor_YL, Lidar2);

@@ -73,6 +73,9 @@ extern LidarPointTypedef Lidar3;
 extern LidarPointTypedef Lidar4;
 extern LidarPointTypedef Lidar6;
 
+extern  float remem_12xR;
+extern  float remem_12xL;
+
 extern uint16_t inner_ring_flag;
 extern uint8_t receive_buffer[24];
 extern float weight_placement[5];
