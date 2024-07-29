@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-07-20 21:33:49
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-29 00:08:52
+ * @LastEditTime: 2024-07-29 23:35:27
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Light_fury_state.c
  * @Brief:
  *
@@ -25,42 +25,41 @@ uint16_t tickflag;
 uint16_t tickflag_x;
 uint16_t starttick;
 
-float remem_12xR;
-float remem_12xL;
+uint16_t stateflag ;
 
 void StateMachine_Task(void *argument)
 {
     osDelay(100);
-    uint16_t stateflag = 0;
     /*距离变量*/
     float mnq     = 2010; // 中间 内圈 滑行前
     float mnh     = 2370; // 中间 内圈 滑行后
     float mwq     = 1600; // 中间 外圈 滑行前
     float mwh     = 2050; // 中间 外圈 滑行后
     float ywq     = 590;  // 两边区y 外圈 滑行前
-    float ywh     = 410;  // 两边区y 外圈 滑行后
+    float ywh     = 380;  // 两边区y 外圈 滑行后
     float ynq     = 400;    // 两边区y 内圈 滑行前
     float ynh     = 81;     // 两边区y 内圈 滑行后
-    float wx_12   = 3064;   // 12区外圈x
-    float nx_12   = 2887;   // 12区内圈x
-    float stake_x12 = 3700;   // 12区木桩x
-    float wx_34     = 2340;   // 34区外圈x
-    float nx_34     = 2520;   // 34区内圈x
-    float stake_x34 = 188;    // 34区木桩x
+    float wx_12   = 3064-4;   // 12区外圈x
+    float nx_12   = 2887-4;   // 12区内圈x
+    float stake_x12 = 3700-8;   // 12区木桩x
+    float wx_34     = 2340-10;   // 34区外圈x
+    float nx_34     = 2520-4;   // 34区内圈x
+    float stake_x34 = 188-15;    // 34区木桩x
     float stake_y   = 565;    // 木桩y
-    float weight_m_x = 2563;//中间木桩x轴
+    float weight_m_x = 2563-2;//中间木桩x轴
     float wait_ticks    = 2.0;
     float wait_ticks_x  = 1.0;
     uint16_t cur2       = 0;
-    weight_placement[0] = 1;
-    weight_placement[1] = 0;
-    weight_placement[2] = 0;
-    weight_placement[3] = 1;
-    weight_placement[4] = 1;
+    // weight_placement[0] = 0;
+    // weight_placement[1] = 1;
+    // weight_placement[2] = 1;
+    // weight_placement[3] = 1;
+    // weight_placement[4] = 0;
     for (;;) {
 
         if(stateflag==0)//抓取中间的砝码
         {
+            pid_reset(&(LightFury.Motor_X->posPID), -15, 0, 0);
             LightFury.gantry_t.position.yL = 610;
             LightFury.gantry_t.position.yR = 610;
             if(weight_placement[4]==1){     //neiquan
@@ -70,8 +69,8 @@ void StateMachine_Task(void *argument)
                 LightFury.gantry_t.position.x = mwq;
                 osDelay(800);
             }
-            
-                stateflag = 1;
+            pid_reset(&(LightFury.Motor_X->posPID), -20, 0, 0);
+            stateflag = 1;
             
         }else if(stateflag==1){     //往前拖行一段
             HAL_GPIO_WritePin(CylinderX_GPIO_Port, CylinderX_Pin, 0);
@@ -105,7 +104,7 @@ void StateMachine_Task(void *argument)
                 diff[0] = fabs(LightFury.gantry_t.position.x - Lidar1.distance_aver);
                 diff[1] = fabs(LightFury.gantry_t.position.yL - Lidar2.distance_aver);
                 diff[2] = fabs(LightFury.gantry_t.position.yR - Lidar3.distance_aver);
-                if (diff[0] < 50) 
+                if (diff[0] < 20) 
                 {
                     if (tickflag_x == 0) {
                         starttick  = xTaskGetTickCount();
@@ -131,7 +130,7 @@ void StateMachine_Task(void *argument)
                 float diff[2]                  = {0};
                 diff[0] = fabs(LightFury.gantry_t.position.x - Lidar1.distance_aver);
                 diff[1] = fabs(LightFury.gantry_t.position.yR - Lidar3.distance_aver);
-                if (diff[0] < 50) {
+                if (diff[0] < 20) {
                     if (tickflag_x == 0) {
                         starttick  = xTaskGetTickCount();
                         tickflag_x = 1;
@@ -157,7 +156,7 @@ void StateMachine_Task(void *argument)
 
                 diff[0] = fabs(LightFury.gantry_t.position.x - Lidar1.distance_aver);
                 diff[1] = fabs(LightFury.gantry_t.position.yL - Lidar2.distance_aver);
-                if (diff[0] < 50) {
+                if (diff[0] < 20) {
                     if (tickflag_x == 0) {
                         starttick  = xTaskGetTickCount();
                         tickflag_x = 1;
@@ -182,7 +181,7 @@ void StateMachine_Task(void *argument)
                 LightFury.gantry_t.position.yR = ywq;
                 float diff[3]                  = {0};
                 diff[0] = fabs(LightFury.gantry_t.position.x - Lidar1.distance_aver);
-                if (diff[0] < 50) {
+                if (diff[0] < 20) {
                     if (tickflag_x == 0) {
                         starttick  = xTaskGetTickCount();
                         tickflag_x = 1;
@@ -205,6 +204,8 @@ void StateMachine_Task(void *argument)
                starttick = xTaskGetTickCount();
                 tickflag                    = 1;
             }
+            pid_reset(&(LightFury.Motor_YL->posPID), 45, 0, 0);     /*修改往前拖行吸上砝码时的pid*/
+            pid_reset(&(LightFury.Motor_YR->posPID), -45, 0, 0);
             if (weight_placement[0] == 1 && weight_placement[1] == 1) // 都在内圈 ----一起往中间走
             {
                 HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 0);
@@ -220,7 +221,7 @@ void StateMachine_Task(void *argument)
                 diff[1] = fabs(LightFury.gantry_t.position.yR - Lidar3.distance_aver);
                 uint16_t cur1 = xTaskGetTickCount() - starttick;
                 if ((diff[0] < 2 && diff[1] < 2)||cur1>wait_ticks*1000) {
-                    osDelay(500);
+                    osDelay(100);
                     stateflag = 4;
                 }
             }
@@ -234,7 +235,7 @@ void StateMachine_Task(void *argument)
                 diff[0] = fabs(LightFury.gantry_t.position.yR - Lidar3.distance_aver);
                 uint16_t cur1                  = xTaskGetTickCount() - starttick;
                 if ((diff[0] < 2) || cur1 > wait_ticks * 1000) {
-                    osDelay(500);
+                    osDelay(100);
                     stateflag = 4;
                 }
             }
@@ -248,7 +249,7 @@ void StateMachine_Task(void *argument)
                 diff[0]                        = fabs(LightFury.gantry_t.position.yL - Lidar2.distance_aver);
                 uint16_t cur1                  = xTaskGetTickCount() - starttick;
                 if ((diff[0] < 2) || cur1 > wait_ticks * 1000) {
-                    osDelay(500);
+                    osDelay(100);
                     stateflag = 4;
                 }
             }
@@ -267,11 +268,14 @@ void StateMachine_Task(void *argument)
                 diff[1]                        = fabs(LightFury.gantry_t.position.yR - Lidar3.distance_aver);
                 uint16_t cur1                  = xTaskGetTickCount() - starttick;
                 if ((diff[0] < 2 && diff[1] < 2) || cur1 > wait_ticks * 1000) {
-                    osDelay(500);
+                    osDelay(100);
                     stateflag = 4;
                 }
             }
+            
         } else if (stateflag == 4) {
+            pid_reset(&(LightFury.Motor_YL->posPID), 30, 0, 0); /*修改往前拖行吸上砝码时的pid*/
+            pid_reset(&(LightFury.Motor_YR->posPID), -30, 0, 0);
             HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 1);
             HAL_GPIO_WritePin(CylinderYR_GPIO_Port, CylinderYR_Pin, 1);
             osDelay(500);                                             // 一内一外的情况
@@ -283,7 +287,7 @@ void StateMachine_Task(void *argument)
              
                 float diff[2]                  = {0};
                 diff[0] = fabs(LightFury.gantry_t.position.x - Lidar1.distance_aver);
-                if (diff[0] < 50) {
+                if (diff[0] < 20) {
                     if (tickflag_x == 0) {
                         starttick  = xTaskGetTickCount();
                         tickflag_x = 1;
@@ -305,7 +309,7 @@ void StateMachine_Task(void *argument)
                 LightFury.gantry_t.position.yR = ywq;
                 float diff[2]        = {0};
                 diff[0]                        = fabs(LightFury.gantry_t.position.x - Lidar1.distance_aver);
-                if (diff[0] < 50) {
+                if (diff[0] < 20) {
                     if (tickflag_x == 0) {
                         starttick  = xTaskGetTickCount();
                         tickflag_x = 1;
@@ -328,6 +332,8 @@ void StateMachine_Task(void *argument)
                 starttick = xTaskGetTickCount();
                 tickflag  = 2;
             }
+            pid_reset(&(LightFury.Motor_YL->posPID), 45, 0, 0); /*修改往前拖行吸上砝码时的pid*/
+            pid_reset(&(LightFury.Motor_YR->posPID), -45, 0, 0);
             if (weight_placement[0] == 1 && weight_placement[1] == 0) // 1区在内 2区在外------------->后抓2区 left
             {
                 HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 0);
@@ -338,7 +344,7 @@ void StateMachine_Task(void *argument)
                 diff[0] = fabs(LightFury.gantry_t.position.yL - Lidar2.distance_aver);
                 uint16_t cur1                  = xTaskGetTickCount() - starttick;
                 if ((diff[0] < 2) || cur1 > wait_ticks * 1000) {
-                    osDelay(500);
+                    osDelay(100);
                     stateflag = 6;
                 }
             }
@@ -354,7 +360,7 @@ void StateMachine_Task(void *argument)
                 diff[0] = fabs(LightFury.gantry_t.position.yR - Lidar3.distance_aver);
                 uint16_t cur1        = xTaskGetTickCount() - starttick;
                 if ((diff[0] < 2 ) || cur1 > wait_ticks * 1000) {
-                    osDelay(500);
+                    osDelay(100);
                     stateflag = 6;
                 }
             }
@@ -362,6 +368,8 @@ void StateMachine_Task(void *argument)
                 stateflag = 6;
             }
         } else if (stateflag == 6) {
+            pid_reset(&(LightFury.Motor_YL->posPID), 30, 0, 0); /*修改往前拖行吸上砝码时的pid*/
+            pid_reset(&(LightFury.Motor_YR->posPID), -30, 0, 0);
             HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 1);
             HAL_GPIO_WritePin(CylinderYR_GPIO_Port, CylinderYR_Pin, 1);
             osDelay(500);
@@ -436,7 +444,7 @@ void StateMachine_Task(void *argument)
                 diff[0]                        = fabs(LightFury.gantry_t.position.x - Lidar1.distance_aver);
                 diff[1]                        = fabs(LightFury.gantry_t.position.yL - Lidar2.distance_aver);
                 diff[2]                        = fabs(LightFury.gantry_t.position.yR - Lidar3.distance_aver);
-                if (diff[0] < 50) {
+                if (diff[0] < 20) {
                     if (tickflag_x == 0) {
                         starttick  = xTaskGetTickCount();
                         tickflag_x = 1;
@@ -461,7 +469,7 @@ void StateMachine_Task(void *argument)
 
                 diff[0] = fabs(LightFury.gantry_t.position.x - Lidar1.distance_aver);
                 diff[1] = fabs(LightFury.gantry_t.position.yR - Lidar3.distance_aver);
-                if (diff[0] < 50) {
+                if (diff[0] < 20) {
                     if (tickflag_x == 0) {
                         starttick  = xTaskGetTickCount();
                         tickflag_x = 1;
@@ -484,7 +492,7 @@ void StateMachine_Task(void *argument)
 
                 diff[0] = fabs(LightFury.gantry_t.position.x - Lidar1.distance_aver);
                 diff[1] = fabs(LightFury.gantry_t.position.yL - Lidar2.distance_aver);
-                if (diff[0] < 50) {
+                if (diff[0] < 20) {
                     if (tickflag_x == 0) {
                         starttick  = xTaskGetTickCount();
                         tickflag_x = 1;
@@ -507,7 +515,7 @@ void StateMachine_Task(void *argument)
                 LightFury.gantry_t.position.yR = ywq;
                 float diff[3]                  = {0};
                 diff[0]                        = fabs(LightFury.gantry_t.position.x - Lidar1.distance_aver);
-                if (diff[0] < 50) {
+                if (diff[0] < 20) {
                     if (tickflag_x == 0) {
                         starttick  = xTaskGetTickCount();
                         tickflag_x = 1;
@@ -529,6 +537,8 @@ void StateMachine_Task(void *argument)
                 starttick = xTaskGetTickCount();
                 tickflag  = 3;
             }
+            pid_reset(&(LightFury.Motor_YL->posPID), 45, 0, 0); /*修改往前拖行吸上砝码时的pid*/
+            pid_reset(&(LightFury.Motor_YR->posPID), -45, 0, 0);
             if (weight_placement[2] == 1 && weight_placement[3] == 1) // 都在内圈 ----一起往中间走
             {
                 HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 0);
@@ -600,6 +610,8 @@ void StateMachine_Task(void *argument)
                 }
             }
         } else if (stateflag == 12) { // 一内一外的情况
+            pid_reset(&(LightFury.Motor_YL->posPID), 30, 0, 0); /*修改往前拖行吸上砝码时的pid*/
+            pid_reset(&(LightFury.Motor_YR->posPID), -30, 0, 0);
             HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 1);
             HAL_GPIO_WritePin(CylinderYR_GPIO_Port, CylinderYR_Pin, 1);
             osDelay(500);
@@ -609,7 +621,7 @@ void StateMachine_Task(void *argument)
                 LightFury.gantry_t.position.yR = ywq;
                 float diff[1]        = {0};
                 diff[0]                       = fabs(LightFury.gantry_t.position.x - Lidar1.distance_aver);
-                if (diff[0] < 50) {
+                if (diff[0] < 20) {
                     if (tickflag_x == 0) {
                         starttick  = xTaskGetTickCount();
                         tickflag_x = 1;
@@ -632,6 +644,8 @@ void StateMachine_Task(void *argument)
                 starttick = xTaskGetTickCount();
                 tickflag  = 4;
             }
+            pid_reset(&(LightFury.Motor_YL->posPID), 45, 0, 0); /*修改往前拖行吸上砝码时的pid*/
+            pid_reset(&(LightFury.Motor_YR->posPID), -45, 0, 0);
             if (weight_placement[3] == 1 && weight_placement[2] == 0) // 4区在内 3区在外------------->后抓3区 left
             {
                 HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 0);
@@ -667,6 +681,8 @@ void StateMachine_Task(void *argument)
                 stateflag = 14;
             }
         } else if (stateflag == 14) {
+            pid_reset(&(LightFury.Motor_YL->posPID), 30, 0, 0); /*修改往前拖行吸上砝码时的pid*/
+            pid_reset(&(LightFury.Motor_YR->posPID), -30, 0, 0);
             HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 1);
             HAL_GPIO_WritePin(CylinderYR_GPIO_Port, CylinderYR_Pin, 1);
             pid_reset(&(LightFury.Motor_YL->speedPID), 3, 0.3, 0.3);

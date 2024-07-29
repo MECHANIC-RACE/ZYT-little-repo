@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-07-20 21:31:27
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-28 22:48:49
+ * @LastEditTime: 2024-07-29 20:08:27
  * @FilePath: \Gantry_Trial\UserCode\Upper\USART\UsartUpdate.c
  * @Brief: 
  * 
@@ -37,7 +37,7 @@ void UartUpdateTask(void *argument)
                 if (weight_placement[4] == 1) weight_placement_tmp[4] = 1;
                 
                 tar_count++; // 首次接收时，计数器初始化为1
-                if (tar_count >= 15) {
+                if (tar_count >= 10) {
                     if (weight_placement_tmp[0] == 1) weight_placement[0] = 1;
                     if (weight_placement_tmp[1] == 1) weight_placement[1] = 1;
                     if (weight_placement_tmp[2] == 1) weight_placement[2] = 1;
@@ -95,5 +95,5 @@ void Usart_start()
 
 void RaspReceive_Enable()
 {
-    HAL_UART_Receive_IT(&huart5, receive_buffer, sizeof(receive_buffer));
+    HAL_UART_Receive_IT(&huart4, receive_buffer, sizeof(receive_buffer));
 }

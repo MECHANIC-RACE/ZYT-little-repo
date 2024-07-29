@@ -65,6 +65,8 @@ void Error_Handler(void);
 #define u2_area1_y_tx_GPIO_Port GPIOA
 #define u2_area1_y_rx_Pin GPIO_PIN_3
 #define u2_area1_y_rx_GPIO_Port GPIOA
+#define Reset_Pin GPIO_PIN_7
+#define Reset_GPIO_Port GPIOE
 #define u3_area2_x_tx_Pin GPIO_PIN_10
 #define u3_area2_x_tx_GPIO_Port GPIOB
 #define u3_area2_x_rx_Pin GPIO_PIN_11

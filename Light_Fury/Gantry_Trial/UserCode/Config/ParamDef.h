@@ -80,4 +80,6 @@ extern uint16_t inner_ring_flag;
 extern uint8_t receive_buffer[24];
 extern float weight_placement[5];
 extern uint16_t Uart_State;
+extern uint16_t stateflag;
+
 #endif // __PARAMDEF_H__
