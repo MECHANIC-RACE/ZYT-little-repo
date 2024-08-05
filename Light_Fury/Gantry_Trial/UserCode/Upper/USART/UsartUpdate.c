@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-07-20 21:31:27
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-29 20:08:27
+ * @LastEditTime: 2024-07-31 00:31:53
  * @FilePath: \Gantry_Trial\UserCode\Upper\USART\UsartUpdate.c
  * @Brief: 
  * 
@@ -35,8 +35,7 @@ void UartUpdateTask(void *argument)
                 if (weight_placement[2] == 1) weight_placement_tmp[2] = 1;
                 if (weight_placement[3] == 1) weight_placement_tmp[3] = 1;
                 if (weight_placement[4] == 1) weight_placement_tmp[4] = 1;
-                
-                tar_count++; // 首次接收时，计数器初始化为1
+            if(receive_buffer[0]== 255)    tar_count++; // 首次接收时，计数器初始化为1
                 if (tar_count >= 10) {
                     if (weight_placement_tmp[0] == 1) weight_placement[0] = 1;
                     if (weight_placement_tmp[1] == 1) weight_placement[1] = 1;

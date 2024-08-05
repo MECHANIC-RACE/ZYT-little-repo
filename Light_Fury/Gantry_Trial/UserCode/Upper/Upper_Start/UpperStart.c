@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-05-19 14:41:19
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-29 21:36:31
+ * @LastEditTime: 2024-07-31 00:32:31
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_Start\UpperStart.c
  * @Brief: 
  * 
@@ -22,34 +22,42 @@ void StartDefaultTask(void *argument)
     Usart_start();
     UsartUpdate_Start();
     osDelay(4000);
+    for (;;) {
+        if (Uart_State == 1) {
+            break;
+        }else
+        {
+            HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 1);
+        }
+    }
     /*初始化函数*/
     LightFury_Motor_init();
     /*开启线程*/
     StateMachine_Start();
     Upper_Servo_Start();
-    //Reset_Start();
+    Reset_Start();
     HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 1);
     HAL_GPIO_WritePin(CylinderYR_GPIO_Port, CylinderYR_Pin, 1);
     HAL_GPIO_WritePin(CylinderX_GPIO_Port, CylinderX_Pin, 1);
 
     osDelay(1000);
 
-    /*如需复位程序请记得开启线程*/   
-    for (;;) {
+        /*如需复位程序请记得开启线程*/
+        for (;;) {
 
-        // printf("%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",
-        //        Lidar1.distance_aver,
-        //        Lidar2.distance_aver, Lidar3.distance_aver,
-        //        LightFury.gantry_t.position.x,
-        //        LightFury.gantry_t.position.yL,
-        //        LightFury.gantry_t.position.yR,
-        //        LightFury.Motor_X->speedPID.output,
-        //        LightFury.Motor_YL->speedPID.output,
-        //        LightFury.Motor_YR->speedPID.output,
-        //        weight_placement[4]);
-        //printf("%f,%f\n", LightFury.Motor_YR->AxisData.AxisAngle_inDegree,remem_12xR);
-        printf("%f,%f,%f,%f,%f,%d\n", weight_placement[0], weight_placement[1], weight_placement[2],
-               weight_placement[3], weight_placement[4],receive_buffer[0]);
-        osDelay(50);
-    }
+            // printf("%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n",
+            //        Lidar1.distance_aver,
+            //        Lidar2.distance_aver, Lidar3.distance_aver,
+            //        LightFury.gantry_t.position.x,
+            //        LightFury.gantry_t.position.yL,
+            //        LightFury.gantry_t.position.yR,
+            //        LightFury.Motor_X->speedPID.output,
+            //        LightFury.Motor_YL->speedPID.output,
+            //        LightFury.Motor_YR->speedPID.output,
+            //        weight_placement[4]);
+            // printf("%f,%f\n", LightFury.Motor_YR->AxisData.AxisAngle_inDegree,remem_12xR);
+            printf("%f,%f,%f,%f,%f,%d\n", weight_placement[0], weight_placement[1], weight_placement[2],
+                   weight_placement[3], weight_placement[4], receive_buffer[0]);
+            osDelay(50);
+        }
 }

@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-07-19 12:40:45
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-29 15:09:22
+ * @LastEditTime: 2024-07-30 22:58:01
  * @FilePath: \Gantry_Trial\UserCode\Upper\Protect\reset.c
  * @Brief: 
  * 
@@ -15,7 +15,9 @@ void Reset_Task(void *argument)
     uint16_t flag = 0;
     while (1) {
         uint16_t ResetFlag = HAL_GPIO_ReadPin(Reset_GPIO_Port, Reset_Pin);
-        if (ResetFlag) {
+        uint16_t ResetFlag1 = HAL_GPIO_ReadPin(Reset1_GPIO_Port, Reset1_Pin);
+        uint16_t ResetFlag2 = HAL_GPIO_ReadPin(Reset2_GPIO_Port, Reset2_Pin);
+        if (ResetFlag && ResetFlag1 && ResetFlag2) {
             // float degree1x = Core_xy[0].Motor_X->AxisData.AxisAngle_inDegree;
             // float degree2x = Core_xy[1].Motor_Y->AxisData.AxisAngle_inDegree;
             // float degree1y = Core_xy[0].Motor_X->AxisData.AxisAngle_inDegree;
@@ -40,7 +42,7 @@ void Reset_Task(void *argument)
                 HAL_GPIO_WritePin(ElectromagnetYR_GPIO_Port, ElectromagnetYL_Pin, 0);
                 HAL_GPIO_WritePin(ElectromagnetYL_GPIO_Port, ElectromagnetYL_Pin, 0);
 
-                LightFury.gantry_t.position.x  = 1420;
+                LightFury.gantry_t.position.x  = 1390;
                 LightFury.gantry_t.position.yL = 600;
                 LightFury.gantry_t.position.yR = 600;
             } 

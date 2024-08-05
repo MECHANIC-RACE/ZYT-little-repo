@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-07-20 21:33:49
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-29 23:35:27
+ * @LastEditTime: 2024-08-05 23:54:21
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Light_fury_state.c
  * @Brief:
  *
@@ -29,21 +29,25 @@ uint16_t stateflag ;
 
 void StateMachine_Task(void *argument)
 {
-    osDelay(100);
+    osDelay(100);//距离要重新规划一下防止拖行太长，以及pid要重新调
     /*距离变量*/
     float mnq     = 2010; // 中间 内圈 滑行前
     float mnh     = 2370; // 中间 内圈 滑行后
     float mwq     = 1600; // 中间 外圈 滑行前
     float mwh     = 2050; // 中间 外圈 滑行后
-    float ywq     = 590;  // 两边区y 外圈 滑行前
-    float ywh     = 380;  // 两边区y 外圈 滑行后
-    float ynq     = 400;    // 两边区y 内圈 滑行前
-    float ynh     = 81;     // 两边区y 内圈 滑行后
-    float wx_12   = 3064-4;   // 12区外圈x
-    float nx_12   = 2887-4;   // 12区内圈x
+    float ywl     = 590;  // 外圈的y轴参数
+    float ywr      = 590;  // 
+    float ynl     = 590;  // 内圈的y轴参数
+    float ynr     = 81;     // 内圈的y轴参数
+    float wxq_12        = 3064;   // 12区外圈x前
+    float wxh_12        = 3064; // 12区外圈x前
+    float wxq_34        = 2887; // 34区外圈x后
+    float wxh_34        = 2887; // 34区外圈x后
+    float nxq_12        = 2887; // 12区内圈x前
+    float nxh_12        = 2887; // 12区内圈x后
+    float nxq_34        = 2887; // 34区内圈x前
+    float nxh_34        = 2887; // 34区内圈x后
     float stake_x12 = 3700-8;   // 12区木桩x
-    float wx_34     = 2340-10;   // 34区外圈x
-    float nx_34     = 2520-4;   // 34区内圈x
     float stake_x34 = 188-15;    // 34区木桩x
     float stake_y   = 565;    // 木桩y
     float weight_m_x = 2563-2;//中间木桩x轴
@@ -51,10 +55,10 @@ void StateMachine_Task(void *argument)
     float wait_ticks_x  = 1.0;
     uint16_t cur2       = 0;
     // weight_placement[0] = 0;
-    // weight_placement[1] = 1;
+    // weight_placement[1] = 0;
     // weight_placement[2] = 1;
     // weight_placement[3] = 1;
-    // weight_placement[4] = 0;
+    // weight_placement[4] = 1;
     for (;;) {
 
         if(stateflag==0)//抓取中间的砝码
@@ -84,21 +88,21 @@ void StateMachine_Task(void *argument)
             float diff[1] = {0};
             diff[0]       = fabs(LightFury.gantry_t.position.x - Lidar1.distance_aver);
             //if ((diff[0] < 2)) {
-                osDelay(1200);
+                osDelay(1000);
                 stateflag = 2;
             //}
-        } else if (stateflag == 2) // 夹取短区的砝码
+        } else if (stateflag == 2) // 夹取34区的砝码
         {
             pid_reset(&(LightFury.Motor_YL->speedPID), 7, 0.5, 0.3);
             pid_reset(&(LightFury.Motor_YR->speedPID), 7, 0.5, 0.3);
             HAL_GPIO_WritePin(CylinderX_GPIO_Port, CylinderX_Pin, 1);
-            osDelay(500);
+            osDelay(300);
             
             if(weight_placement[0]==1&&weight_placement[1]==1)      //都在内圈
             {
-                LightFury.gantry_t.position.x = nx_12;
-                LightFury.gantry_t.position.yL = ynq;
-                LightFury.gantry_t.position.yR = ynq;
+                LightFury.gantry_t.position.x = nxq_34;
+                LightFury.gantry_t.position.yL = ynl;
+                LightFury.gantry_t.position.yR = ynr;
                 float diff[3]                 = {0};
 
                 diff[0] = fabs(LightFury.gantry_t.position.x - Lidar1.distance_aver);
@@ -116,7 +120,7 @@ void StateMachine_Task(void *argument)
                 
                 if ((diff[0] < 4 && diff[1] < 2 && diff[2] < 2)||cur2>wait_ticks_x*1000)
                 {
-                    osDelay(500);
+                    osDelay(100);
                     tickflag_x = 0;
                     cur2       = 0;
                     stateflag  = 3;
@@ -125,7 +129,7 @@ void StateMachine_Task(void *argument)
             if (weight_placement[0] == 1 && weight_placement[1] == 0) // 1区在内 2区在外------------->先抓内圈的1区 即right
             {
             
-                LightFury.gantry_t.position.x  = nx_12;
+                LightFury.gantry_t.position.x  = wxq_34;
                 LightFury.gantry_t.position.yR = ynq;
                 float diff[2]                  = {0};
                 diff[0] = fabs(LightFury.gantry_t.position.x - Lidar1.distance_aver);
@@ -554,7 +558,7 @@ void StateMachine_Task(void *argument)
                 uint16_t cur1                  = xTaskGetTickCount() - starttick;
                 if ((diff[0] < 2 && diff[1] < 2) || cur1 > wait_ticks * 1000) {
                     
-                        osDelay(500);
+                        osDelay(100);
                         stateflag = 12;
                     }
                 }
@@ -569,7 +573,7 @@ void StateMachine_Task(void *argument)
                 diff[0]                        = fabs(LightFury.gantry_t.position.yR - Lidar3.distance_aver);
                 uint16_t cur1                  = xTaskGetTickCount() - starttick;
                 if ((diff[0] < 2) || cur1 > wait_ticks * 1000) {
-                    osDelay(500);
+                    osDelay(100);
                     stateflag = 12;
                 }
             }
@@ -584,7 +588,7 @@ void StateMachine_Task(void *argument)
                 diff[0]                        = fabs(LightFury.gantry_t.position.yL - Lidar2.distance_aver);
                 uint16_t cur1                  = xTaskGetTickCount() - starttick;
                 if ((diff[0] < 2) || cur1 > wait_ticks * 1000) {
-                    osDelay(500);
+                    osDelay(100);
                     stateflag = 12;
                 }
             }
@@ -605,7 +609,7 @@ void StateMachine_Task(void *argument)
                 diff[1] = fabs(LightFury.gantry_t.position.yR - Lidar3.distance_aver);
                 uint16_t cur1 = xTaskGetTickCount() - starttick;
                 if ((diff[0] < 2 && diff[1] < 2) || cur1 > wait_ticks * 1000) {
-                    osDelay(500);
+                    osDelay(100);
                     stateflag = 12;
                 }
             }
@@ -658,7 +662,7 @@ void StateMachine_Task(void *argument)
                 diff[0]                        = fabs(LightFury.gantry_t.position.yL - Lidar2.distance_aver);
                 uint16_t cur1                  = xTaskGetTickCount() - starttick;
                 if ((diff[0] < 2 ) || cur1 > wait_ticks * 1000) {
-                    osDelay(500);
+                    osDelay(100);
                     stateflag = 14;
                 }
             }
@@ -673,7 +677,7 @@ void StateMachine_Task(void *argument)
                 diff[0]                        = fabs(LightFury.gantry_t.position.yR - Lidar3.distance_aver);
                 uint16_t cur1                  = xTaskGetTickCount() - starttick;
                 if ((diff[0] < 2 ) || cur1 > wait_ticks * 1000) {
-                    osDelay(500);
+                    osDelay(100);
                     stateflag = 14;
                 }
             }
