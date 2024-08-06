@@ -57,6 +57,14 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define detectl1_Pin GPIO_PIN_2
+#define detectl1_GPIO_Port GPIOE
+#define detectl2_Pin GPIO_PIN_3
+#define detectl2_GPIO_Port GPIOE
+#define detectr1_Pin GPIO_PIN_4
+#define detectr1_GPIO_Port GPIOE
+#define detectr2_Pin GPIO_PIN_5
+#define detectr2_GPIO_Port GPIOE
 #define u4_area3tx_Pin GPIO_PIN_0
 #define u4_area3tx_GPIO_Port GPIOA
 #define u4_area3rx_Pin GPIO_PIN_1
