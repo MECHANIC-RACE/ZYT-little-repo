@@ -19,13 +19,11 @@ void Upper_Servo_Task(void *argument)
         
         positionServo_lidar(LightFury.gantry_t.position.yR, LightFury.Motor_YR, Lidar3);
         
-        //positionServo_lidar(565, LightFury.Motor_YR, Lidar3);
-        //positionServo(-1000, LightFury.Motor_YR);
 
-        // positionServo_lidar(current_posX,  LightFury.Motor_X,  Lidar1);
+        // positionServo_lidar(350,  LightFury.Motor_YR,  Lidar3);
         // positionServo_lidar(current_posYL, LightFury.Motor_YL, Lidar2);
         // positionServo_lidar(current_posYR, LightFury.Motor_YR, Lidar3);
-
+        //speedServo(500, LightFury.Motor_X);
         CanTransmit_DJI_1234(&hcan1,
                              LightFury.Motor_X->speedPID.output,
                              -1 * LightFury.Motor_X->speedPID.output,
@@ -72,9 +70,9 @@ void LightFury_Motor_init()               //电机初始化
     
    
 
-    pid_reset(&(LightFury.Motor_X->posPID), -20, 0, 0);
-    pid_reset(&(LightFury.Motor_YL->posPID), 30, 0, 0);
-    pid_reset(&(LightFury.Motor_YR->posPID), -30, 0, 0);
+    pid_reset(&(LightFury.Motor_X->posPID), -30, 0, 0);
+    pid_reset(&(LightFury.Motor_YL->posPID), -30, 0, 0);
+    pid_reset(&(LightFury.Motor_YR->posPID), 30, 0, 0);
     
 
     LightFury.Motor_X->posPID.outputMax = 20000;

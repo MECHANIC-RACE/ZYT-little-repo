@@ -30,8 +30,8 @@ void Reset_Task(void *argument)
                 pid_reset(&(LightFury.Motor_YR->speedPID), 5, 0.4, 0.3);
 
                 pid_reset(&(LightFury.Motor_X->posPID), -20, 0, 0);
-                pid_reset(&(LightFury.Motor_YL->posPID), 30, 0, 0);
-                pid_reset(&(LightFury.Motor_YR->posPID), -30, 0, 0);
+                pid_reset(&(LightFury.Motor_YL->posPID), -30, 0, 0);
+                pid_reset(&(LightFury.Motor_YR->posPID), 30, 0, 0);
 
                 flag = 1;
             } else if (flag == 1) {
@@ -43,8 +43,8 @@ void Reset_Task(void *argument)
                 HAL_GPIO_WritePin(ElectromagnetYL_GPIO_Port, ElectromagnetYL_Pin, 0);
 
                 LightFury.gantry_t.position.x  = 1390;
-                LightFury.gantry_t.position.yL = 600;
-                LightFury.gantry_t.position.yR = 600;
+                LightFury.gantry_t.position.yL = 590;
+                LightFury.gantry_t.position.yR = 590;
             } 
         }
     }
