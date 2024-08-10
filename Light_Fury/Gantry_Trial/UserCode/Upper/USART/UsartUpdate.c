@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-07-20 21:31:27
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-31 00:31:53
+ * @LastEditTime: 2024-08-10 21:19:57
  * @FilePath: \Gantry_Trial\UserCode\Upper\USART\UsartUpdate.c
  * @Brief: 
  * 
@@ -66,7 +66,7 @@ void UartUpdateTask(void *argument)
                 STP_23L_Decode(Rxbuffer_4, &Lidar4);
                 UartFlag[4] = 0;
             }
-            osDelay(6);
+            osDelay(1);
         }
     }
     /* USER CODE END UartUpdateTask */

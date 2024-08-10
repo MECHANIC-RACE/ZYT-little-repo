@@ -60,14 +60,14 @@ void StateMachine_Task(void *argument)
     float stake_x34 = 200;    // 34区木桩x
     float stake_y   = 546;    // 木桩y
     float weight_m_x = 2560;//中间木桩x轴
-    float wait_ticks    = 2.0;
+    float wait_ticks    = 1.5;
     float wait_ticks_x  = 1.0;
     uint16_t cur1       = 0;
     uint16_t cur2       = 0;
     weight_placement[0] = 1;
     weight_placement[1] = 0;
-    weight_placement[2] = 0;
-    weight_placement[3] = 1;
+    weight_placement[2] = 1;
+    weight_placement[3] = 0;
     weight_placement[4] = 0;
     for (;;) {
 
