@@ -232,7 +232,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
         if (HAL_GPIO_ReadPin(detect_GPIO_Port,detect_Pin) == 0 && detectflag == 1 ) {
             for (uint16_t i = 0; i < 20000; i++) { ; }
             if (HAL_GPIO_ReadPin(detect_GPIO_Port, detect_Pin) == 0 && detectflag == 1){
-                rem = Lidar1.distance;
+                pid_reset(&(LightFury.Motor_X->posPID), 0, 0, 0);
                 detectflag = 0;
             }
         }

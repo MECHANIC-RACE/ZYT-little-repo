@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-07-20 21:33:49
  * @LastEditors: ZYT
- * @LastEditTime: 2024-08-10 20:54:33
+ * @LastEditTime: 2024-08-10 22:33:31
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_StateMachine\Light_fury_state.c
  * @Brief:
  *
@@ -15,8 +15,8 @@
 #define X_Acceleration  500
 #define Y_Acceleration  60
 
-#define OFFSET12       100
-#define OFFSET34       -40
+#define OFFSET12       190
+#define OFFSET34       -10      //100
 
 
 float initial_posX;
@@ -36,6 +36,7 @@ uint16_t detectflag;
 float rem;
 
 uint16_t once;
+uint16_t once02;
 void StateMachine_Task(void *argument)
 {
     osDelay(100);//距离要重新规划一下防止拖行太长，以及pid要重新调
@@ -236,7 +237,7 @@ void StateMachine_Task(void *argument)
             once = 0;
             HAL_GPIO_WritePin(CylinderYL_GPIO_Port, CylinderYL_Pin, 1);
             HAL_GPIO_WritePin(CylinderYR_GPIO_Port, CylinderYR_Pin, 1);
-            pid_reset(&(LightFury.Motor_X->posPID), -25, 0, 0);
+            pid_reset(&(LightFury.Motor_X->posPID), -27, 0, 0);
 
             osDelay(300);
             stateflag = 3;
@@ -263,12 +264,15 @@ void StateMachine_Task(void *argument)
             diff[0]                        = fabs(LightFury.gantry_t.position.x - Lidar1.distance_aver);
             diff[1]                        = fabs(LightFury.gantry_t.position.yL - Lidar2.distance_aver);
             diff[2]                        = fabs(LightFury.gantry_t.position.yR - Lidar3.distance_aver);
-            if(diff[0]<500&&once==0){
+            if(diff[0]<200&&once==0){
                 detectflag = 1;
                 once       = 1;
             }
-            if (diff[0] < 100) pid_reset(&(LightFury.Motor_X->posPID), -30, 0, 0);
             
+            if(detectflag==0&&once==1) 
+            {
+                stateflag = 5;
+            }
             if ((diff[0] < 4 && diff[1] < 2 && diff[2] < 2)) {
                 osDelay(500);
                 stateflag = 5;
@@ -278,9 +282,15 @@ void StateMachine_Task(void *argument)
          else if (stateflag == 5)
             {
             once = 0;
-            if (detectflag == 0) {LightFury.gantry_t.position.x = rem + OFFSET12;
+            
+            if (detectflag == 0) {
+                osDelay(2);
+                rem                           = Lidar1.distance_aver;
+                pid_reset(&(LightFury.Motor_X->posPID), -30, 0, 0);
+                LightFury.gantry_t.position.x = rem + OFFSET12;
             } else {
                 LightFury.gantry_t.position.x = stake_x12;
+                pid_reset(&(LightFury.Motor_X->posPID), -30, 0, 0);
             }
             osDelay(1000);
             HAL_GPIO_WritePin(ElectromagnetYL_GPIO_Port, ElectromagnetYL_Pin, 0);
@@ -646,24 +656,28 @@ void StateMachine_Task(void *argument)
 
                 if ((diff[0] < 2)) {
                     osDelay(200);
+                    pid_reset(&(LightFury.Motor_X->posPID), -25, 0, 0);
                     stateflag = 10;
                 }
             } else if (stateflag == 10) { // 前往长区木桩
                 HAL_GPIO_WritePin(ElectromagnetX_GPIO_Port, ElectromagnetX_Pin, 0);
-                pid_reset(&(LightFury.Motor_X->posPID), -25, 0, 0);/*待定pid*/
                 osDelay(300);
                 
                 LightFury.gantry_t.position.x  = stake_x34-10; 
                 LightFury.gantry_t.position.yL = stake_y + 3;
                 LightFury.gantry_t.position.yR = stake_y - 2;
+                
                 float diff[3]                  = {0};
                 diff[0]                        = fabs(LightFury.gantry_t.position.x - Lidar1.distance_aver);
                 diff[0]                        = fabs(LightFury.gantry_t.position.yL - Lidar2.distance_aver);
                 diff[1]                        = fabs(LightFury.gantry_t.position.yR - Lidar3.distance_aver);
-                if (diff[0] < 500 && once == 0) 
+                if (diff[0] < 400 && once == 0) 
                 {
                     detectflag = 1;
                     once       = 1;
+                }
+                if (detectflag == 0) {
+                    stateflag = 11;
                 }
                 if ((diff[0] < 2 && diff[1] < 2 && diff[2] < 2)) {
                     osDelay(800);
@@ -673,8 +687,13 @@ void StateMachine_Task(void *argument)
             
             } else if (stateflag == 11) {
                 if(detectflag==0){
+                    osDelay(2);
+                    rem                           = Lidar1.distance_aver;
+                    pid_reset(&(LightFury.Motor_X->posPID), -30, 0, 0);
+
                     LightFury.gantry_t.position.x = rem+OFFSET34;
                 }else{
+                    pid_reset(&(LightFury.Motor_X->posPID), -30, 0, 0);
                     LightFury.gantry_t.position.x = stake_x34;
                 }
                 osDelay(1000);
