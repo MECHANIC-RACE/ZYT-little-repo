@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-05-19 14:41:19
  * @LastEditors: ZYT
- * @LastEditTime: 2024-08-08 18:50:33
+ * @LastEditTime: 2024-08-10 19:03:00
  * @FilePath: \Gantry_Trial\UserCode\Upper\Upper_Start\UpperStart.c
  * @Brief: 
  * 
@@ -41,19 +41,18 @@ void StartDefaultTask(void *argument)
     StateMachine_Start();
     Upper_Servo_Start();
     Reset_Start();
-    
+    //detectflag = 1;
 
-        /*如需复位程序请记得开启线程*/
-        for (;;) {
-            //HAL_UART_Transmit(&huart5, "hello", 6, 0xffff);
-            printf("%f,%f,%f,%f,%f,%f\n",
-                   Lidar1.distance_aver,
-                   Lidar2.distance_aver, Lidar3.distance_aver,
-                   LightFury.Motor_X->speedPID.output,Lidar4.distance_aver,Lidar6.distance_aver
-                   );
-            // printf("%f,%f\n", LightFury.Motor_YR->AxisData.AxisAngle_inDegree,remem_12xR);
-            // printf("%f,%f,%f,%f,%f,%d\n", weight_placement[0], weight_placement[1], weight_placement[2],
-            //       weight_placement[3], weight_placement[4], receive_buffer[0]);
-            osDelay(50);
+    /*如需复位程序请记得开启线程*/
+    for (;;) {
+        // HAL_UART_Transmit(&huart5, "hello", 6, 0xffff);
+        printf("%f,%f,%f,%f,%f,%f,%f\n",
+               Lidar1.distance_aver,
+               Lidar2.distance_aver, Lidar3.distance_aver,
+               rem, LightFury.gantry_t.position.x, Lidar6.distance_aver,Lidar4.distance_aver);
+        // printf("%f,%f\n", LightFury.Motor_YR->AxisData.AxisAngle_inDegree,remem_12xR);
+        // printf("%f,%f,%f,%f,%f,%d\n", weight_placement[0], weight_placement[1], weight_placement[2],
+        //       weight_placement[3], weight_placement[4], receive_buffer[0]);
+        osDelay(50);
         }
 }

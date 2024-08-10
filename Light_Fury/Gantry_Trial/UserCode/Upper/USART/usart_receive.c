@@ -224,3 +224,19 @@ void Upper_Target_Decode()
 //         }
 //     }
 // }
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    if (GPIO_Pin == detect_Pin) {
+
+        if (HAL_GPIO_ReadPin(detect_GPIO_Port,detect_Pin) == 0 && detectflag == 1 ) {
+            for (uint16_t i = 0; i < 20000; i++) { ; }
+            if (HAL_GPIO_ReadPin(detect_GPIO_Port, detect_Pin) == 0 && detectflag == 1){
+                rem = Lidar1.distance;
+                detectflag = 0;
+            }
+        }
+        __HAL_GPIO_EXTI_CLEAR_IT(detect_Pin);
+    }
+
+}

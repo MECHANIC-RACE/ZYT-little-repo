@@ -2,7 +2,7 @@
  * @Author: ZYT
  * @Date: 2024-07-20 21:31:26
  * @LastEditors: ZYT
- * @LastEditTime: 2024-07-20 21:57:31
+ * @LastEditTime: 2024-08-10 15:09:07
  * @FilePath: \Gantry_Trial\UserCode\Config\ParamDef.h
  * @Brief: 
  * 
@@ -81,5 +81,9 @@ extern uint8_t receive_buffer[24];
 extern float weight_placement[5];
 extern uint16_t Uart_State;
 extern uint16_t stateflag;
+
+extern uint16_t detectflag;
+
+extern float rem;
 
 #endif // __PARAMDEF_H__
